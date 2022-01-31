@@ -1,6 +1,4 @@
 <!-- this is my final year project  -->
-## Made By @shahzaibalam231
-
 
 ## this is the final year project created by 
 @shahzaibAlam

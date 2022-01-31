@@ -3,9 +3,11 @@
     display: grid;
     grid-template-columns: 32.5% 32% 32.4% ;
     grid-template-areas: 
-    'left right right'
-    'left mid lastright'
-    'last last lastright'
+    'left left left'
+    'right right right'
+    'mid mid mid'
+    'last last last'
+    'lastright lastright lastright'
     ;
     grid-gap: 20px;
 }
@@ -39,4 +41,19 @@ right: 40px;
     right: 40px;
     border-radius: 5px;
  }
+
+}
+
+@media (min-width: 768px) {  
+    .home__gallery{
+        height: 937PX;
+        display: grid;
+        grid-template-columns: 32.5% 32% 32.4% ;
+        grid-template-areas: 
+        'left right right'
+        'left mid lastright'
+        'last last lastright'
+        ;
+        grid-gap: 20px;
+    }
 }

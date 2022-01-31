@@ -1,0 +1,11 @@
+
+.login__container{
+
+    min-height: 100vh;
+    height: 100vh;    
+
+}
+.login__img{
+    height: 100%;
+    object-fit: cover;
+}

@@ -1,0 +1,121 @@
+/* ------------overall styling------------ */
+/* ------------overall styling------------ */
+/* ------------overall styling------------ */
+/* ------------overall styling------------ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+  box-shadow: none;
+}
+
+/* ------------Figma style copying ------------ */
+/* ------------Figma style copying ------------ */
+/* ------------Figma style copying ------------ */
+/* ------------Figma style copying ------------ */
+:root{
+    /* btn color scheme */
+
+    --btn-bg-primary  : #2D3748 ;
+    --btn-bg-success : #04C35C ;
+    
+    /* text color */
+
+    --text-primary:#1A202C ;
+    --text-primary-light-800 : #2D3748 ;
+    --text-primary-light-700 : #4A5568 ;
+    --text-secondary: #2C5282 ;
+    --text-secondary-light-800 :#2B6CB0 ;
+    --text-white:#ffffff;
+
+    /* text-family */
+    --text-family-primary : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
+
+    /* text-weight used  */
+    --text-weight-regular : regular;
+    --text-weight-bold : bold;
+
+    /* background colors  */
+    --bg-primary: #6E716E;
+    --bg-primary-light: #E0E0E0;
+    --bg-primary-light-700:#F2F2F2 ;
+    --bg-secondary : ;
+    --bg-secondary-light : ; 
+    --bg-grid-color: #91ff0010 ;
+    --bg-white: #ffffff;
+
+
+    
+}
+/* ------------creating custom classes ------------ */
+/* ------------creating custom classes ------------ */
+/* ------------creating custom classes ------------ */
+/* ------------creating custom classes ------------ */
+.bg-primary-light-700{
+    background-color: var(--bg-primary-light-700) !important;
+}
+.bg-white{
+    background-color: var(--bg-white) !important;
+}
+.bg-grid-color{
+    background-color: var(--bg-grid-color) !important;
+}
+.bg-primary {
+    background-color: var(--bg-primary) !important;
+}
+.bg-primary-light {
+    background-color: var(--bg-primary-light) !important;
+}
+.bg-secondary {
+    background-color: var(--bg-secondary) !important;
+}
+.bg-secondary-light {
+    background-color: var(--bg-secondary-light) !important;
+}
+.btn-bg-primary{
+    background-color: var(--btn-bg-primary) !important;
+}
+.btn-bg-success{
+    background-color: var(--btn-bg-success) !important;
+}
+.text-primary{
+    color: var(--text-primary) !important;
+}
+.text-primary-light-800{
+    color: var(--text-primary-light-800) !important;
+}
+.text-primary-light-700{
+    color: var(--text-primary-light-700) !important;
+}
+.text-secondary{
+    color: var(--text-secondary) !important;
+}
+.text-secondary-light-800{
+    color: var(--text-secondary-light-800) !important;
+}
+.text-white{
+    color: var(--text-white);
+}
+.text-family-primary{
+    font-family: var(--text-family-primary) !important;
+}
+.text-weight-regular{
+    font-weight: var(--text-weight-regular) !important;
+}
+.text-weight-bold{
+    font-weight: var(--text-weight-bold) !important;
+}
+.heading-2{
+    font-size: 1.875rem !important;
+    line-height: 40px;
+}
+.body-1{
+    font-size: 1rem !important;
+}
+.body-2{
+    font-size: 0.875rem !important;
+}
+
+

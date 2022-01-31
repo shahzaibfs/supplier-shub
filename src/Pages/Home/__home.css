@@ -1,3 +1,29 @@
+.home__gallery{
+    height: 937PX;
+    display: grid;
+    grid-template-columns: 32.5% 32% 32.4% ;
+    grid-template-areas: 
+    'left right right'
+    'left mid lastright'
+    'last last lastright'
+    ;
+    grid-gap: 20px;
+}
+.home__gallery div:nth-child(1){
+    grid-area: left;
+}
+.home__gallery div:nth-child(2){
+    grid-area: right;
+}
+.home__gallery div:nth-child(3){
+    grid-area: mid;
+}
+.home__gallery div:nth-child(4){
+    grid-area: last;
+}
+.home__gallery div:nth-child(5){
+    grid-area: lastright;
+}
 
 .banner__info{
 width: 80%;

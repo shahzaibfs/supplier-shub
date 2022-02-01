@@ -18,7 +18,7 @@ const Routes = () => {
         <Route path="/" element={<HomeLayout />}>
           <Route path="" element={<Home />} />
           <Route path="cart" element={<h1>this is cart page</h1>} />
-
+            
           <Route path=":productCategory" element={<Catalog />} />
         </Route>
         {/* ----------Auth Routing-----------  */

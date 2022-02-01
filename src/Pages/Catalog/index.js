@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import {
   AiOutlineDown,
   AiOutlineMinusSquare,
-  AiOutlinePlus,
+  
   AiOutlinePlusSquare,
   AiOutlineRight,
   AiOutlineStar,

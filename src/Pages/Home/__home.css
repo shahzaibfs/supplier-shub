@@ -1,7 +1,7 @@
 .home__gallery{
    min-height: 937PX;
     display: grid;
-    grid-template-columns: 32.5% 32% 32.4% ;
+    grid-template-columns: auto 32% auto ;
     grid-template-areas: 
     'left left left'
     'right right right'
@@ -48,7 +48,7 @@ right: 40px;
     .home__gallery{
         height: 937PX;
         display: grid;
-        grid-template-columns: 32.5% 32% 32.4% ;
+        grid-template-columns: auto 32% auto ;
         grid-template-areas: 
         'left right right'
         'left mid lastright'

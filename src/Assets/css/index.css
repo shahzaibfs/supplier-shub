@@ -41,10 +41,13 @@
     --bg-primary: #6E716E;
     --bg-primary-light: #E0E0E0;
     --bg-primary-light-700:#F2F2F2 ;
+    --bg-primary-light-800:#f0f0f063 ;
     --bg-secondary : ;
     --bg-secondary-light : ; 
     --bg-grid-color: #91ff0010 ;
     --bg-white: #ffffff;
+
+ 
 
 
     
@@ -53,8 +56,26 @@
 /* ------------creating custom classes ------------ */
 /* ------------creating custom classes ------------ */
 /* ------------creating custom classes ------------ */
+.border-primary {
+    border: 1px solid var(--text-primary) !important;
+}
+.border-right-primary {
+    border-right: 1px solid var(--text-primary) !important;
+}
+.border-left-primary {
+    border-left: 1px solid var(--text-primary) !important;
+}
+.border-top-primary {
+    border-top: 1px solid var(--text-primary) !important;
+}
+.border-bottom-primary {
+    border-bottom: 1px solid var(--text-primary) !important;
+}
 .bg-primary-light-700{
     background-color: var(--bg-primary-light-700) !important;
+}
+.bg-primary-light-800{
+    background-color: var(--bg-primary-light-800) !important;
 }
 .bg-white{
     background-color: var(--bg-white) !important;
@@ -118,4 +139,12 @@
     font-size: 0.875rem !important;
 }
 
+
+
+/* media  */
+@media (min-width: 992px) {  
+   .border-lg-none{
+       border: none !important;
+   }
+}
 

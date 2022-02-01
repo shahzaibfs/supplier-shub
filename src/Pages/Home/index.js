@@ -104,12 +104,7 @@ function Home() {
             <div className="col d-flex justify-content-end  d-md-block  col-md-2 flex-grow-0 ">
               <AiOutlineShoppingCart className="heading-2 " />
             </div>
-            <div
-              className="col flex-grow-0 d-md-none bg-primary ms-2 "
-              style={{ borderRadius: "5px" }}
-            >
-              <h1 className="body-1 pt-2">1</h1>
-            </div>
+          
           </div>
         </header>
         {/* <----------- menu container------------> */

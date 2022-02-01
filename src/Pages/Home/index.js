@@ -474,7 +474,7 @@ function Home() {
         /* <------------ smallFooter container------------> */
         /* <------------ smallFooter container------------> */
         /* <------------ smallFooter container------------> */}
-        <footer className="container-fluid bg-primary d-flex align-items-center justify-content-center text-white body-2 " style={{height:"42px"}}>
+        <footer className="container-fluid bg-primary d-flex align-items-center justify-content-center text-white body-2 py-2 " style={{minHeight:"42px" }}>
           <div className="text-center" >
           Copyright © 2013-2017 Magento, Inc. All rights reserved.
           </div>

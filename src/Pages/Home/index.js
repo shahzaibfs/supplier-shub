@@ -246,9 +246,9 @@ function Home() {
               Here is what`s trending on Luma right now
             </p>
           </header>
-          <main className="row mx-0 justify-content-between  flex-wrap px-0">
+          <main className="row mx-0 justify-content-center justify-content-sm-between  flex-wrap px-0">
             <div
-              className="col-12 col-sm-5  col-md-3  col-xl-2  mx-2 my-2  mx-xxl-2  px-0"
+              className="col-11 col-sm-5  col-md-3  col-xl-2  mx-0 mx-md-2 my-2  mx-xxl-2  px-0"
               style={{ minHeight: "400px" }}
             >
               {/* img */}
@@ -276,7 +276,7 @@ function Home() {
               </div>
             </div>
             <div
-              className="col-12 col-sm-5  col-md-3  col-xl-2  mx-2 my-2  mx-xxl-2  px-0"
+              className="col-11 col-sm-5  col-md-3  col-xl-2  mx-0 mx-md-2 my-2  mx-xxl-2  px-0"
               style={{ minHeight: "400px" }}
             >
               {/* img */}
@@ -304,7 +304,7 @@ function Home() {
               </div>
             </div>
             <div
-              className="col-12 col-sm-5  col-md-3  col-xl-2  mx-2 my-2  mx-xxl-2  px-0"
+              className="col-11 col-sm-5  col-md-3  col-xl-2  mx-0 mx-md-2 my-2  mx-xxl-2  px-0"
               style={{ minHeight: "400px" }}
             >
               {/* img */}
@@ -332,7 +332,7 @@ function Home() {
               </div>
             </div>
             <div
-              className="col-12 col-sm-5  col-md-3  col-xl-2  mx-2 my-2  mx-xxl-2  px-0"
+              className="col-11 col-sm-5  col-md-3  col-xl-2  mx-0 mx-md-2my-2  mx-xxl-2  px-0"
               style={{ minHeight: "400px" }}
             >
               {/* img */}
@@ -360,7 +360,7 @@ function Home() {
               </div>
             </div>
             <div
-              className="col-12 col-sm-5  col-md-3  col-xl-2  mx-2 my-2  mx-xxl-2  px-0"
+              className="col-11 col-sm-5  col-md-3  col-xl-2  mx-0 mx-md-2 my-2  mx-xxl-2  px-0"
               style={{ minHeight: "400px" }}
             >
               {/* img */}
@@ -388,7 +388,7 @@ function Home() {
               </div>
             </div>
             <div
-              className="col-12 col-sm-5  col-md-3  col-xl-2  mx-2 my-2   mx-xxl-2  px-0"
+              className="col-11 col-sm-5  col-md-3  col-xl-2  mx-0 mx-md-2 my-2   mx-xxl-2  px-0"
               style={{ minHeight: "400px" }}
             >
               {/* img */}
@@ -423,7 +423,7 @@ function Home() {
         /* <------------ footer  container------------> */}
         <footer className="container-fluid mt-2 bg-primary-light-800 border-top-primary px-0 ">
           <div className="row  flex-column-reverse flex-lg-row container-fluid  container-xxl mx-0 no-gutters  mx-md-auto  px-0 py-lg-4">
-            <div className="col-12 p-0 col-lg-3 list-unstyled text-white flex-grow-0">
+            <div className="col-11 p-0 col-lg-3 list-unstyled text-white flex-grow-0">
               <li className="py-3 px-4 border-bottom-primary  py-lg-2 border-lg-none text-primary text-weight-regular ">
                 About us{" "}
               </li>

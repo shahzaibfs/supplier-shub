@@ -6,6 +6,7 @@ import {
   AiFillCaretDown,
   AiOutlineMenu,
   AiOutlineCaretRight,
+  AiOutlineStar,
 } from "react-icons/ai";
 
 import "./__home.css";
@@ -13,7 +14,7 @@ import "./__home.css";
 function Home() {
   return (
     <section
-      className="w-100 h-100 overflow-auto position-relative"
+      className="w-100 h-100  position-relative"
       style={{ minHeight: "100vh", height: "max-content" }}
     >
       {/* <-----------background Overlay------------> */
@@ -145,7 +146,7 @@ function Home() {
         /* <------------ Banner container------------> */
         /* <------------ Banner container------------> */}
         <div
-          className="container-fluid position-relative container-xxl bg-primary-light mt-4"
+          className="container-fluid position-relative container-xxl  mt-4"
           style={{ height: "450px" }}
         >
           <div className="banner__info  position-absolute bg-primary-light-700 p-4 d-flex flex-column justify-content-center ">
@@ -209,12 +210,14 @@ function Home() {
             <div className="bg-primary-light p-4">
               <div className="d-flex flex-column align-items-start h-100 justify-content-center w-75 ms-auto p-4 bg-primary-light-700">
                 <h1 className="heading-2 text-primary-light-700 text-weight-regular">
-                Twice around, twice as nice
+                  Twice around, twice as nice
                 </h1>
                 <p className="body-1 text-muted text-weight-regular">
-                Find conscientious, comfy clothing in our eco-friendly collection                </p>
+                  Find conscientious, comfy clothing in our eco-friendly
+                  collection{" "}
+                </p>
                 <p className="body-2 text-primary text-weight-regular text-decoration-underline">
-                Shop Eco-Friendly <AiOutlineCaretRight className="ms-1" />
+                  Shop Eco-Friendly <AiOutlineCaretRight className="ms-1" />
                 </p>
               </div>
             </div>
@@ -232,6 +235,149 @@ function Home() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* <----------- hotSellers  container------------> */
+        /* <------------ hotSellers container------------> */
+        /* <------------ hotSellers container------------> */
+        /* <------------ hotSellers container------------> */}
+        <div className="container-fluid container-xxl">
+          {/* Section header  */}
+          <header className="d-flex flex-column justify-content-center align-items-center py-4 my-2">
+            <h1 className="heading-2 text-primary text-weight-regular">
+              Hot Sellers
+            </h1>
+            <p className="body-2 text-primary-light-800">
+              Here is what`s trending on Luma right now
+            </p>
+          </header>
+          <main className="row mx-0 justify-content-between  flex-wrap px-0">
+            <div className="col-12 col-sm-5  col-md-3  col-xl-2  mx-2 my-2  mx-xxl-2  px-0" style={{ minHeight: "400px" }}>
+              
+              {/* img */}
+              <div className="h-50 bg-primary">
+
+              </div>
+              {/* section for card data */}
+              <article className="my-3 px-2">
+                <p className="body-2 text-primary-light-700 text-decoration-underline">Fusion Backpack</p>
+                <price className="text-weight-bold body-2">$69.00 | Stock</price>
+              </article>
+              {/* actions  */}
+              <div className="position-relative px-2">
+              <div className="stars">
+                <AiOutlineStar />
+              </div>
+              <p className="mb-2 text-muted text-decoration-underline">Reviews</p>
+              <button className="btn bg-primary my-0 text-white">Add to cart</button>
+              </div>
+
+            </div>
+            <div className="col-12 col-sm-5  col-md-3  col-xl-2  mx-2 my-2  mx-xxl-2  px-0" style={{ minHeight: "400px" }}>
+              
+              {/* img */}
+              <div className="h-50 bg-primary">
+
+              </div>
+              {/* section for card data */}
+              <article className="my-3 px-2">
+                <p className="body-2 text-primary-light-700 text-decoration-underline">Fusion Backpack</p>
+                <price className="text-weight-bold body-2">$69.00 | Stock</price>
+              </article>
+              {/* actions  */}
+              <div className="position-relative px-2">
+              <div className="stars">
+                <AiOutlineStar />
+              </div>
+              <p className="mb-2 text-muted text-decoration-underline">Reviews</p>
+              <button className="btn bg-primary text-white">Add to cart</button>
+              </div>
+
+            </div>
+            <div className="col-12 col-sm-5  col-md-3  col-xl-2  mx-2 my-2  mx-xxl-2  px-0" style={{ minHeight: "400px" }}>
+              
+              {/* img */}
+              <div className="h-50 bg-primary">
+
+              </div>
+              {/* section for card data */}
+              <article className="my-3 px-2">
+                <p className="body-2 text-primary-light-700 text-decoration-underline">Fusion Backpack</p>
+                <price className="text-weight-bold body-2">$69.00 | Stock</price>
+              </article>
+              {/* actions  */}
+              <div className="position-relative px-2">
+              <div className="stars">
+                <AiOutlineStar />
+              </div>
+              <p className="mb-2 text-muted text-decoration-underline">Reviews</p>
+              <button className="btn bg-primary text-white">Add to cart</button>
+              </div>
+
+            </div>
+            <div className="col-12 col-sm-5  col-md-3  col-xl-2  mx-2 my-2  mx-xxl-2  px-0" style={{ minHeight: "400px" }}>
+              
+              {/* img */}
+              <div className="h-50 bg-primary">
+
+              </div>
+              {/* section for card data */}
+              <article className="my-3 px-2">
+                <p className="body-2 text-primary-light-700 text-decoration-underline">Fusion Backpack</p>
+                <price className="text-weight-bold body-2">$69.00 | Stock</price>
+              </article>
+              {/* actions  */}
+              <div className="position-relative px-2">
+              <div className="stars">
+                <AiOutlineStar />
+              </div>
+              <p className="mb-2 text-muted text-decoration-underline">Reviews</p>
+              <button className="btn bg-primary text-white">Add to cart</button>
+              </div>
+
+            </div>
+            <div className="col-12 col-sm-5  col-md-3  col-xl-2  mx-2 my-2  mx-xxl-2  px-0" style={{ minHeight: "400px" }}>
+              
+              {/* img */}
+              <div className="h-50 bg-primary">
+
+              </div>
+              {/* section for card data */}
+              <article className="my-3 px-2">
+                <p className="body-2 text-primary-light-700 text-decoration-underline">Fusion Backpack</p>
+                <price className="text-weight-bold body-2">$69.00 | Stock</price>
+              </article>
+              {/* actions  */}
+              <div className="position-relative px-2">
+              <div className="stars">
+                <AiOutlineStar />
+              </div>
+              <p className="mb-2 text-muted text-decoration-underline">Reviews</p>
+              <button className="btn bg-primary text-white">Add to cart</button>
+              </div>
+
+            </div>
+            <div className="col-12 col-sm-5  col-md-3  col-xl-2  mx-2 my-2   mx-xxl-2  px-0" style={{minHeight:"400px"}}>
+              {/* img */}
+              <div className="h-50 bg-primary">
+
+              </div>
+              {/* section for card data */}
+              <article className="my-3 px-2">
+                <p className="body-2 text-primary-light-700 text-decoration-underline">Fusion Backpack</p>
+                <price className="text-weight-bold body-2">$69.00 | Stock</price>
+              </article>
+              {/* actions  */}
+              <div className="position-relative px-2">
+              <div className="stars">
+                <AiOutlineStar />
+              </div>
+              <p className="mb-2 text-muted text-decoration-underline">Reviews</p>
+              <button className="btn bg-primary text-white">Add to cart</button>
+              </div>
+
+            </div>
+          </main>
         </div>
       </section>
     </section>

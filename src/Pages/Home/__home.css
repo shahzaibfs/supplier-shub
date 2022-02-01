@@ -1,5 +1,5 @@
 .home__gallery{
-    height: 937PX;
+   min-height: 937PX;
     display: grid;
     grid-template-columns: 32.5% 32% 32.4% ;
     grid-template-areas: 
@@ -44,7 +44,7 @@ right: 40px;
 
 }
 
-@media (min-width: 768px) {  
+@media (min-width: 992px) {  
     .home__gallery{
         height: 937PX;
         display: grid;

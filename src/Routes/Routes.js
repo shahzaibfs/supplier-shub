@@ -4,7 +4,7 @@ import { Route,Routes as Switch } from "react-router-dom";
 import {Home} from "../Pages";
 import Loader from "../Components/Loader/Loader";
 const Login = React.lazy(() => import('../Pages/Login'));
-const Signup = React.lazy(() => import('../Pages/Login'));
+const Signup = React.lazy(() => import('../Pages/Signup'));
 
 
 const Routes = () => {

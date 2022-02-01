@@ -423,11 +423,11 @@ function Home() {
         /* <------------ footer  container------------> */}
         <footer className="container-fluid mt-2 bg-primary-light-800 border-top-primary px-0 ">
           <div className="row  flex-column-reverse flex-lg-row container-fluid  container-xxl mx-0 no-gutters  mx-md-auto  px-0 py-lg-4">
-            <div className="col-11 p-0 col-lg-3 list-unstyled text-white flex-grow-0">
-              <li className="py-3 px-4 border-bottom-primary  py-lg-2 border-lg-none text-primary text-weight-regular ">
+            <div className="col-12 p-0 col-lg-3 list-unstyled text-white flex-grow-0">
+              <li className="py-3 p-0 px-4 border-bottom-primary  py-lg-2 border-lg-none text-primary text-weight-regular ">
                 About us{" "}
               </li>
-              <li className="py-3 px-4 border-bottom-primary py-lg-2 border-lg-none text-primary text-weight-regular">
+              <li className="py-3 p-0 px-4 border-bottom-primary py-lg-2 border-lg-none text-primary text-weight-regular">
                 Customer Service{" "}
               </li>
             </div>
@@ -474,8 +474,8 @@ function Home() {
         /* <------------ smallFooter container------------> */
         /* <------------ smallFooter container------------> */
         /* <------------ smallFooter container------------> */}
-        <footer className="container-fluid bg-primary d-flex align-items-center justify-content-center text-white body-2 py-2 " style={{minHeight:"42px" }}>
-          <div className="text-center" >
+        <footer className="container-fluid bg-primary d-flex align-items-center justify-content-center text-white body-2  " style={{minHeight:"42px" }}>
+          <div className="text-center py-2 text-weight-regular" >
           Copyright © 2013-2017 Magento, Inc. All rights reserved.
           </div>
         </footer>

@@ -3,9 +3,12 @@ import { Route, Routes as Switch } from "react-router-dom";
 
 import { HomeLayout, Home } from "../Pages";
 import Loader from "../Components/Loader/Loader";
+
 const Login = React.lazy(() => import("../Pages/Login"));
 const Signup = React.lazy(() => import("../Pages/Signup"));
 const Catalog = React.lazy(() => import("../Pages/Catalog"));
+const Product = React.lazy(() => import("../Pages/Product"));
+
 
 const Routes = () => {
   return (
@@ -20,6 +23,7 @@ const Routes = () => {
           <Route path="cart" element={<h1>this is cart page</h1>} />
 
           <Route path="products/:productCategory" element={<Catalog />} />
+          <Route path = "products/:productCategory/:id" element={<Product />} />
         </Route>
         {/* ----------Auth Routing-----------  */
         /* ----------Auth Routing-----------  */

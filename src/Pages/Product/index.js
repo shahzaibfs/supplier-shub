@@ -1,5 +1,10 @@
 import React from "react";
-import { AiOutlineShoppingCart, AiOutlineStar } from "react-icons/ai";
+import {
+  AiOutlineHeart,
+  AiOutlineMail,
+  AiOutlineShoppingCart,
+  AiOutlineStar,
+} from "react-icons/ai";
 
 function Product() {
   return (
@@ -88,7 +93,7 @@ function Product() {
           </div>
           {/* section for actions and title and pay  */}
           <div
-            className="col-12 p-0 col-lg-5 flex-grow-0  h-75 bg-primary-light "
+            className="col-12 p-0 px-3 col-lg-5 flex-grow-0  h-75  mt-3 mt-lg-0 "
             style={{ minHeight: "500px" }}
           >
             {/* heading */}
@@ -126,22 +131,80 @@ function Product() {
             </div>
             {/* add to cart */}
             <form>
-            <label className="text-primary-light-700 text-weight-regular body-2 my-2">Quantity</label>
-            <select class="form-select  text-primary body-2" aria-label="Default select example" style={{width:"max-content"}}>
-              <option value="1">1 kilo</option>
-              <option value="2">2 kilo</option>
-              <option value="3">3 kilo</option>
-            </select>
-            <label className="text-primary-light-700 text-weight-regular body-2 my-2">Delivery Time</label>
-            <select class="form-select w-25 text-primary body-2" aria-label="Default select example">
-              <option value="normal">normal</option>
-              <option value="2">Fast </option>
-            </select>
-            <button className="my-4 text-white body-2 btn btn-bg-primary w-50 d-flex align-items-center justify-content-center">Add to cart <AiOutlineShoppingCart  className="mx-2"/></button>
+              <label className="text-primary-light-700 text-weight-regular body-2 my-2">
+                Quantity
+              </label>
+              <select
+                class="form-select  text-primary body-2"
+                aria-label="Default select example"
+                style={{ width: "max-content" }}
+              >
+                <option value="1">1 kilo</option>
+                <option value="2">2 kilo</option>
+                <option value="3">3 kilo</option>
+              </select>
+              <label className="text-primary-light-700 text-weight-regular body-2 my-2">
+                Delivery Time
+              </label>
+              <select
+                class="form-select w-25 text-primary body-2"
+                aria-label="Default select example"
+              >
+                <option value="normal">normal</option>
+                <option value="2">Fast </option>
+              </select>
+              <button className="my-4 text-white body-2 btn btn-bg-primary w-50 d-flex align-items-center justify-content-center">
+                Add to cart <AiOutlineShoppingCart className="mx-2" />
+              </button>
             </form>
+            {/* bottom actions  */}
+            <div className="d-flex  align-items-center my-2">
+              <div className="body-1 text-primary-light-700 flex-item ">
+                <AiOutlineHeart className="me-1 " />{" "}
+                <sapn>Add to wishlist</sapn>
+              </div>
+              <div className="body-1 text-primary-light-700 flex-item ms-4">
+                <AiOutlineMail className="me-1 " /> <sapn>Email</sapn>
+              </div>
+            </div>
           </div>
         </section>
-        <section>{/* section for tabs */}</section>
+        <section className="my-3">
+          {/* section for tabs */}
+          {/* header  */}
+          <nav
+            className="d-flex list-unstyled border-left-primary"
+            style={{ height: "44px", marginBottom: "-1px" }}
+          >
+            <li className="h-100 body-1 text-primary-light-700  d-flex align-items-center  px-4 border-right-primary border-top-primary border-bottom-none  bg-white  ">
+              Details
+            </li>
+            <li className="h-100 body-1 text-primary-light-700  d-flex align-items-center  px-4 border-right-primary border-top-primary border-bottom-none    ">
+              More Inforrmation
+            </li>
+
+            <li className="h-100 body-1 text-primary-light-700  d-flex align-items-center  px-4 border-right-primary border-top-primary border-bottom-none    ">
+              Reviews (3)
+            </li>
+          </nav>
+          <div
+            className="border-primary mb-3 bg-white p-4"
+            style={{ borderCollapse: "collapse" }}
+          >
+            <p className="body-2 text-primary-light-700">
+              Perfect for class, work or the gym, the Wayfarer Messenger Bag is
+              packed with pockets. The dual-buckle flap closure reveals an
+              organizational panel, and the roomy main compartment has spaces
+              for your laptop and a change of clothes. An adjustable shoulder
+              strap and easy-grip handle promise easy carrying.
+            </p>
+            <ul>
+                <li className="body-2 text-primary-light-700 mb-1">Multiple internal zip pockets.</li>
+                <li className="body-2 text-primary-light-700 mb-1">Made of durable nylon.</li>
+
+            </ul>
+          </div>
+        </section>
       </main>
     </>
   );

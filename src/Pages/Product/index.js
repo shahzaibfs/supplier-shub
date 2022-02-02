@@ -176,14 +176,14 @@ function Product() {
             className="d-flex list-unstyled border-left-primary"
             style={{ height: "44px", marginBottom: "-1px" }}
           >
-            <li className="h-100 body-1 text-primary-light-700  d-flex align-items-center  px-4 border-right-primary border-top-primary border-bottom-none  bg-white  ">
+            <li className="h-100 body-1 text-primary-light-700  d-flex align-items-center  px-2 px-md-4 border-right-primary border-top-primary border-bottom-none  bg-white  ">
               Details
             </li>
-            <li className="h-100 body-1 text-primary-light-700  d-flex align-items-center  px-4 border-right-primary border-top-primary border-bottom-none    ">
+            <li className="h-100 body-1 text-primary-light-700  d-flex align-items-center  px-2 px-md-4 border-right-primary border-top-primary border-bottom-none    ">
               More Inforrmation
             </li>
 
-            <li className="h-100 body-1 text-primary-light-700  d-flex align-items-center  px-4 border-right-primary border-top-primary border-bottom-none    ">
+            <li className="h-100 body-1 text-primary-light-700  d-flex align-items-center  px-2 px-md-4 border-right-primary border-top-primary border-bottom-none    ">
               Reviews (3)
             </li>
           </nav>

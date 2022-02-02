@@ -137,7 +137,7 @@ function Home() {
 
 
         {/* render on route condition  */}
-        <section className="container-xxl" style={{minHeight:"100vh"}}>
+        <section className="container-xxl" style={{minHeight:"85vh"}}>
           <Outlet />
         </section>
 

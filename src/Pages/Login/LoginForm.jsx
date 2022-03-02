@@ -16,42 +16,42 @@ const LoginForm = () => {
           </div>
           {/* form starts from here  */}
           <form className="mb-4">
-            <div class="form-group mb-4">
+            <div className="form-group mb-4">
               <label className="text-primary-light-700 body2">Email</label>
               <input
                 type="email"
-                class="form-control"
+                className="form-control"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
               />
             </div>
-            <div class="form-group mb-4">
+            <div className="form-group mb-4">
               <label className="text-primary-light-700 body2">Password</label>
               <input
                 type="password"
-                class="form-control"
+                className="form-control"
                 aria-describedby="passwordHelp"
                 placeholder="Your Password"
               />
             </div>
             <div className="row m-0 justify-content-space-between mb-4">
-              <div class="form-group form-check col">
+              <div className="form-group form-check col">
                 <input
                   type="checkbox"
-                  class="form-check-input"
+                  className="form-check-input"
                   id="exampleCheck1"
                 />
                 <label
-                  class="form-check-label"
-                  for="exampleCheck1"
+                  className="form-check-label"
+                  htmlFor="exampleCheck1"
                   className="body-2 text-primary-light-700"
                 >
                   Remember me
                 </label>
               </div>
-              <div class="col m-0 p-0">
+              <div className="col m-0 p-0">
                 <label
-                  for="exampleCheck1"
+                  htmlFor="exampleCheck1"
                   className="body-2 text-secondary "
                   style={{ float: "right" }}
                 >
@@ -63,7 +63,7 @@ const LoginForm = () => {
             <div className="mb-3">
               <button
                 type="button"
-                class="btn btn-bg-success text-white text-weight-regular body-1 w-100"
+                className="btn btn-bg-success text-white text-weight-regular body-1 w-100"
               >
                 Login now
               </button>
@@ -71,7 +71,7 @@ const LoginForm = () => {
             <div className="mb-5">
               <button
                 type="button"
-                class="btn btn-bg-primary text-white text-weight-regular body-1 w-100 "
+                className="btn btn-bg-primary text-white text-weight-regular body-1 w-100 "
               >
                 <FcGoogle /> <span className="mx-2">or signin with Google</span>
               </button>

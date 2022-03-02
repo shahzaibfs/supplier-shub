@@ -17,41 +17,41 @@ const SignupForm = () => {
 
           {/* main form signup  */}
           <form className="mb-4">
-            <div class="fullName form-group mb-4">
+            <div className="fullName form-group mb-4">
               <label className="text-primary-light-700 body2">Full Name</label>
-              <input type="text" class="form-control" placeholder="Your Name" />
+              <input type="text" className="form-control" placeholder="Your Name" />
             </div>
-            <div class="PhNo form-group mb-4">
+            <div className="PhNo form-group mb-4">
               <label className="text-primary-light-700 body2">Phone number</label>
               <input
                 type="tel"
-                class="form-control"
+                className="form-control"
                 placeholder="CC-XX-XXXXXXX"
               />
             </div>
-            <div class="Email form-group mb-4">
+            <div className="Email form-group mb-4">
               <label className="text-primary-light-700 body2">Email</label>
               <input
                 type="email"
-                class="form-control"
+                className="form-control"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
               />
             </div>
-            <div class="Password form-group mb-4">
+            <div className="Password form-group mb-4">
               <label className="text-primary-light-700 body2">Password</label>
               <input
                 type="password"
-                class="form-control"
+                className="form-control"
                 aria-describedby="passwordHelp"
                 placeholder="Your Password"
               />
             </div>
-            <div class="AccountType form-group mb-4">
+            <div className="AccountType form-group mb-4">
               <label className="text-primary-light-700 body2">
                 Account type
               </label>
-              <select class="form-control">
+              <select className="form-control">
                 <option>Supplier</option>
                 <option>Customer</option>
               </select>
@@ -60,7 +60,7 @@ const SignupForm = () => {
             <div className="SignupButton  mb-3">
               <button
                 type="button"
-                class="btn btn-bg-success text-white text-weight-regular body-1 w-100"
+                className="btn btn-bg-success text-white text-weight-regular body-1 w-100"
               >
                 Signup
               </button>
@@ -68,7 +68,7 @@ const SignupForm = () => {
             <div className="OrSignupWithGoogle mb-5">
               <button
                 type="button"
-                class="btn btn-bg-primary text-white text-weight-regular body-1 w-100 "
+                className="btn btn-bg-primary text-white text-weight-regular body-1 w-100 "
               >
                 <FcGoogle /> <span className="mx-2">or signin with Google</span>
               </button>

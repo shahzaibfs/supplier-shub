@@ -30,7 +30,7 @@ const LoginPageIllustration = ({width}) => {
   return <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      dataName="Layer 1"
+      data-name="Layer 1"
       width={width}
       height="741.04834"
       viewBox="0 0 888 741.04834"

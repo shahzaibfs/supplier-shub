@@ -1,7 +1,6 @@
 import React from "react";
 import "./__Signup.css";
-import { FcGoogle } from "react-icons/fc";
-import Img1 from "../../Assets/images/auth.png";
+
 import SignupForm from "./SignupForm";
 
 const Signup = () => {

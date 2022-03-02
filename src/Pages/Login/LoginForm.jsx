@@ -42,9 +42,9 @@ const LoginForm = () => {
                   id="exampleCheck1"
                 />
                 <label
-                  className="form-check-label"
+                  
                   htmlFor="exampleCheck1"
-                  className="body-2 text-primary-light-700"
+                  className="body-2 text-primary-light-700 form-check-label"
                 >
                   Remember me
                 </label>

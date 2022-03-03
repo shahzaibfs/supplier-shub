@@ -1,8 +1,30 @@
-import React from "react";
+import React ,{useState} from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch ,useSelector } from "react-redux";
+import { fakeauth } from "../../Application/store/middleWares/AuthMiddleWare/authMiddleWare";
+
 
 const LoginForm = () => {
+  const [loginDetails,setloginDetails] = useState({email:"",password:""});
+  const dispatch = useDispatch();
+
+  const authState = useSelector(store=>store.authReducer)
+  let navigate = useNavigate();
+  
+  const handleInputs=(e)=>{
+    setloginDetails(oldLoginDetails => ({
+      ...oldLoginDetails,
+      [e.target.name] : e.target.value
+    }))
+  }
+
+  const handleLogin = (e)=>{
+    dispatch(fakeauth(loginDetails.email,loginDetails.password));
+    if(authState.isLogin){
+      navigate("/",{replace: true });
+    }
+  }
   return (
     <>
       <section className="row mx-auto w-100 h-75 justify-content-center align-items-center flex-wrap">
@@ -23,6 +45,8 @@ const LoginForm = () => {
                 className="form-control"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
+                name="email"
+                onChange={handleInputs}
               />
             </div>
             <div className="form-group mb-4">
@@ -32,6 +56,8 @@ const LoginForm = () => {
                 className="form-control"
                 aria-describedby="passwordHelp"
                 placeholder="Your Password"
+                name="password"
+                onChange={handleInputs}
               />
             </div>
             <div className="row m-0 justify-content-space-between mb-4">
@@ -64,6 +90,7 @@ const LoginForm = () => {
               <button
                 type="button"
                 className="btn btn-bg-success text-white text-weight-regular body-1 w-100"
+                onClick={handleLogin}
               >
                 Login now
               </button>

@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./__login.css";
 import LoginForm from "./LoginForm";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 const Login = () => {
+  const authState = useSelector(store=>store.authReducer)
+  let navigate = useNavigate();
+  useEffect(()=>{
+    
+    if(authState.isLogin){
+      navigate("/", { replace: true });
+    }
+  })
   return (
     <section className="container-fluid p-0  text-white login__container overflow-auto">
       <div className="row h-100 w-100 mx-auto  overflow-hidden">

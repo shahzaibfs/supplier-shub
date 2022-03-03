@@ -10,6 +10,12 @@
   font-size: 16px;
   box-shadow: none;
 }
+a{
+  color: inherit;
+}
+a:hover{
+  color: inherit;
+}
 
 /* ------------Figma style copying ------------ */
 /* ------------Figma style copying ------------ */
@@ -41,7 +47,7 @@
   /* background colors  */
   --bg-primary: #6e716e;
   --bg-primary-light: #e0e0e0;
-  --bg-primary-light-700: #f2f2f2;
+  --bg-primary-light-700: #f2f2f2de;
   --bg-primary-light-800: #f0f0f063;
   --bg-secondary: ;
   --bg-secondary-light: ;

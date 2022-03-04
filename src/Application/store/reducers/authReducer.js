@@ -16,7 +16,7 @@ export const authReducer = (state = intitState, action) => {
       return {...state,isLogin:false,errMessage:""};
 
     default:
-        console.log(localStorage.getItem("sessionID"))
+        
         if(localStorage.getItem("sessionID")!=null){
             return {...state,errMessage:"",isLogin:true}
         }

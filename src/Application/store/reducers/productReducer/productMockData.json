@@ -1,0 +1,159 @@
+[
+  {
+    "productId": 1,
+    "productName": "Sunsilk Blue",
+    "productDetails": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+    "category": {
+      "categoryName":"Health and Beauty"
+    },
+    "productSize": 12,
+    "productWeight": "cotton",
+    "minimumOrder": 5,
+    "productPrice": 5000,
+    "customerRating": 4,
+    "inStock": true,
+    "companyName": "Sunsilk",
+    "productCoverPictureUrl": "https://cdn2.bigcommerce.com/n-biq04i/ivmp9iza/products/14475/images/36201/1__37154.1474720307.500.750.jpg?c=2",
+    "productPics": [
+      {
+        "productPicId": 1,
+        "productPictureUrl": "https://makeupandbeauty.com/wp-content/uploads/2011/07/sunsilk-anti-dandruff-solution.jpg"
+      },
+      {
+        "productPicId": 2,
+        "productPictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5TNmArGcPi2YLdAE-GCeqsZBEc3aMXVDBcQ&usqp=CAU"
+      },
+      {
+        "productPicId": 3,
+        "productPictureUrl": "https://makeupandbeauty.com/wp-content/uploads/2011/07/sunsilk-anti-dandruff-solution.jpghttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSl7_Fba1Uy_tEMjFPcf6TxBDHUnW6mvriGQ&usqp=CAU"
+      },
+      {
+        "productPicId": 4,
+        "productPictureUrl": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F14%2F2007%2F08%2F07%2F080307_sunsilk_shn_240X320_0.jpg&w=400&h=532&c=sc&poi=face&q=60"
+      }
+    ]
+  },
+  {
+    "productId": 2,
+    "productName": "Sunsilk Black",
+    "productDetails": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+
+    "category": {
+      "categoryName":"Health and Beauty"
+    },
+    "productSize": 12,
+    "productWeight": "cotton",
+    "minimumOrder": 10,
+    "productPrice": 5000,
+    "customerRating": 4,
+    "inStock": true,
+    "companyName": "Sunsilk",
+    "productCoverPictureUrl": "https://m.media-amazon.com/images/I/51ks3MTOnfL._SX679_.jpg",
+    "productPics": [
+      {
+        "productPicId": 1,
+        "productPictureUrl": "https://makeupandbeauty.com/wp-content/uploads/2011/07/sunsilk-anti-dandruff-solution.jpg"
+      },
+      {
+        "productPicId": 2,
+        "productPictureUrl": "data:image/jpeg;base64,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EREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERA//Z"
+      },
+      {
+        "productPicId": 3,
+        "productPictureUrl": "https://www.incity.pk/wp-content/uploads/2021/03/sunsilk.jpg"
+      },
+      {
+        "productPicId": 4,
+        "productPictureUrl": "data:image/jpeg;base64,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"
+      }
+    ]
+  },
+  {
+    "productId": 3,
+    "productName": "Chemistry",
+    "productDetails": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+    "category": {
+      "categoryName":"Stationary"
+    },
+    "productSize": 50,
+    "productWeight": "cotton",
+    "minimumOrder": 5,
+    "productPrice": 10000,
+    "customerRating": 3,
+    "inStock": true,
+    "companyName": "AlMaktaba",
+    "productCoverPictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpCGKrcEghdRjJMW5iwQsq7jFVQQsgZUgO4g&usqp=CAU",
+    "productPics": [
+      {
+        "productPicId": 1,
+        "productPictureUrl": "https://images-na.ssl-images-amazon.com/images/I/71mpxcAspEL.jpg"
+      }
+    ]
+  }
+  ,{
+    "productId": 4,
+    "productName": "Kurkre-Red",
+    "productDetails": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+    "category": {
+      "categoryName":"Snacks"
+    },
+    "productSize": 50,
+    "productWeight": "cotton",
+    "minimumOrder": 2,
+    "productPrice": 1000,
+    "customerRating": 5,
+    "inStock": true,
+    "companyName": "Kurkre",
+    "productCoverPictureUrl": "http://goodcart.pk/wp-content/uploads/2018/08/Kurkure-RCJ-Rs.20.png",
+    "productPics": [
+      {
+        "productPicId": 1,
+        "productPictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMznYVARuQKtKVGXXNgFjYz-CxIBE9XWkkewQAoef-O0vklhI90bEsR6-3nH0s5cBsQYc&usqp=CAU"
+      }
+    ]
+  },
+  {
+    "productId": 5,
+    "productName": "Kurkre-Black",
+    "productDetails": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+    "category": {
+      "categoryName":"Snacks"
+    },
+    "productSize": 50,
+    "productWeight": "cotton",
+    "minimumOrder": 2,
+    "productPrice": 1000,
+    "customerRating": 2,
+    "inStock": false,
+    "companyName": "Kurkre",
+    "productCoverPictureUrl": "https://cdnprod.mafretailproxy.com/sys-master-root/h52/h19/12641584218142/232399_main.jpg_1700Wx1700H",
+    "productPics": [
+      {
+        "productPicId": 1,
+        "productPictureUrl": "https://pictures.grocerapps.com/original/grocerapp-kurkure-toofani-mirch-5f1acab7d222c.jpeg"
+      }
+    ]
+  },
+  {
+    "productId": 6,
+    "productName": "Osaka Battery",
+    "productDetails": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+    "category": {
+      "categoryName":"HoueseHold Items"
+    },
+    "productSize": 20,
+    "productWeight": "cotton",
+    "minimumOrder": 2,
+    "productPrice": 1000,
+    "customerRating": 5,
+    "inStock": true,
+    "companyName": "Osaka",
+    "productCoverPictureUrl": "https://pakistanbatterytraders.pk/wp-content/uploads/2020/05/T125.jpg",
+    "productPics": [
+      {
+        "productPicId": 1,
+        "productPictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_F3BbXKDrpC1wq7nHktF29meL4MrZ2UgWBDW3RunuwyZ43q4FAdUPrx3PN0WLNsvHd0U&usqp=CAU"
+      }
+    ]
+  }
+]

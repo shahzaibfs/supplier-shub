@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 
-import { useSelector } from "react-redux";
+import { useSelector ,useDispatch } from "react-redux";
 
 import "./__home.css";
 import { Outlet } from "react-router-dom";
@@ -11,9 +11,16 @@ import MainHeader from "./MainHeader";
 import NavBAr from "./NavBAr";
 import MainFooter from "./MainFooter";
 import SmallFooter from "./SmallFooter";
+import {productMiddleWare} from '../../Application/store/middleWares/ProductMiddleWare/productMiddleWare'
+
 
 function Home() {
   const state = useSelector((store) => store);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(productMiddleWare())
+  },[])
+  
   
 
   return (

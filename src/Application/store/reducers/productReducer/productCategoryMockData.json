@@ -1,0 +1,46 @@
+[
+    {
+        "categoryId":1,
+        "categoryName":"Baverages"
+    },
+    {
+        "categoryId":2,
+        "categoryName":"Dairy and Eggs"
+    },
+    {
+        "categoryId":3,
+        "categoryName":"Health and Beauty"
+    },
+    {
+        "categoryId":4,
+        "categoryName":"Bakery Items"
+    },
+    {
+        "categoryId":5,
+        "categoryName":"Mother and Baby"
+    },
+    {
+        "categoryId":6,
+        "categoryName":"Stationary"
+    },
+    {
+        "categoryId":7,
+        "categoryName":"Cosmetics"
+    },
+    {
+        "categoryId":8,
+        "categoryName":"Snacks"
+    },
+    {
+        "categoryId":9,
+        "categoryName":"Cooking Essentials"
+    },
+    {
+        "categoryId":10,
+        "categoryName":"HoueseHold Items"
+    },
+    {
+        "categoryId":11,
+        "categoryName":"Organic"
+    }
+]

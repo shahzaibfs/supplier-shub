@@ -36,6 +36,7 @@ const Routes = () => {
         /* ----------Auth Routing-----------  */
         /* ----------Auth Routing-----------  */}
         <Route path="/login" element={<Login />} />
+        <Route path="/404Error" element={<h1>Error 404</h1>} />
         <Route path="/signup" element={<Signup />} />
       </Switch>
     </React.Suspense>

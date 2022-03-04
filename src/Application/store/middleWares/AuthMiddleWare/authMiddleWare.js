@@ -11,7 +11,11 @@ export const fakeauth = (email, password) => {
           type: "LOGIN_ACTION",
           payload: {
             isLogin: true,
-            errMessage:""
+            errMessage: "",
+            userDetails: {
+              name: "Sunsilk",
+              accountType: "SUPPLIER",
+            },
           },
         });
       })

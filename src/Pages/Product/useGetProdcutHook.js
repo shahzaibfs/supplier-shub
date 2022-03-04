@@ -13,7 +13,7 @@ export function useGetProductHook({ productId, products, navigate }) {
     } else {
       navigate("/", { replace: true });
     }
-  }, [productId,products]);
+  }, [productId,products,navigate]);
 
   return product;
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import ProccedToCheckout from "./ProccedToCheckout";
 import ShoppingCartTable from "./ShoppingCartTable";
 import { useSelector } from "react-redux";
@@ -7,9 +7,15 @@ function Cart() {
   const [getProductsDetails,setgetProductsDetails] = useState(null);
   const products = useSelector(store=>store.cartReducer.products)
 
-  const getProductsDetailsRef =(productsDetails)=>{
-    setgetProductsDetails(productsDetails);
-  }
+  const getProductsDetailsRef =useCallback(
+    
+      (productsDetails)=>{
+        setgetProductsDetails(productsDetails);
+      
+    },
+    [setgetProductsDetails]
+  )
+ 
   
  
   return (

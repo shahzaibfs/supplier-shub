@@ -33,21 +33,28 @@ const ShoppingCartTable = ({ products ,setProductsDetailsRef}) => {
   }
 
   const handleQuantityChange=(e,product)=>{
+     console.log(e.target.value)
       setquantities(old=>({
         ...old,
         [e.target.name]:e.target.value*1
       }))
       if(e.target.value <quantities[product.productId]){
+        console.log("in lesser")
         setPrices(old=>({
           ...old,
            [e.target.name]: prices[e.target.name]-product.productPrice
         }))
-      }else{
+      }else if(e.target.value*1 ===quantities[product.productId]){
+        console.log("fomr eqqual")
+      }
+      else{
+        console.log("in greater")
         setPrices(old=>({
           ...old,
            [e.target.name]: prices[e.target.name]+product.productPrice
         }))
       }
+
      
 
   }
@@ -143,6 +150,7 @@ const ShoppingCartTable = ({ products ,setProductsDetailsRef}) => {
                   name={product.productId}
                   onChange={(e)=>handleQuantityChange(e,product)}
                   placeholder={product.minimumOrder}
+                 
                 />
               </td>
               <td className="ps-4 position-relative py-3 body-1 d-block text-primary-light-700 h-100">

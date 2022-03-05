@@ -1,10 +1,21 @@
 import React from "react";
 import { AiOutlineStar } from "react-icons/ai";
-import { useSelector } from "react-redux";
+import { useSelector ,useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 const HomeHotSellers = () => {
   const products = useSelector((store) => store.productReducer);
+  const dispatch = useDispatch();
+  
+  const handleAddToCart =(product)=>{
+    dispatch({
+      type:"ADD_TO_CART" ,
+      payload:product
+    })
+  }
+
+
+
   return (
     <div className="container-fluid container-xxl">
       {/* Section header  */}
@@ -61,7 +72,7 @@ const HomeHotSellers = () => {
               <p className="mb-2 text-muted text-decoration-underline">
                 Reviews
               </p>
-              <button className="btn bg-primary my-0 text-white">
+              <button onClick={()=>handleAddToCart(product)} className="btn bg-primary my-0 text-white">
                 Add to cart
               </button>
             </div>

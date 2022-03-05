@@ -14,7 +14,7 @@ const ShoppingCartTable = ({ products ,setProductsDetailsRef}) => {
     
   
     
-  }, [quantities,prices])
+  }, [quantities,prices,setProductsDetailsRef])
   
 
   const handleOnLoad=(productId,minimumOrder,productPrice)=>{

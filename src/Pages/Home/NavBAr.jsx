@@ -22,7 +22,7 @@ const NavBAr = () => {
   };
 
   const getClearLink = (name) => {
-    return name.split(" ").join("");
+    return name.split(" ").join("-");
   };
   return (
     <nav

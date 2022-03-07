@@ -5,47 +5,19 @@ import {
   AiOutlineShoppingCart,
   AiOutlineStar,
 } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 
-function reducer(state, action) {
-  switch (action.type) {
-    case "QUANTITY_INCREASE":
-      if(action.payload.quantity < action.payload.minQuantity){
-        return {...state,quantity:action.payload.minQuantity};
-      }
-      return {quantity:action.payload.quantity};
-      case "DELIVERY_TIME":
-        return {...state,deliveryTime:action.payload.deliveryTime}
-    default:
-      return state
-  }
-}
+
 
 const ProductPriceDetailSection = ({ product }) => {
-  const initialState = { quantity: product.minimumOrder ,deliveryTime :"Normal"};
-  const [state, dispatch] = useReducer(reducer, initialState);
+const dispatch  = useDispatch();
 
-
-  const handleInputChange = (e) => {
-    if(e.target.name === "quantity"){
-      dispatch({
-        type: "QUANTITY_INCREASE",
-        payload: {
-          [e.target.name]: e.target.value,
-         
-        },
-      });
-    }else{
-      dispatch({
-        type: "DELIVERY_TIME",
-        payload: {
-          deliveryTime: e.target.value,
-          
-        },
-      });
-    }
-   
-  };
- 
+const handleAddToCart = ()=>{
+  dispatch({
+    type:"ADD_TO_CART" ,
+    payload:product
+  })
+}
 
   return (
     <div
@@ -87,32 +59,21 @@ const ProductPriceDetailSection = ({ product }) => {
         </div>
       </div>
       {/* add to cart */}
-      <form>
-        <label className="text-primary-light-700 text-weight-regular body-2 my-2">
-          Quantity
-        </label>
-        <br />
-        <input
-          type={"number"}
-          className=" form-control text-primary body-2 "
-          value={state.quantity}
-          onChange={handleInputChange}
-          name="quantity"
-          style={{width:"100px"}}
-        />
-        <br />
+      <form onSubmit={(e)=>e.preventDefault()}>
+     
+       
         <label className="text-primary-light-700 text-weight-regular body-2 my-2">
           Delivery Time
         </label>
         <select
           className="form-select w-25 text-primary body-2"
           aria-label="Default select example"
-          onChange={handleInputChange}
+         
         >
           <option value="normal">Normal</option>
           <option value="fast">Fast </option>
         </select>
-        <button className="my-4 text-white body-2 btn btn-bg-primary w-50 d-flex align-items-center justify-content-center">
+        <button onClick={handleAddToCart} className="my-4 text-white body-2 btn btn-bg-primary w-50 d-flex align-items-center justify-content-center">
           Add to cart <AiOutlineShoppingCart className="mx-2" />
         </button>
       </form>

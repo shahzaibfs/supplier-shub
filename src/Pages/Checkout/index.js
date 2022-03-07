@@ -1,7 +1,10 @@
 import React from "react";
 import { AiOutlineCheck } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 function Checkout() {
+  const checkoutState = useSelector(store => store.checkoutReducer)
+  console.log(checkoutState)
   return (
     <>
       {/* @ compp */}
@@ -67,7 +70,7 @@ function Checkout() {
         </header>
         <section className="row mx-0 justify-content-between align-items-start">
           <div className="col-12 col-md-6 col-xl-7 px-0 flex-grow-1 me-2 ">
-            <form className="w-100 w-md-75 w-xl-50 my-2">
+            <form className="w-100 w-md-75 w-xl-50 my-2" onSubmit={(e)=>e.preventDefault()}>
               <div className="form-group mt-2 bg-none ">
                 <label className="body-2 text-weight-regular text-primary-light-700">
                   First name
@@ -160,7 +163,7 @@ function Checkout() {
                 </div>
               </div>
               <button className="btn btn-bg-primary text-white text-weight-regular my-2 ms-auto">
-                Next
+                Confirm order 
               </button>
             </form>
           </div>
@@ -173,53 +176,40 @@ function Checkout() {
             >
               Order Summary
             </header>
-            <p className="text-muted body-1">2 items in cart</p>
-            <article className="d-flex justify-content-between border-top-primary py-2 w-100">
-              <div className="d-flex">
-                <span className="me-2">
-                  {" "}
-                  <img
-                    src="https://image.shutterstock.com/image-photo/image-shocked-young-brunette-lady-260nw-641814046.jpg"
-                    alt=""
-                    height={70}
-                    width={70}
-                    style={{objectFit:"cover"}}
-                    className="bg-primary"
-                  />
-                </span>
-                <span>
-                    <h1 className="body-2  text-decoration-underline text-weight-regular">Go get Pushup Grips</h1>
-                    <p className="body-2   text-weight-regular">Qty : 1</p>
-                </span>
-              </div>
-              <price>
-                  $45.00
-              </price>
+            <div className="d-flex justify-content-between">
+            <p className="text-muted body-1">{checkoutState.products.length} items in cart</p>
+              <p className="text-muted body-1">Total : Rs {checkoutState.totalPrice}</p>
+            </div>
+         {
+           checkoutState.products.map((product)=>(
+            <article  key={product.productId} className="d-flex justify-content-between border-top-primary py-2 w-100">
+            <div className="d-flex">
+              <span className="me-2">
+                {" "}
+                <img
+                  src={product.productCoverPictureUrl}
+                  alt=""
+                  height={70}
+                  width={70}
+                  style={{objectFit:"cover"}}
+                  className="bg-primary"
+                />
+              </span>
+              <span>
+                  <h1 className="body-2  text-decoration-underline text-weight-regular">{product.productName}</h1>
+                  <p className="body-2   text-weight-regular">
+                    Qty : {checkoutState.quantities[product.productId]}
+                    </p>
+              </span>
+            </div>
+            <price>
+             Rs {product.productPrice}
+            </price>
 
-            </article>
-            <article className="d-flex justify-content-between border-top-primary py-2 w-100">
-              <div className="d-flex">
-                <span className="me-2">
-                  {" "}
-                  <img
-                    src="https://image.shutterstock.com/image-photo/image-shocked-young-brunette-lady-260nw-641814046.jpg"
-                    alt=""
-                    height={70}
-                    width={70}
-                    style={{objectFit:"cover"}}
-                    className="bg-primary"
-                  />
-                </span>
-                <span>
-                    <h1 className="body-2  text-decoration-underline text-weight-regular">Go get Pushup Grips</h1>
-                    <p className="body-2   text-weight-regular">Qty : 1</p>
-                </span>
-              </div>
-              <price>
-                  $45.00
-              </price>
-
-            </article>
+          </article>)
+           )
+         }
+              
           </div>
         </section>
       </main>

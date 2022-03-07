@@ -1,11 +1,28 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const ProccedToCheckout = ({products,getProductsDetails}) => {
   const user = useSelector(store=>store.authReducer)
+  
 
-  console.log(getProductsDetails)
+  const checkoutState = useSelector(store=>store.checkoutReducer)
+
+  const dispatch = useDispatch();
+  console.log(checkoutState)
+  const handleProccedToCheckout =()=>{
+    dispatch({
+      type:"PROCCED_TO_CHECKOUT",
+      payload:{
+        products:products,
+        totalPrice:Object.values(getProductsDetails.prices ===0 ? {key:0} : getProductsDetails.prices)
+        .reduce((partialSum, a) => partialSum+a) ,
+        quantities : getProductsDetails.quantities
+      }
+    })
+  }
+
+
 
   return (
     <section className="col-lg-3 bg-primary-light-700 flex-grow-0 mt-3 mt-lg-0">
@@ -79,12 +96,15 @@ const ProccedToCheckout = ({products,getProductsDetails}) => {
           </div>
           <div className="d-flex justify-content-between align-items-center py-2">
                 <p className="text-primary text-weight-regular body-1 mb-0">Total</p>
-                <p className="text-primary text-weight-regular body-1 mb-0">90.00</p>
+                <p className="text-primary text-weight-regular body-1 mb-0">{
+                 getProductsDetails === null  ? "null" :  Object.values(getProductsDetails.prices ===0 ? {key:0} : getProductsDetails.prices)
+                 .reduce((partialSum, a) => partialSum+a) 
+                }</p>
 
               </div>
               <button className="btn my-2 btn-bg-primary text-weight-bold text-white w-100">
-                  {user.isLogin ? <Link to={"/checkout"} >Procced to Checkout</Link>
-                  :<Link to={"/login"} >Login</Link>}
+                  {user.isLogin  && products.length  ?  <Link to={"/checkout"} onClick={handleProccedToCheckout} >Procced to Checkout</Link>
+                  : (!user.isLogin  || user.isLogin) && !products.length ? "Add Products to Cart"  :<Link to={"/login"} >Login</Link>}
               </button>
         </section>
   )

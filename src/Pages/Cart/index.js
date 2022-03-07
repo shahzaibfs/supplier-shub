@@ -13,6 +13,7 @@ function Cart() {
     },
     [setgetProductsDetails]
   );
+  console.log(getProductsDetails)
 
   return (
     <>
@@ -27,7 +28,7 @@ function Cart() {
         />
         <ProccedToCheckout
           products={products}
-          getProductsDetails={getProductsDetails}
+          getProductsDetails={ getProductsDetails }
         />
       </main>
     </>

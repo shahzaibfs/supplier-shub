@@ -217,7 +217,7 @@ function Catalog() {
                         {/* reviews */}
                         <div><AiOutlineStar className="body-2" /></div>
                         {/* price */}
-                        <price className="text-primary text-weight-bold body-2">$400 | <span className="body-2 bd-highlight">Stock</span></price>
+                        <price className="text-primary text-weight-bold body-2">$500 | <span className="body-2 bd-highlight">Stock</span></price>
                     </div>
                 </div>
 

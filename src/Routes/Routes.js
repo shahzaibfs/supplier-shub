@@ -6,7 +6,7 @@ import Loader from "../Components/Loader/Loader";
 
 const Login = React.lazy(() => import("../Pages/Login"));
 const Signup = React.lazy(() => import("../Pages/Signup"));
-const Catalog = React.lazy(() => import("../Pages/Catalog"));
+const Category = React.lazy(() => import("../Pages/Category"));
 const Product = React.lazy(() => import("../Pages/Product"));
 const Cart = React.lazy(() => import("../Pages/Cart"));
 const Checkout = React.lazy(() => import("../Pages/Checkout"));
@@ -22,7 +22,7 @@ const Routes = () => {
           <Route path="" element={<Home />} />
           <Route path="cart" element={<Cart />} />
 
-          <Route path="products/:productCategory" element={<Catalog />} />
+          <Route path="products/:productCategory" element={<Category />} />
           <Route path="products/:productCategory/:id" element={<Product />} />
         
           <Route path="checkout" element={<Checkout />} />

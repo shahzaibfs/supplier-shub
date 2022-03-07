@@ -31,7 +31,7 @@ const CategoryMain = ({CategoryProducts}) => {
                         </div>
                         {/* info */}
                         <div className="px-2">
-                            <h1 className="body-2 text-primary text-decoration-underline text-muted py-2 my-0">Cocacola</h1>
+                            <h1 className="body-2 text-primary text-decoration-underline text-muted py-2 my-0">{product.productName}</h1>
                             {/* reviews */}
                             <div>
                                 {[...Array(product.customerRating)].map((_,index)=>(

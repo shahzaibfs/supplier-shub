@@ -1,15 +1,18 @@
 import React from 'react'
-import CustomerDashboard from "./CustomerDashboard"
-import SupplierDashboard from "./SupplierDashboard"
+
 import { useSelector } from 'react-redux'
+import { Navigate, Outlet } from 'react-router-dom'
 
 const Index = () => {
   const user = useSelector(store=>store.authReducer) 
-
-  return (
-    user.isLogin && user.userDetails.accountType === "SUPPLIER" ?
-    <SupplierDashboard /> :<CustomerDashboard />
-  )
+  if(!user.isLogin){
+    return <Navigate to={"/login"} />
+  }
+  else{
+      return <Outlet />
+  }
+  
+  
 }
 
 export default Index

@@ -1,20 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineStar } from "react-icons/ai";
-import { useSelector ,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import Popup from "../../../Components/Popup/Popup";
 
 const HomeHotSellers = () => {
+  const [isPopupShow, setisPopupShow] = useState(false);
+
   const products = useSelector((store) => store.productReducer);
   const dispatch = useDispatch();
-  
-  const handleAddToCart =(product)=>{
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      setisPopupShow(false)
+    },1000)
+  },[isPopupShow])
+
+  const handleAddToCart = (product) => {
     dispatch({
-      type:"ADD_TO_CART" ,
-      payload:product
-    })
-  }
-
-
+      type: "ADD_TO_CART",
+      payload: product,
+    });
+  };
 
   return (
     <div className="container-fluid container-xxl">
@@ -72,13 +79,20 @@ const HomeHotSellers = () => {
               <p className="mb-2 text-muted text-decoration-underline">
                 Reviews
               </p>
-              <button onClick={()=>handleAddToCart(product)} className="btn bg-primary my-0 text-white">
+              <button
+                onClick={() => {
+                  handleAddToCart(product);
+                  setisPopupShow(true);
+                }}
+                className="btn bg-primary my-0 text-white"
+              >
                 Add to cart
               </button>
             </div>
           </div>
         ))}
       </main>
+      <Popup isShow={isPopupShow} message={"Product Added to Cart"}/>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { AiOutlineStar } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -10,11 +10,7 @@ const HomeHotSellers = () => {
   const products = useSelector((store) => store.productReducer);
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-    setTimeout(()=>{
-      setisPopupShow(false)
-    },1000)
-  },[isPopupShow])
+  
 
   const handleAddToCart = (product) => {
     dispatch({
@@ -83,6 +79,9 @@ const HomeHotSellers = () => {
                 onClick={() => {
                   handleAddToCart(product);
                   setisPopupShow(true);
+                  setTimeout(()=>{
+                    setisPopupShow(false)
+                  },500)
                 }}
                 className="btn bg-primary my-0 text-white"
               >

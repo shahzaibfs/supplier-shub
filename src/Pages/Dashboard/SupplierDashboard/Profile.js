@@ -50,8 +50,8 @@ const Profile = () => {
         </div>
        
       </div>
-      <div className="my-2 d-flex flex-column justify-content-center align-items-start bg-primary p-2 mx-2 text-white" style={{borderRadius:"10px" ,minHeight:"250px"}}>
-      <h1>Company Details</h1>
+      <div className="my-2 d-flex flex-column justify-content-center align-items-center  bg-primary p-2 mx-2 text-white" style={{borderRadius:"10px" ,minHeight:"250px"}}>
+      <h1 className="mb-4">Company Details</h1>
       <div className="d-flex w-100 align-items-center justify-content-evenly " >
       <div>
             <article className="p-2 ">

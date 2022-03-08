@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import AddProduct from "./Inventory/AddProduct";
 import ViewInventory from "./Inventory/ViewInventory";
 import Profile from "./Profile";
-import Settings from "./Settings";
 
 const SupplierSideBar = ({ftnRef}) => {
   const [checkedValue, setcheckedValue] = useState({

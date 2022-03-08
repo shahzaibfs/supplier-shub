@@ -16,7 +16,7 @@ const Profile = () => {
             height="100%"
             style={{ objectFit: "cover" }}
             src="https://www.logolynx.com/images/logolynx/0c/0cd161813d1bf6721c64af50f681e324.jpeg"
-            alt="Profile Picture"
+            alt="Profile"
           />
           <div className="position-absolute bg-primary py-1 px-4 " style={{borderRadius:"5px" ,top:"30px",right:"-130px"}}>
             Profile Picture

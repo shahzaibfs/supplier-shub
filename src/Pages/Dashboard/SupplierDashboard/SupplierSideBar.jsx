@@ -57,7 +57,7 @@ const SupplierSideBar = ({ftnRef}) => {
             className="m-0 m-0 p-2"
             style={{ background: checkedValue.parent === 3 && "#6e716e"  ,color :checkedValue.parent === 3 && "white"}}
             onClick={() => handleCheckedValue(3)(null)(null)}          >
-            Profile
+            Active Orders
           </p>
         </li>
       </nav>

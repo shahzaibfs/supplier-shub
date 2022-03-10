@@ -1,8 +1,9 @@
 import React from 'react'
 import { AiOutlineStar } from 'react-icons/ai'
+import { Link } from 'react-router-dom'
 
-const CategoryMain = ({CategoryProducts}) => {
-    console.log(CategoryProducts)
+const CategoryMain = ({CategoryProducts,productCategory}) => {
+ 
   return (
     <section className="col ">
           {/* content header */}
@@ -24,8 +25,9 @@ const CategoryMain = ({CategoryProducts}) => {
                {
                    CategoryProducts.length ? 
                     CategoryProducts.map(product=>(
-                        <div key={product.productId} className="col my-2 mx-2 p-0 " style={{height:"340px" ,minWidth:"250px" ,maxWidth:"250px" }}>
+                      <div key={product.productId} className="col my-2 mx-2 p-0 " style={{height:"340px" ,minWidth:"250px" ,maxWidth:"250px" }}>
                         {/* img */}
+                        <Link to={`/products/${productCategory}/${product.productId}`}>
                         <div className="h-75 w-100 p-0 bg-primary-light mx-0">
                         <img width={"100%"} height="100%" style={{objectFit:"cover"}} src={product.productCoverPictureUrl} alt={product.productName}/>
                         </div>
@@ -40,7 +42,7 @@ const CategoryMain = ({CategoryProducts}) => {
                             </div>
                             {/* price */}
                             <div className="text-primary text-weight-bold body-2">Rs {product.productPrice} per <span className="body-2 bd-highlight">{product.productWeight}</span></div>
-                        </div>
+                        </div> </Link>
                     </div>
                     ))
                : "no products have been added to this category "

@@ -34,7 +34,7 @@ function Catalog() {
         {/* side bar   */}
         <CategorySideBar />
         {/* content */}
-        <CategoryMain CategoryProducts={getCategoryProducts()} />
+        <CategoryMain CategoryProducts={getCategoryProducts()} productCategory={productCategory} />
       </main>
     </>
   );

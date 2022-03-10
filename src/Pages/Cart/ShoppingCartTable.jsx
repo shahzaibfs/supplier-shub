@@ -159,7 +159,7 @@ const ShoppingCartTable = ({ products, setProductsDetailsRef }) => {
               {prices !== null ? prices[product.productId] : "loading"}Rs
               <div
                 className=" py-1 position-absolute d-block text-primary-light-700 mb-4 ms-3 "
-                style={{ bottom: 0, cursor: "pointer" }}
+                style={{ top:"150px", cursor: "pointer" }}
               >
                 <AiFillDelete
                   onClick={() => handleDeleteProduct(product.productId)}

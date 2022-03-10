@@ -7,7 +7,7 @@ const SmallFooter = () => {
     style={{ minHeight: "42px" }}
   >
     <div className="text-center py-2 text-weight-regular">
-      Copyright © 2013-2017 Magento, Inc. All rights reserved.
+      Copyright © 2013-2017 supplier's hub, Inc. All rights reserved.
     </div>
   </footer>
   )

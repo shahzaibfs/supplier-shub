@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../../Assets/images/logo.png";
 import {
   AiOutlineShoppingCart,
   AiOutlineSearch,
@@ -24,7 +23,9 @@ const MainHeader = () => {
       {/* logo container */}
       <div className="col">
         <Link to={"/"}>
-          <img src={logo} alt="logo" />
+          {/* <img src={logo} alt="logo" /> */}
+          <h1 className="heading-2 text-primary mb-1">Supplier's Hub</h1>
+          <p className="body-2 text-primary m-0 ">Virtual Assistant</p>
         </Link>
       </div>
 

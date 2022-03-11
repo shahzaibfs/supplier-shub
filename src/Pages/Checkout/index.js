@@ -150,17 +150,8 @@ function Checkout() {
                     Cash on Delivery
                   </label>
                 </div>
-                <div class="form-check pb-1 ">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="exampleRadios"
-                    value="option1"
-                  />
-                  <label className="form-check-label body-2 text-primary-light">
-                    Cash on Delivery
-                  </label>
-                </div>
+              
+               
               </div>
               <button className="btn btn-bg-primary text-white text-weight-regular my-2 ms-auto">
                 Confirm order 

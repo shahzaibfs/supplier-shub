@@ -1,17 +1,33 @@
-import React ,{useState} from "react";
+import React ,{useEffect, useState} from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch ,useSelector } from "react-redux";
 import { fakeauth } from "../../Application/store/middleWares/AuthMiddleWare/authMiddleWare";
+import Popup from "../../Components/Popup/Popup";
 
 
 const LoginForm = () => {
   const [loginDetails,setloginDetails] = useState({email:"",password:""});
-  const dispatch = useDispatch();
-
+  const [isPopupShow, setisPopupShow] = useState(false);
   const authState = useSelector(store=>store.authReducer)
   let navigate = useNavigate();
+
+  useEffect(() => {
+    
+    if(authState.errMessage.length){
+     
+      setisPopupShow(true)
+    }
+    setTimeout(() => {
+      setisPopupShow(false)
+    }, 4000);
   
+    
+  }, [authState])
+  const dispatch = useDispatch();
+
+
+  console.log(authState)
   const handleInputs=(e)=>{
     setloginDetails(oldLoginDetails => ({
       ...oldLoginDetails,
@@ -114,6 +130,8 @@ const LoginForm = () => {
             </p>
           </footer>
         </div>
+        <Popup isShow={isPopupShow} color="warning" message={"failed to login"}/>
+
       </section>
     </>
   );

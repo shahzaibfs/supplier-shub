@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch } from "react-redux";
+import Popup from "../../Components/Popup/Popup";
+
 
 const ShoppingCartTable = ({ products, setProductsDetailsRef }) => {
   const [quantities, setquantities] = useState(null);
+  const [isPopupShow, setisPopupShow] = useState(false);
+
   const [prices, setPrices] = useState(null);
   const dispatch = useDispatch();
 
@@ -47,6 +51,11 @@ const ShoppingCartTable = ({ products, setProductsDetailsRef }) => {
   };
 
   const handleDeleteProduct = (productId) => {
+    setisPopupShow(true)
+    setTimeout(() => {
+      setisPopupShow(false)
+
+    }, 2000);
     dispatch({
       type: "REMOVE_FROM_CART",
       payload: {
@@ -71,6 +80,8 @@ const ShoppingCartTable = ({ products, setProductsDetailsRef }) => {
       className="col px-0 bg-primary-light-700 me-1 "
       style={{ overflowX: "auto" }}
     >
+            <Popup isShow={isPopupShow} color={"warning"} message={"Product Remove from Cart"}/>
+
      {!products.length ? <h1 className="heading-2 text-primary-light-700 text-weight-regular mx-2 py-3">Your Cart is Empty </h1>
      : 
       <table width="100%" className=" h-50 ">
@@ -171,6 +182,7 @@ const ShoppingCartTable = ({ products, setProductsDetailsRef }) => {
         ))}
       </tbody>
     </table> }
+    
     </section>
   );
 };

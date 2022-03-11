@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AiOutlineHeart,
   AiOutlineMail,
@@ -6,17 +6,24 @@ import {
   AiOutlineStar,
 } from "react-icons/ai";
 import { useDispatch } from "react-redux";
+import Popup from "../../Components/Popup/Popup";
 
 
 
 const ProductPriceDetailSection = ({ product }) => {
+  const [isPopupShow, setisPopupShow] = useState(false);
+
 const dispatch  = useDispatch();
 
 const handleAddToCart = ()=>{
+  setisPopupShow(true)
   dispatch({
     type:"ADD_TO_CART" ,
     payload:product
   })
+  setTimeout(() => {
+    setisPopupShow(false)
+  }, 2000);
 }
 
   return (
@@ -86,6 +93,9 @@ const handleAddToCart = ()=>{
           <AiOutlineMail className="me-1 " /> <span>Email</span>
         </div>
       </div>
+
+      <Popup isShow={isPopupShow} message={"Product Added to Cart"}/>
+
     </div>
   );
 };

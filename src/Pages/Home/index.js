@@ -31,7 +31,7 @@ function Home() {
       <HomeOverLay />
       <section className=" mx-auto " style={{ zIndex: 1 }}>
         <SmallHeader isLogin={state.authReducer.isLogin}/>
-        <MainHeader />
+        <MainHeader  authReducer={state.authReducer}/>
         <NavBAr />
         <section className="container-xxl" style={{ minHeight: "85vh" }}>
           <Outlet />

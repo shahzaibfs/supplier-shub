@@ -8,6 +8,8 @@ const HomeHotSellers = () => {
   const [isPopupShow, setisPopupShow] = useState(false);
 
   const products = useSelector((store) => store.productReducer);
+  const authReducer = useSelector((store) => store.authReducer);
+
   const dispatch = useDispatch();
 
   
@@ -51,7 +53,7 @@ const HomeHotSellers = () => {
               />
             </Link>
             {/* section for card data */}
-            <article className="my-3 px-2">
+            <article className="my-3 px-2" >
               <Link
                 to={`/products/${product.category.categoryName}/${product.productId}`}
               >
@@ -75,6 +77,8 @@ const HomeHotSellers = () => {
               <p className="mb-2 text-muted text-decoration-underline">
                 Reviews
               </p>
+              {
+                authReducer.userDetails.accountType !== "SUPPLIER" ?
               <button
                 onClick={() => {
                   handleAddToCart(product);
@@ -86,7 +90,8 @@ const HomeHotSellers = () => {
                 className="btn bg-primary my-0 text-white"
               >
                 Add to cart
-              </button>
+              </button> :null
+              }
             </div>
           </div>
         ))}

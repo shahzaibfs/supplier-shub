@@ -2,8 +2,8 @@
 const intitState = {
   isLogin: false,
   userDetails: {
-    name:"Sunsilk",
-    accountType:"SUPPLIER"
+    name:"",
+    accountType:""
   },
   errMessage:""
 };

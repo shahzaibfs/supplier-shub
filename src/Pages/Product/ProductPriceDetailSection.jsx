@@ -5,13 +5,14 @@ import {
   AiOutlineShoppingCart,
   AiOutlineStar,
 } from "react-icons/ai";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Popup from "../../Components/Popup/Popup";
 
 
 
 const ProductPriceDetailSection = ({ product }) => {
   const [isPopupShow, setisPopupShow] = useState(false);
+  const authReducer = useSelector((store) => store.authReducer);
 
 const dispatch  = useDispatch();
 
@@ -80,15 +81,15 @@ const handleAddToCart = ()=>{
           <option value="normal">Normal</option>
           <option value="fast">Fast </option>
         </select>
-        <button onClick={handleAddToCart} className="my-4 text-white body-2 btn btn-bg-primary w-50 d-flex align-items-center justify-content-center">
+       { authReducer.userDetails.accountType !== "SUPPLIER" ? <button onClick={handleAddToCart} className="my-4 text-white body-2 btn btn-bg-primary w-50 d-flex align-items-center justify-content-center">
           Add to cart <AiOutlineShoppingCart className="mx-2" />
-        </button>
+        </button> : null}
       </form>
       {/* bottom actions  */}
       <div className="d-flex  align-items-center my-2">
-        <div className="body-1 text-primary-light-700 flex-item " style={{cursor:"pointer"}}>
+        {authReducer.userDetails.accountType !== "SUPPLIER" ?<div className="body-1 text-primary-light-700 flex-item " style={{cursor:"pointer"}}>
           <AiOutlineHeart className="me-1 " /> <span>Add to wishlist</span>
-        </div>
+        </div>:null}
         <div className="body-1 text-primary-light-700 flex-item ms-4"  style={{cursor:"pointer"}}>
           <AiOutlineMail className="me-1 " /> <span>Email</span>
         </div>

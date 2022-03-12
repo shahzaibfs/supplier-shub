@@ -1,9 +1,11 @@
 import React from "react";
 import { Link ,useNavigate} from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const SmallHeader = ({ isLogin }) => {
+  const authReducer = useSelector((store) => store.authReducer);
+  
     let navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -19,7 +21,7 @@ const SmallHeader = ({ isLogin }) => {
         className="text-white body-2 text-weight-regular container-fluid container-xxl d-flex align-items-center justify-content-end w-100  p-0 mx-0 mx-md-auto p-md-2"
         style={{ height: "42px" }}
       >
-        Welcome<span className="text-weight-bold mx-md-1 ">{isLogin ? <Link to={"/dashboard/customer"}>userNameHere |</Link> : "~Guest |"}</span>
+        Welcome<span className="text-weight-bold mx-md-1 ">{isLogin ? <Link to={"/dashboard/customer"}> {authReducer.userDetails.name} |</Link> : "~Guest |"}</span>
         <span className="ms-2 text-decoration-underline cursor-pointer">
           {isLogin ? (
             <span onClick={handleLogout} style={{cursor:"pointer"}}>Logout</span>

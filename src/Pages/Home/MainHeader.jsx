@@ -7,8 +7,9 @@ import {
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const MainHeader = () => {
+const MainHeader = ({authReducer}) => {
   const cart = useSelector((store) => store.cartReducer.products);
+  
   console.log(cart);
   return (
     <header
@@ -53,13 +54,16 @@ const MainHeader = () => {
 
         <div className="col d-md-none d-flex   flex-grow-0 ">
           <AiOutlineSearch className="col d-md-none heading-2" />
-        </div>
+        </div>{
+          authReducer.userDetails.accountType !=="SUPPLIER" ?
         <div className="position-relative col d-flex justify-content-end  d-md-block  col-md-2 flex-grow-0 ">
           <Link to={"/cart"}>
             <AiOutlineShoppingCart className="heading-2 " />
           </Link>
           <div className="position-absolute d-flex justify-content-center" style={{top:"-8px",left:"30px",background:"red",width:"20px",borderRadius:"50%"}}>{cart.length}</div>
         </div>
+        :null
+        }
       </div>
     </header>
   );

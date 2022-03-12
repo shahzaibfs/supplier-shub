@@ -6,15 +6,15 @@ export const fakeauth = (email, password) => {
     // you can use api here
     fakeAuth(email, password)
       .then((data) => {
-        localStorage.setItem("sessionID", data);
+        localStorage.setItem("sessionID", data.token);
         dispatch({
           type: "LOGIN_ACTION",
           payload: {
             isLogin: true,
             errMessage: "",
             userDetails: {
-              name: "Sunsilk",
-              accountType: "SUPPLIER",
+              name: data.payload.name,
+              accountType: data.payload.role,
             },
           },
         });

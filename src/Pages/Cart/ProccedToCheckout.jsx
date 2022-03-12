@@ -104,7 +104,7 @@ const ProccedToCheckout = ({products,getProductsDetails}) => {
               </div>
               <button className="btn my-2 btn-bg-primary text-weight-bold text-white w-100">
                   {user.isLogin  && products.length  ?  <Link to={"/checkout"} onClick={handleProccedToCheckout} >Procced to Checkout</Link>
-                  : (!user.isLogin  || user.isLogin) && !products.length ? "Add Products to Cart"  :<Link to={"/login"} >Login</Link>}
+                  : (!user.isLogin  || user.isLogin) && !products.length ? <Link to={"/"}>"Add Products to Cart" </Link>  :<Link to={"/login"} >Login</Link>}
               </button>
         </section>
   )

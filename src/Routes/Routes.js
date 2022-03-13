@@ -15,6 +15,13 @@ const Dashboard = React.lazy(() => import("../Pages/Dashboard"));
 const CustomerDashboard = React.lazy(() => import("../Pages/Dashboard/CustomerDashboard"));
 const SupplierDashboard = React.lazy(() => import("../Pages/Dashboard/SupplierDashboard"));
 
+//customer dashboard
+const CustomerProfile = React.lazy(() => import("../Pages/Dashboard/CustomerDashboard/Settings/ViewProfile"));
+const CustomerEditSettings = React.lazy(() => import("../Pages/Dashboard/CustomerDashboard/Settings/EditProfileSettings"));
+const CustomerTrackOrders = React.lazy(() => import("../Pages/Dashboard/CustomerDashboard/Orders/TrackOrders"));
+const CustomerPreviousOrders = React.lazy(() => import("../Pages/Dashboard/CustomerDashboard/Orders/PreviousOrder"));
+const CustomerViewReports = React.lazy(() => import("../Pages/Dashboard/CustomerDashboard/Reports/ViewReports"));
+
 
 const Routes = () => {
   return (
@@ -31,7 +38,17 @@ const Routes = () => {
           <Route path="checkout" element={<Checkout />} />                       
           <Route path="dashboard" element={<Dashboard />} >
             
-          <Route path="customer" element={<CustomerDashboard />} />   
+          <Route path="customer" element={<CustomerDashboard />} >
+            
+          <Route path="settings/view-profile" element={<CustomerProfile />} />
+          <Route path="settings/edit-profile" element={<CustomerEditSettings />} />
+          <Route path="orders/track-orders" element={<CustomerTrackOrders />} />
+          <Route path="orders/previous-orders" element={<CustomerPreviousOrders />} />
+          <Route path="reports/view-reports" element={<CustomerViewReports /> } />
+
+
+            
+            </Route>   
           <Route path="supplier" element={<SupplierDashboard />} />    
 
             </Route>                   

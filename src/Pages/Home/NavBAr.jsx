@@ -33,10 +33,10 @@ const NavBAr = () => {
         {get1stHalf().map((category, id) => (
          <li
          style={{ cursor: "pointer" }}
-         className="text-white text-weight-regular body-2 me-3"
+         className=" text-weight-regular  me-3"
          key={category.categoryId}
        >
-         <Link to={"/products/"+getClearLink(category.categoryName)}>
+         <Link className="text-white body-2" to={"/products/"+getClearLink(category.categoryName)}>
            {category.categoryName}
          </Link>
        </li>

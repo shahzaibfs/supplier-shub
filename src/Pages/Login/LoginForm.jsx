@@ -12,18 +12,27 @@ const LoginForm = () => {
   const authState = useSelector(store=>store.authReducer)
   let navigate = useNavigate();
 
-  useEffect(() => {
-    
-    if(authState.errMessage.length){
-     
-      setisPopupShow(true)
-    }
-    setTimeout(() => {
-      setisPopupShow(false)
-    }, 4000);
   
     
-  }, [authState])
+    
+    useEffect(() => {
+      if(authState.errMessage.length){
+     
+        setisPopupShow(true)
+      }
+     let timeout = setTimeout(() => {
+        setisPopupShow(false)
+      }, 4000);
+    
+    
+      return () => {
+        clearTimeout(timeout)
+      }
+    }, [authState])
+    
+ 
+    
+  
   const dispatch = useDispatch();
 
 

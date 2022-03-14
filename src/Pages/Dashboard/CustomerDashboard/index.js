@@ -25,10 +25,10 @@ const CustomerDashboard = () => {
     return (
       <div
         className="d-flex w-100"
-        style={{ height: "100vh", marginTop: "10px" }}
+        style={{ height: "100vh", marginTop: "10px" ,backgroundColor:"transparent"}}
       >
-        <Layout>
-          <Sider theme="dark" width={200} className="site-layout-background">
+        <Layout style={{backgroundColor:"transparent"}}>
+          <Sider theme="dark" width={200} className="">
             <Menu
               mode="inline"
               defaultSelectedKeys={["1"]}
@@ -37,7 +37,7 @@ const CustomerDashboard = () => {
             >
               <SubMenu key="sub1" icon={<UserOutlined />} title="Settings">
                 <Menu.Item key="1"><Link to="settings/view-profile">View Profile</Link></Menu.Item>
-                <Menu.Item key="2"><Link to="settings/edit-profile" >Edit Profile Setting</Link></Menu.Item>
+                <Menu.Item key="2"><Link to="settings/shipping-info" >Shipping Info</Link></Menu.Item>
               </SubMenu>
               <SubMenu key="sub2" icon={<LaptopOutlined />} title="Orders">
                 <Menu.Item key="5"><Link to="orders/track-orders">Track Orders</Link></Menu.Item>
@@ -52,18 +52,21 @@ const CustomerDashboard = () => {
               </SubMenu>
             </Menu>
           </Sider>
-          <Layout style={{ padding: "0 24px 24px" }}>
+          <Layout style={{ padding: "0 24px 24px" ,background: "transparent", overflowY:"auto",minHeight:"100vh"}}>
             <Breadcrumb style={{ margin: "16px 0" }}>
               {getBreadCrumbData(location).map((breadCrumbItem ,idx) => (
                 <Breadcrumb.Item key={idx}>{breadCrumbItem}</Breadcrumb.Item>
               ))}
             </Breadcrumb>
             <Content
-              className="site-layout-background"
+              className=
+              ""
               style={{
-                padding: 24,
+                backgroundColor:"transparent",
                 margin: 0,
-                minHeight: 280,
+                minHeight: "400px",
+               
+              
               }}
             >
              <Outlet />

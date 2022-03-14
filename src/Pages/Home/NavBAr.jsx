@@ -49,14 +49,14 @@ const NavBAr = () => {
         >
           <AiFillCaretDown color="white"  cursor={"pointer"}/>
           {isDropDown && (
-            <ul className="position-absolute bg-primary list-unstyled p-2">
+            <ul className="position-absolute bg-primary list-unstyled p-2" style={{zIndex:10}}>
               {getLastHalf().map((category) => (
                <li
                style={{ cursor: "pointer" }}
-               className="text-white text-weight-regular body-2 me-3 py-2"
+               className="text-white text-weight-regular body-2 me-3 py-2 text-white"
                key={category.categoryId}
              >
-               <Link to={"/products/"+getClearLink(category.categoryName)}>
+               <Link className="text-white" to={"/products/"+getClearLink(category.categoryName)}>
                  {category.categoryName}
                </Link>
              </li>

@@ -29,10 +29,10 @@ function ViewProfile() {
         }
         key="1"
       >
-        <section className=" bg-primary-light-700 p-3 d-flex flex-wrap justify-content-evenly" >
+        <section className="  p-3 d-flex flex-wrap justify-content-evenly" >
           <div className="profile-picture-section   mt-2 mb-2" style={{width:"150px"}}>
             <div
-              style={{ width: "150px", height: "150px" }}
+              style={{ width: "150px", height: "150px" ,overflow:"hidden" }}
               className="bg-primary rounded-circle "
             >
               <img src="" alt="" width={"100%"} height="100%" />
@@ -81,9 +81,9 @@ function ViewProfile() {
         }
         key="2"
       >
-        <div className="h-100 w-100 bg-primary-light-700 p-3">
+        <div className="h-100 w-100  p-3">
         <div>
-          <h1 className="heading-2 text-primary mb-0">Account Info</h1>
+          <h1 className="heading-2 text-primary mb-1">Account Info</h1>
           <p className="body-2 text-muted" >Here you can change your Email and Password </p>
         </div>
         <form className="w-50" autoComplete="off">

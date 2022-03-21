@@ -64,9 +64,9 @@ const LoginForm = () => {
           {/* form starts from here  */}
           <form className="mb-4">
             <div className="form-group mb-4">
-              <label className="text-primary-light-700 body2">Email</label>
+              <label className="text-primary-light-700 body2">Username</label>
               <input
-                type="email"
+                type="text"
                 className="form-control"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"

@@ -23,41 +23,62 @@ const CustomerPreviousOrders = React.lazy(() => import("../Pages/Dashboard/Custo
 const CustomerViewReports = React.lazy(() => import("../Pages/Dashboard/CustomerDashboard/Reports/ViewReports"));
 
 
+//Supplier dashboard routes 
+const SupplierProfile = React.lazy(() => import("../Pages/Dashboard/SupplierDashboard/settings/Profile"));
+const SupplierAddresses = React.lazy(() => import("../Pages/Dashboard/SupplierDashboard/settings/SupplierAddresses"));
+const SupplierTrackOrders = React.lazy(() => import("../Pages/Dashboard/SupplierDashboard/orders/TrackOrders"));
+const SupplierCompletedOrders = React.lazy(() => import("../Pages/Dashboard/SupplierDashboard/orders/CompletedOrders"));
+const SupplierAllPRoducts = React.lazy(() => import("../Pages/Dashboard/SupplierDashboard/products/AllProducts"));
+const SupplierViewReports = React.lazy(() => import("../Pages/Dashboard/SupplierDashboard/reports/Report"));
+const SupplierOutOfStockProducts = React.lazy(() => import("../Pages/Dashboard/SupplierDashboard/products/OutOfStock"));
+
+
 const Routes = () => {
   return (
     <React.Suspense fallback={<Loader />}>
       <Switch>
-      
+
         <Route path="/" element={<HomeLayout />}>
-          <Route path="" element={<Home />} />                                 
-          <Route path="cart" element={<Cart />} />                             
+          <Route path="" element={<Home />} />
+          <Route path="cart" element={<Cart />} />
 
-          <Route path="products/:productCategory" element={<Category />} />    
-          <Route path="products/:productCategory/:id" element={<Product />} />   
-        
-          <Route path="checkout" element={<Checkout />} />                       
+          <Route path="products/:productCategory" element={<Category />} />
+          <Route path="products/:productCategory/:id" element={<Product />} />
+
+          <Route path="checkout" element={<Checkout />} />
           <Route path="dashboard" element={<Dashboard />} >
-            
-          <Route path="customer" element={<CustomerDashboard />} >
-          <Route path="" element={<Navigate to={"settings/view-profile"} />} />
-          <Route path="settings/view-profile" element={<CustomerProfile />} />
-          <Route path="settings/shipping-info" element={<CustomerShippingInfo />} />
-          <Route path="orders/track-orders" element={<CustomerTrackOrders />} />
-          <Route path="orders/previous-orders" element={<CustomerPreviousOrders />} />
-          <Route path="reports/view-reports" element={<CustomerViewReports /> } />
+
+            <Route path="customer" element={<CustomerDashboard />} >
+              <Route path="" element={<Navigate to={"settings/view-profile"} />} />
+              <Route path="settings/view-profile" element={<CustomerProfile />} />
+              <Route path="settings/shipping-info" element={<CustomerShippingInfo />} />
+              <Route path="orders/track-orders" element={<CustomerTrackOrders />} />
+              <Route path="orders/previous-orders" element={<CustomerPreviousOrders />} />
+              <Route path="reports/view-reports" element={<CustomerViewReports />} />
 
 
-            
-            </Route>   
-          <Route path="supplier" element={<SupplierDashboard />} />    
 
-            </Route>                   
+            </Route>
+            <Route path="supplier" element={<SupplierDashboard />} >
+
+
+            <Route path="" element={<Navigate to={"settings/view-profile"} />} />
+            <Route path="settings/view-profile" element={<SupplierProfile />} />
+            <Route path="settings/addresses" element={<SupplierAddresses />} />
+            <Route path="orders/track-orders" element={<SupplierTrackOrders />} />
+            <Route path="orders/completed-orders" element={<SupplierCompletedOrders />} />
+            <Route path="reports/view-reports" element={<SupplierViewReports />} />
+            <Route path="products/all-products" element={<SupplierAllPRoducts />} />
+            <Route path="products/out-of-stock" element={<SupplierOutOfStockProducts />} />
+</Route>
+
+          </Route>
 
         </Route>
-     
-        <Route path="/login" element={<Login />} />                            
-        <Route path="/404Error" element={<h1>Error 404</h1>} />                
-        <Route path="/signup" element={<Signup />} />                          
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/404Error" element={<h1>Error 404</h1>} />
+        <Route path="/signup" element={<Signup />} />
       </Switch>
     </React.Suspense>
   );

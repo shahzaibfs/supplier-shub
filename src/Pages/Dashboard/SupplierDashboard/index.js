@@ -1,30 +1,95 @@
-import React, { useState } from "react";
-import SupplierSideBar from "./SupplierSideBar";
-import ViewInventory from "./Inventory/ViewInventory";
+import React from "react";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate, Outlet, useLocation } from "react-router-dom";
+import { Layout, Menu, Breadcrumb } from "antd";
+import {
+  UserOutlined,
+  LaptopOutlined,
+  NotificationOutlined,
+} from "@ant-design/icons";
 
-const SupplierDashBoard = () => {
-  const [Comp, setComp] = useState(null);
+const { SubMenu } = Menu;
+const { Content, Sider } = Layout;
+
+
+const Index = () => {
   const user = useSelector((store) => store.authReducer);
-  const setCompRef = (Comp) => {
-    setComp(Comp);
+  const location = useLocation();
+
+  const getBreadCrumbData = (location) => {
+    return location.pathname.split("/").filter((name) => name !== "");
   };
+
+  if (!user.isLogin) {
+    return <Navigate to="/" />;
+  }
   if (user.userDetails.accountType === "SUPPLIER") {
     return (
-      <section
-        className=" my-2 overflow-auto d-flex"
-        style={{ width: "100%", height: "100vh" }}
+      <div
+        className="d-flex w-100"
+        style={{ height: "100vh", marginTop: "10px", backgroundColor: "transparent" }}
       >
-        <SupplierSideBar ftnRef={setCompRef} />
-        <section className="main h-100 w-75 " style={{background:"transparent"}}>
-          {Comp !== null ? Comp : <ViewInventory />}
-        </section>
-      </section>
+        <Layout style={{ backgroundColor: "transparent" }}>
+          <Sider theme="dark" width={200} className="">
+            <Menu
+              mode="inline"
+              defaultSelectedKeys={["1"]}
+              defaultOpenKeys={["sub1"]}
+              style={{ height: "100%", borderRight: 0 }}
+            >
+              <SubMenu key="sub1" icon={<UserOutlined />} title="Settings">
+                <Menu.Item key="1"><Link to="settings/view-profile">Profile</Link></Menu.Item>
+                <Menu.Item key="2"><Link to="settings/addresses" >Addresses</Link></Menu.Item>
+              </SubMenu>
+              <SubMenu key="sub2" icon={<LaptopOutlined />} title="Orders">
+                <Menu.Item key="3"><Link to="orders/track-orders">Track Orders</Link></Menu.Item>
+                <Menu.Item key="4"><Link to={"orders/completed-orders"}>Completed Orders</Link></Menu.Item>
+              </SubMenu>
+              <SubMenu
+                key="sub3"
+                icon={<NotificationOutlined />}
+                title="Products"
+              >
+                <Menu.Item key="5"><Link to="products/all-products">All Products</Link></Menu.Item>
+                <Menu.Item key="6"><Link to="products/out-of-stock">Out Of Stock</Link></Menu.Item>
+
+              </SubMenu>
+              <SubMenu
+                key="sub4"
+                icon={<NotificationOutlined />}
+                title="Reports"
+              >
+                <Menu.Item key="5"><Link to="reports/view-reports">All Reports</Link></Menu.Item>
+
+              </SubMenu>
+            </Menu>
+          </Sider>
+          <Layout style={{ padding: "0 24px 24px", background: "transparent", overflowY: "auto", minHeight: "100vh" }}>
+            <Breadcrumb style={{ margin: "16px 0" }}>
+              {getBreadCrumbData(location).map((breadCrumbItem, idx) => (
+                <Breadcrumb.Item key={idx}>{breadCrumbItem}</Breadcrumb.Item>
+              ))}
+            </Breadcrumb>
+            <Content
+              className=
+              ""
+              style={{
+                backgroundColor: "transparent",
+                margin: 0,
+                minHeight: "400px",
+
+
+              }}
+            >
+              <Outlet />
+            </Content>
+          </Layout>
+        </Layout>
+      </div>
     );
   } else {
-    return <Navigate to="/dashboard/customer" />;
+    return <Navigate to="/" />;
   }
 };
 
-export default SupplierDashBoard;
+export default Index;

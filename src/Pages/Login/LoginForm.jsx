@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch ,useSelector } from "react-redux";
 import { fakeauth } from "../../Application/store/middleWares/AuthMiddleWare/authMiddleWare";
 import Popup from "../../Components/Popup/Popup";
+// import axios from "axios";
 
 
 const LoginForm = () => {
@@ -11,9 +12,9 @@ const LoginForm = () => {
   const [isPopupShow, setisPopupShow] = useState(false);
   const authState = useSelector(store=>store.authReducer)
   let navigate = useNavigate();
-
+  const dispatch = useDispatch();
   
-    
+    // TODO: Url needed to Authenticate : http://localhost:8080/api/v1.0/authenticate
     
     useEffect(() => {
       if(authState.errMessage.length){
@@ -33,7 +34,7 @@ const LoginForm = () => {
  
     
   
-  const dispatch = useDispatch();
+ 
 
 
   console.log(authState)
@@ -46,6 +47,18 @@ const LoginForm = () => {
 
   const handleLogin = (e)=>{
     dispatch(fakeauth(loginDetails.email,loginDetails.password));
+  //   axios.post('api/v1.0/authenticate', {
+  //     username: 'shahzaib',
+  //     password: '123'
+  //   },
+  // {"Access-Control-Allow-Origin":"*"}
+  //   )
+  //   .then(function (response) {
+  //     console.log(response);
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
     if(authState.isLogin){
       navigate("/",{replace: true });
     }

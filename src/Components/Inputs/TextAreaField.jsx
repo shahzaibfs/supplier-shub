@@ -10,6 +10,7 @@ function TextAreaField({
   onChange,
   type,
   status,
+  value
 }) {
   return (
     <div style={{width:width}} className="mt-2 mb-2">
@@ -24,6 +25,7 @@ function TextAreaField({
         name={name}
         type={type?? "text"}
         onChange={onChange}
+        value={value}
       />{" "}
     </div>
   );

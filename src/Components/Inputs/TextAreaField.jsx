@@ -13,7 +13,7 @@ function TextAreaField({
   value
 }) {
   return (
-    <div style={{width:width}} className="mt-2 mb-2">
+    <div style={{width:width}} className="m-2">
       <label>{label}</label>
       <br></br>
       <TextArea

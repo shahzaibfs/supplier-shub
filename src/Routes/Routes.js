@@ -31,6 +31,7 @@ const SupplierCompletedOrders = React.lazy(() => import("../Pages/Dashboard/Supp
 const SupplierAllPRoducts = React.lazy(() => import("../Pages/Dashboard/SupplierDashboard/products/AllProducts"));
 const SupplierViewReports = React.lazy(() => import("../Pages/Dashboard/SupplierDashboard/reports/Report"));
 const SupplierOutOfStockProducts = React.lazy(() => import("../Pages/Dashboard/SupplierDashboard/products/OutOfStock"));
+const SupplierAddProduct = React.lazy(() => import("../Pages/Dashboard/SupplierDashboard/products/AddProduct"));
 
 
 const Routes = () => {
@@ -69,6 +70,8 @@ const Routes = () => {
             <Route path="orders/completed-orders" element={<SupplierCompletedOrders />} />
             <Route path="reports/view-reports" element={<SupplierViewReports />} />
             <Route path="products/all-products" element={<SupplierAllPRoducts />} />
+            <Route path="products/add-product" element={<SupplierAddProduct />} />
+
             <Route path="products/out-of-stock" element={<SupplierOutOfStockProducts />} />
 </Route>
 

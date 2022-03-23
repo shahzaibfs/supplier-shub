@@ -51,7 +51,9 @@ const Index = () => {
                 title="Products"
               >
                 <Menu.Item key="5"><Link to="products/all-products">All Products</Link></Menu.Item>
-                <Menu.Item key="6"><Link to="products/out-of-stock">Out Of Stock</Link></Menu.Item>
+                <Menu.Item key="6"><Link to="products/add-product">Add Product</Link></Menu.Item>
+
+                <Menu.Item key="7"><Link to="products/out-of-stock">Out Of Stock</Link></Menu.Item>
 
               </SubMenu>
               <SubMenu
@@ -59,7 +61,7 @@ const Index = () => {
                 icon={<NotificationOutlined />}
                 title="Reports"
               >
-                <Menu.Item key="5"><Link to="reports/view-reports">All Reports</Link></Menu.Item>
+                <Menu.Item key="8"><Link to="reports/view-reports">All Reports</Link></Menu.Item>
 
               </SubMenu>
             </Menu>

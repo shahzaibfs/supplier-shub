@@ -7,7 +7,7 @@ import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 function PasswordField({label,placeHolder,width}) {
   return (
-    <div className='mt-2 mb-2' style={{width:width}}>
+    <div className='m-2' style={{width:width}}>
         {label && <><label>{label}</label> <br /></>}
     <Input.Password
     width={"100%"}

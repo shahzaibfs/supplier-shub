@@ -17,7 +17,10 @@ a{
 a:hover{
   color: inherit;
 }
-
+body > #root{
+min-height: 100vh;
+position: relative;
+}
 /* ------------Figma style copying ------------ */
 /* ------------Figma style copying ------------ */
 /* ------------Figma style copying ------------ */
@@ -59,6 +62,11 @@ a:hover{
 /* ------------creating custom classes ------------ */
 /* ------------creating custom classes ------------ */
 /* ------------creating custom classes ------------ */
+
+
+.border-right-primary-light {
+  border-right:1px solid #1a202c1f !important ;
+}
 .border-bottom-none {
   border-bottom: none !important;
 }

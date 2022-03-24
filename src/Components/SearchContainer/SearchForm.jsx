@@ -15,6 +15,7 @@ function SearchForm({ formFields ,buttonInfo}) {
             label={formField.label}
             type={formField.type}
             name={formField.name}
+            placeHolder={formField.placeholder}
           />
         ) : (
           <TextAreaField

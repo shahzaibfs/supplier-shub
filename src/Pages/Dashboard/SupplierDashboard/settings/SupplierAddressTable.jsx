@@ -1,7 +1,11 @@
-import React  from "react";
+import React from "react";
 import { Table, Button, Popconfirm } from "antd";
 
-import { AiFillDelete, AiFillEdit, AiOutlineQuestionCircle } from "react-icons/ai";
+import {
+  AiFillDelete,
+  AiFillEdit,
+  AiOutlineQuestionCircle,
+} from "react-icons/ai";
 import Loader from "../../../../Components/Loader/Loader";
 
 const data = [
@@ -15,9 +19,8 @@ const data = [
 ];
 
 function SupplierAddressTable({ showModal }) {
-
   const cancel = () => {
-    console.log("hurrah i am deleted ")
+    console.log("hurrah i am deleted ");
   };
 
   // Todo : table columns
@@ -53,7 +56,11 @@ function SupplierAddressTable({ showModal }) {
             onClick={() => showModal(data, { key: "EDIT_ADDRESS" })}
           ></Button>
 
-          <Popconfirm icon={<AiOutlineQuestionCircle  color="red"/>} title="Sure to Delete?" onConfirm={cancel}>
+          <Popconfirm
+            icon={<AiOutlineQuestionCircle color="red" />}
+            title="Sure to Delete?"
+            onConfirm={cancel}
+          >
             <Button
               className="bg-danger text-white"
               icon={<AiFillDelete />}
@@ -66,8 +73,13 @@ function SupplierAddressTable({ showModal }) {
 
   return (
     <>
-      <Table loading={{  spinning: true,
-      indicator: <Loader />}} className="mt-3" columns={columns} dataSource={data} />
+      <Table
+      className=" mt-2"
+        loading={{ spinning: false, indicator: <Loader /> }}
+        
+        columns={columns}
+        dataSource={data}
+      />
     </>
   );
 }

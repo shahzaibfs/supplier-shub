@@ -80,6 +80,9 @@ position: relative;
 .border-primary {
   border: 1px solid var(--text-primary) !important;
 }
+.border-primary-light {
+  border: 1px solid var(--bg-primary-light) !important;
+}
 .border-right-primary {
   border-right: 1px solid var(--text-primary) !important;
 }

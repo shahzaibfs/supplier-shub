@@ -90,18 +90,17 @@ function SupplierAddresses() {
     <>
       <PageHeader heading={"Addresses"} subtitle="Here you can browse ,edit and add addresesas per your need" />
       <SearchForm formFields={searchFormFields} buttonInfo={buttonInfo} />
-      <div className='d-flex  justify-content-end'>
+      <div style={{width:"90%"}} className="mx-auto" >
         <Button
           type='primary'
-          className='d-flex align-items-center justify-content-center'
+          className='d-flex align-items-center justify-content-center ms-auto'
           icon={<MdAddBox className='me-1'
-
           />}
           size='large'
           onClick={()=>showModal(addressInterface,{key:"NEW_ADDRESS"})}
         >Add Address</Button>
-      </div>
-      <SupplierAddressTable showModal= {showModal} />
+     
+      <SupplierAddressTable showModal= {showModal} /> </div>
 
       <Modal title={<b>{modalTitle}</b>} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         {

@@ -34,6 +34,17 @@ const SupplierOutOfStockProducts = React.lazy(() => import("../Pages/Dashboard/S
 const SupplierAddProduct = React.lazy(() => import("../Pages/Dashboard/SupplierDashboard/products/AddProduct"));
 
 
+
+const SiteInfo = React.lazy(() => import("../Pages/SiteInfo"));
+const AboutUs = React.lazy(() => import("../Pages/SiteInfo/AboutUs"));
+const ContactUs = React.lazy(() => import("../Pages/SiteInfo/ContactUs"));
+const CustomerService = React.lazy(() => import("../Pages/SiteInfo/CustomerService"));
+const OrderAndReturn = React.lazy(() => import("../Pages/SiteInfo/OrderAndReturn"));
+const PrivacyAndCookiePolicy = React.lazy(() => import("../Pages/SiteInfo/PrivacyAndCookiePolicy"));
+const SearchTerm = React.lazy(() => import("../Pages/SiteInfo/SearchTerm"));
+
+
+
 const Routes = () => {
   return (
     <React.Suspense fallback={<Loader />}>
@@ -42,6 +53,14 @@ const Routes = () => {
         <Route path="/" element={<HomeLayout />}>
           <Route path="" element={<Home />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="supplier-hub" element={<SiteInfo />} >
+            <Route path="about-us" element={<AboutUs />} />
+            <Route path="contact-us" element={<ContactUs />} />
+            <Route path="customer-service" element={<CustomerService />} />
+            <Route path="order-and-return" element={<OrderAndReturn />} />
+            <Route path="privacy-and-cookie-policy" element={<PrivacyAndCookiePolicy />} />
+            <Route path="search-term" element={<SearchTerm />} />
+          </Route>
 
           <Route path="products/:productCategory" element={<Category />} />
           <Route path="products/:productCategory/:id" element={<Product />} />
@@ -63,17 +82,17 @@ const Routes = () => {
             <Route path="supplier" element={<SupplierDashboard />} >
 
 
-            <Route path="" element={<Navigate to={"settings/view-profile"} />} />
-            <Route path="settings/view-profile" element={<SupplierProfile />} />
-            <Route path="settings/addresses" element={<SupplierAddresses />} />
-            <Route path="orders/track-orders" element={<SupplierTrackOrders />} />
-            <Route path="orders/completed-orders" element={<SupplierCompletedOrders />} />
-            <Route path="reports/view-reports" element={<SupplierViewReports />} />
-            <Route path="products/all-products" element={<SupplierAllPRoducts />} />
-            <Route path="products/add-product" element={<SupplierAddProduct />} />
+              <Route path="" element={<Navigate to={"settings/view-profile"} />} />
+              <Route path="settings/view-profile" element={<SupplierProfile />} />
+              <Route path="settings/addresses" element={<SupplierAddresses />} />
+              <Route path="orders/track-orders" element={<SupplierTrackOrders />} />
+              <Route path="orders/completed-orders" element={<SupplierCompletedOrders />} />
+              <Route path="reports/view-reports" element={<SupplierViewReports />} />
+              <Route path="products/all-products" element={<SupplierAllPRoducts />} />
+              <Route path="products/add-product" element={<SupplierAddProduct />} />
 
-            <Route path="products/out-of-stock" element={<SupplierOutOfStockProducts />} />
-</Route>
+              <Route path="products/out-of-stock" element={<SupplierOutOfStockProducts />} />
+            </Route>
 
           </Route>
 

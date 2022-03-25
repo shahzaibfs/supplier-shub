@@ -27,12 +27,12 @@ function SearchForm({ formFields ,buttonInfo}) {
         )
       )}
 
-      <div className="mt-2 mb-2 d-flex justify-content-end w-100">
+      <div className="p-2 d-flex justify-content-end w-100">
         <Button
           type={buttonInfo.type}
           className="d-flex justidy-content-center align-items-center"
           size="large"
-          icon={<AiOutlineSearch className="me-1" />}
+          icon={<AiOutlineSearch className="me-2" />}
           onClick={buttonInfo.onHandleClick}
         >
           {buttonInfo.text}

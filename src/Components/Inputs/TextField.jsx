@@ -14,7 +14,7 @@ function TextField({
 }) {
   return (
     <div style={{ width: width }} className="m-2">
-    { label && <> <label>{label}</label> <br /></>}
+    { label && <> <label className="body-1 text-primary-light-800">{label}</label> <br /></>}
      
       <Input
      

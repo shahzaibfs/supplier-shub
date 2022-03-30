@@ -3,7 +3,7 @@ import "./__loader.css"
 
 function Loader() {
   return (
-<div class="lds-hourglass"></div>
+<div className="lds-hourglass"></div>
   );
 }
 

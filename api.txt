@@ -1,0 +1,21 @@
+###### Authenticate api :POST
+localhost:8080/api/v1.0/authenticate
+JSON BODY :
+{
+    "username":"shahzaibalam231",
+    "password":"123"
+}
+-----------<><><><><><><><><><><><>-------------
+###### User Creation api :POST
+localhost:8080/api/v1.0/user/create
+JSON BODY :
+{
+    "username" :"haider",
+    "email":"haider@gmail.com",
+    "password":"123",
+    "role" : {
+        "roleId" : 2 ,
+        "roleName":"SUPPLIER"
+    }
+}
+-----------<><><><><><><><><><><><>-------------

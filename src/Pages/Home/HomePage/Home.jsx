@@ -9,7 +9,8 @@ function Home() {
   console.log(authReducer)
   return (
     <>
-    {!authReducer.isLogin &&  <HomeBanner />}
+    {!authReducer.isLogin && 
+     <HomeBanner />}
      
 
       <HomeGallery />

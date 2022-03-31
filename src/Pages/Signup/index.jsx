@@ -1,20 +1,30 @@
 import React from "react";
-import "./__Signup.css";
 
 import SignupForm from "./SignupForm";
+import { Col, Row } from "antd";
+
+const styles = {
+  parent: {height: "100vh", overflow: "hidden" ,flexFlow:"row" },
+
+  illustration: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: "-20px",
+  },
+
+};
 
 const Signup = () => {
   return (
-    <section className="container-fluid p-0  text-white login__container overflow-auto">
-      <div className="row h-100 w-100 mx-auto  overflow-hidden">
-        <div className="col-md-6 d-none px-0  d-lg-flex align-items-center justify-content-center bg-grid-color  overflow-hidden h-100">
-          <SignupFormIllustration width={"70%"} />
-        </div>
-        <div className=" col-md-12 col-lg-6 h-100  p-0 mx-auto overflow-auto pb4">
-          <SignupForm />
-        </div>
-      </div>
-    </section>
+    <Row style={styles.parent}>
+      <Col className="bg-grid-color" xs={{ span: 0 }} md={{ span: 12 }} style={styles.illustration}>
+        <SignupFormIllustration width={"80%"} />
+      </Col>
+      <Col  xs={{ span: 24 }} md={{ span: 12 }}>
+        <SignupForm />
+      </Col>
+    </Row>
   );
 };
 

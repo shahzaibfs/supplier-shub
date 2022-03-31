@@ -1,162 +1,134 @@
-import React ,{useEffect, useState} from "react";
-import { FcGoogle } from "react-icons/fc";
+import React, { useState } from "react";
+
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch ,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fakeauth } from "../../Application/store/middleWares/AuthMiddleWare/authMiddleWare";
-import Popup from "../../Components/Popup/Popup";
+import { Button, Col, Row } from "antd";
+import { AiOutlineUser } from "react-icons/ai";
+import TextField from "../../Components/Inputs/TextField";
+import PasswordField from "../../Components/Inputs/PasswordField";
+import { SiGmail } from "react-icons/si";
 // import axios from "axios";
 
-
 const LoginForm = () => {
-  const [loginDetails,setloginDetails] = useState({email:"",password:""});
-  const [isPopupShow, setisPopupShow] = useState(false);
-  const authState = useSelector(store=>store.authReducer)
+  const [loginDetails, setloginDetails] = useState({ email: "", password: "" });
+  const authState = useSelector((store) => store.authReducer);
   let navigate = useNavigate();
   const dispatch = useDispatch();
-  
-    // TODO: Url needed to Authenticate : http://localhost:8080/api/v1.0/authenticate
-    
-    useEffect(() => {
-      if(authState.errMessage.length){
-     
-        setisPopupShow(true)
-      }
-     let timeout = setTimeout(() => {
-        setisPopupShow(false)
-      }, 4000);
-    
-    
-      return () => {
-        clearTimeout(timeout)
-      }
-    }, [authState])
-    
- 
-    
-  
- 
 
+  // TODO: Url needed to Authenticate : http://localhost:8080/api/v1.0/authenticate
 
-  console.log(authState)
-  const handleInputs=(e)=>{
-    setloginDetails(oldLoginDetails => ({
+  console.log(authState);
+  const handleInputs = (e) => {
+    console.log(e.target.name + " " + e.target.value);
+    setloginDetails((oldLoginDetails) => ({
       ...oldLoginDetails,
-      [e.target.name] : e.target.value
-    }))
-  }
+      [e.target.name]: e.target.value,
+    }));
+  };
 
-  const handleLogin = (e)=>{
-    dispatch(fakeauth(loginDetails.email,loginDetails.password));
-  //   axios.post('api/v1.0/authenticate', {
-  //     username: 'shahzaib',
-  //     password: '123'
-  //   },
-  // {"Access-Control-Allow-Origin":"*"}
-  //   )
-  //   .then(function (response) {
-  //     console.log(response);
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
-    if(authState.isLogin){
-      navigate("/",{replace: true });
+  const handleSubmit = (e) => {
+    console.log(loginDetails);
+    e.preventDefault();
+    dispatch(fakeauth(loginDetails.email, loginDetails.password));
+    //   axios.post('api/v1.0/authenticate', {
+    //     username: 'shahzaib',
+    //     password: '123'
+    //   },
+    // {"Access-Control-Allow-Origin":"*"}
+    //   )
+    //   .then(function (response) {
+    //     console.log(response);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+    if (authState.isLogin) {
+      navigate("/", { replace: true });
     }
-  }
+  };
   return (
     <>
-      <section className="row mx-auto w-100 h-75 justify-content-center align-items-center flex-wrap">
-        <div className="col-10 col-md-6 col-lg-8 col-xxl-6 h-75 ">
-          {/* header for login form  */}
-          <div className="row mb-4  ">
-            <p className="text-primary-light-800 body-1 ">Welcome Back</p>
-            <h1 className="text-primary heading-2 text-wrap">
-              Login to your account
+      <Row style={styles.parent} className="h-100" justify="center">
+        <Col xs={18} lg={16} style={styles.container}>
+          <header className="m-2">
+            <p className="text-primary body-1 mb-2">Welcome Guest</p>
+            <h1 className="heading-2 text-weight-bold">
+              Login To your Account
             </h1>
-          </div>
-          {/* form starts from here  */}
-          <form className="mb-4">
-            <div className="form-group mb-4">
-              <label className="text-primary-light-700 body2">Username</label>
-              <input
-                type="text"
-                className="form-control"
-                aria-describedby="emailHelp"
-                placeholder="Enter email"
-                name="email"
+          </header>
+          <form onSubmit={handleSubmit}>
+            {formFields.map(({ inputType: INPUT, ...props }, idx) => (
+              <INPUT
+                value={loginDetails[props.name]}
                 onChange={handleInputs}
+                size={"large"}
+                {...props}
               />
-            </div>
-            <div className="form-group mb-4">
-              <label className="text-primary-light-700 body2">Password</label>
-              <input
-                type="password"
-                className="form-control"
-                aria-describedby="passwordHelp"
-                placeholder="Your Password"
-                name="password"
-                onChange={handleInputs}
-              />
-            </div>
-            <div className="row m-0 justify-content-space-between mb-4">
-              <div className="form-group form-check col">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="exampleCheck1"
-                />
-                <label
-                  
-                  htmlFor="exampleCheck1"
-                  className="body-2 text-primary-light-700 form-check-label"
-                >
-                  Remember me
-                </label>
-              </div>
-              <div className="col m-0 p-0">
-                <label
-                  htmlFor="exampleCheck1"
-                  className="body-2 text-secondary "
-                  style={{ float: "right" }}
-                >
-                  Forgot your password ?
-                </label>
-              </div>
-            </div>
-
-            <div className="mb-3">
-              <button
-                type="button"
-                className="btn btn-bg-success text-white text-weight-regular body-1 w-100"
-                onClick={handleLogin}
+            ))}
+            <div className="m-2 mt-3">
+              <Button
+                icon={<AiOutlineUser className="me-2" />}
+                type="primary"
+                className="btn-bg-success w-100 d-flex align-items-center justify-content-center"
+                htmlType="submit"
+                size="large"
               >
-                Login now
-              </button>
+                Login
+              </Button>
             </div>
-            <div className="mb-5">
-              <button
-                type="button"
-                className="btn btn-bg-primary text-white text-weight-regular body-1 w-100 "
+            <p className="body-2 text-center m-0">Or</p>
+            <div className="m-2 ">
+              <Button
+                icon={<SiGmail className="me-2" />}
+                type="primary"
+                className="btn-bg-primary w-100 d-flex justify-content-center align-items-center "
+                htmlType="submit"
+                size="large"
               >
-                <FcGoogle /> <span className="mx-2">or signin with Google</span>
-              </button>
+                Or Login with Gmail
+              </Button>
             </div>
           </form>
-          {/* fotter here  */}
-          <footer className="col-12 col-xxl-12  pb-5 pb-lg-0">
-            <p className="text-primary-light-800 body-2 text-center">
-              Don't have an account ?{" "}
-              <span className="text-secondary-light-800 body-2">
-                <Link to={"/signup"}>Signup for free</Link>
-              </span>
-            </p>
+          <footer className="body-2 text-center">
+            Have an Account?{" "}
+            <Link to="/signup" className="text-weight-bold body-2">
+              Signup
+            </Link>
           </footer>
-        </div>
-        <Popup isShow={isPopupShow} color="warning" message={"failed to login"}/>
-
-      </section>
+        </Col>
+      </Row>
     </>
   );
 };
 
 export default LoginForm;
+
+const formFields = [
+  {
+    inputType: TextField,
+    label: "Username",
+    placeHolder: "your username",
+    name: "email",
+    type: "text",
+  },
+
+  {
+    inputType: PasswordField,
+    label: "Password",
+    placeHolder: "your Password",
+    name: "password",
+    type: "password",
+  },
+];
+
+const styles = {
+  parent: {
+    padding: "5px",
+    alignItems: "center",
+    overflowY: "auto",
+  },
+  container: {
+    minHeight: "400px",
+  },
+};

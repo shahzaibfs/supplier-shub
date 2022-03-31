@@ -10,14 +10,15 @@ function TextField({
   onChange,
   type,
   status,
-  value
+  value,
+  size
 }) {
   return (
     <div style={{ width: width }} className="m-2">
     { label && <> <label className="body-1 text-primary-light-800">{label}</label> <br /></>}
      
       <Input
-     
+     size={size}
         addonBefore={addOnBefore}
         status={status}
         className="mb-0"

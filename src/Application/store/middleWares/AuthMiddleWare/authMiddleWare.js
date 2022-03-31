@@ -1,32 +1,39 @@
-import { fakeAuth } from "../../../fakeAuth/login";
+import { doAuth } from "../../../services/authenticate-api";
+import { loginAction } from "../../actions/loginAction";
+import { message } from 'antd';
 
-export const fakeauth = (email, password) => {
-  // The `extraArgument` is the third arg for thunk functions
-  return (dispatch, getState, api) => {
-    // you can use api here
-    fakeAuth(email, password)
-      .then((data) => {
-        localStorage.setItem("sessionID", data.token);
-        dispatch({
-          type: "LOGIN_ACTION",
-          payload: {
-            isLogin: true,
-            errMessage: "",
-            userDetails: {
-              name: data.payload.name,
-              accountType: data.payload.role,
-            },
-          },
-        });
-      })
-      .catch((msg) => {
-        dispatch({
-          type: "LOGIN_ACTION",
-          payload: {
-            isLogin: false,
-            errMessage: msg,
-          },
-        });
-      });
-  };
-};
+
+export const doAuthentication = (loginDetails, setisLoader, navigate) => {
+
+  return (dispatch) => {
+
+    doAuth(loginDetails).then(
+      (response) => {
+
+        message.success('This is an error message');
+        setisLoader(false);
+        navigate("/");
+        dispatch(loginAction(
+          response
+        ));
+
+      }
+    ).catch(error => {
+
+      setTimeout(() => {
+        setisLoader(false)
+      }, 1000);
+
+      if (error.response.status === 500) {
+        message.error('INTERNAL SERVER ERRROR => Please Try Again Later !' ,10000);
+      } else {
+        message.error('This is an error message');
+      }
+
+
+    })
+  }
+
+}
+
+

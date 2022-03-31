@@ -1,24 +1,24 @@
 import React, { useState } from "react";
-
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { fakeauth } from "../../Application/store/middleWares/AuthMiddleWare/authMiddleWare";
 import { Button, Col, Row } from "antd";
 import { AiOutlineUser } from "react-icons/ai";
 import TextField from "../../Components/Inputs/TextField";
 import PasswordField from "../../Components/Inputs/PasswordField";
 import { SiGmail } from "react-icons/si";
-// import axios from "axios";
+import { useDispatch } from "react-redux";
+import { doAuthentication } from "../../Application/store/middleWares/AuthMiddleWare/authMiddleWare";
 
 const LoginForm = () => {
-  const [loginDetails, setloginDetails] = useState({ email: "", password: "" });
-  const authState = useSelector((store) => store.authReducer);
-  let navigate = useNavigate();
+  const [loginDetails, setloginDetails] = useState({
+    username: "",
+    password: "",
+  });
+  const [isLoader, setisLoader] = useState(false);
   const dispatch = useDispatch();
+  let navigate = useNavigate();
 
   // TODO: Url needed to Authenticate : http://localhost:8080/api/v1.0/authenticate
 
-  console.log(authState);
   const handleInputs = (e) => {
     console.log(e.target.name + " " + e.target.value);
     setloginDetails((oldLoginDetails) => ({
@@ -28,24 +28,11 @@ const LoginForm = () => {
   };
 
   const handleSubmit = (e) => {
-    console.log(loginDetails);
     e.preventDefault();
-    dispatch(fakeauth(loginDetails.email, loginDetails.password));
-    //   axios.post('api/v1.0/authenticate', {
-    //     username: 'shahzaib',
-    //     password: '123'
-    //   },
-    // {"Access-Control-Allow-Origin":"*"}
-    //   )
-    //   .then(function (response) {
-    //     console.log(response);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
-    if (authState.isLogin) {
-      navigate("/", { replace: true });
-    }
+
+    setisLoader(true);
+
+    dispatch(doAuthentication(loginDetails, setisLoader, navigate));
   };
   return (
     <>
@@ -60,10 +47,12 @@ const LoginForm = () => {
           <form onSubmit={handleSubmit}>
             {formFields.map(({ inputType: INPUT, ...props }, idx) => (
               <INPUT
+                key={idx}
                 value={loginDetails[props.name]}
                 onChange={handleInputs}
                 size={"large"}
                 {...props}
+                required={true}
               />
             ))}
             <div className="m-2 mt-3">
@@ -73,6 +62,7 @@ const LoginForm = () => {
                 className="btn-bg-success w-100 d-flex align-items-center justify-content-center"
                 htmlType="submit"
                 size="large"
+                loading={isLoader}
               >
                 Login
               </Button>
@@ -83,7 +73,6 @@ const LoginForm = () => {
                 icon={<SiGmail className="me-2" />}
                 type="primary"
                 className="btn-bg-primary w-100 d-flex justify-content-center align-items-center "
-                htmlType="submit"
                 size="large"
               >
                 Or Login with Gmail
@@ -109,7 +98,7 @@ const formFields = [
     inputType: TextField,
     label: "Username",
     placeHolder: "your username",
-    name: "email",
+    name: "username",
     type: "text",
   },
 

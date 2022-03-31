@@ -10,13 +10,15 @@ function TextAreaField({
   onChange,
   type,
   status,
-  value
+  value,
+  required
 }) {
   return (
     <div style={{width:width}} className="m-2">
       <label>{label}</label>
       <br></br>
       <TextArea
+         required={required}
       rows={4}
         status={status}
         className="mb-0"

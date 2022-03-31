@@ -11,7 +11,8 @@ function TextField({
   type,
   status,
   value,
-  size
+  size,
+  required
 }) {
   return (
     <div style={{ width: width }} className="m-2">
@@ -28,6 +29,7 @@ function TextField({
         type={type ?? "text"}
         onChange={onChange}
         value={value}
+        required={required}
       />{" "}
     </div>
   );

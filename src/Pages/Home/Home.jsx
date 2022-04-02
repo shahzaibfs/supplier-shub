@@ -9,13 +9,13 @@ import "./__home.css";
 function Home() {
 
 
-  
+
   return (
     <>
       {<HomeBanner />}
 
       <HomeGallery />
-      
+
 
       <HomeHotSellers />
     </>

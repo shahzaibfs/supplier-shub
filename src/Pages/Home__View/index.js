@@ -1,27 +1,30 @@
 import React, { useEffect } from "react";
-
-
-import { useSelector ,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { Outlet } from "react-router-dom";
 
 import "./__home.css";
-import { Outlet } from "react-router-dom";
+
 import HomeOverLay from "./HomeOverLay";
 import SmallHeader from "./SmallHeader";
-import MainHeader from "./MainHeader";
-import NavBAr from "./NavBAr";
-import MainFooter from "./MainFooter";
 import SmallFooter from "./SmallFooter";
-import {productMiddleWare} from '../../Application/store/middleWares/ProductMiddleWare/productMiddleWare'
+import MainHeader from "./MainHeader";
+import MainFooter from "./MainFooter";
+import NavBAr from "./NavBAr";
+
+import { productMiddleWare } from "../../services/productMiddleWare"
 
 
 function Home() {
   const state = useSelector((store) => store);
   const dispatch = useDispatch();
+
   useEffect(() => {
+
     dispatch(productMiddleWare())
-  },[dispatch])
-  
-  
+
+  }, [dispatch])
+
+
 
   return (
     <section
@@ -30,10 +33,10 @@ function Home() {
     >
       <HomeOverLay />
       <section className=" mx-auto " style={{ zIndex: 1 }}>
-        <SmallHeader isLogin={state.authReducer.isLogin}/>
-        <MainHeader  authReducer={state.authReducer}/>
+        <SmallHeader isLogin={state.authReducer.isLogin} />
+        <MainHeader authReducer={state.authReducer} />
         <NavBAr />
-        <section className="container-xxl" style={{ minHeight: "85vh" }}>
+        <section className="container-xxl position-relative" style={{ minHeight: "85vh" }}>
           <Outlet />
         </section>
         <MainFooter />

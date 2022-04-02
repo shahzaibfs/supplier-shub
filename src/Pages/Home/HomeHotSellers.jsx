@@ -2,7 +2,7 @@ import React, {  useState } from "react";
 import { AiOutlineStar } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import Popup from "../../../Components/Popup/Popup";
+import Popup from "../../Components/Popup/Popup";
 
 const HomeHotSellers = () => {
   const [isPopupShow, setisPopupShow] = useState(false);

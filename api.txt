@@ -19,3 +19,40 @@ JSON BODY :
     }
 }
 -----------<><><><><><><><><><><><>-------------
+
+
+
+{
+    "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzaGFoemFpYmFsYW0yMzEiLCJleHAiOjE2NDg4MTExOTgsImlhdCI6MTY0ODc5MzE5OH0.yomXDFPVxVfPJOTzdnCZHgTG5zxFaZM6YkpYfxwZvWbMr7G9H0fBURCJCBjCvosy54iyMj6wHtBOMjVlP4YDpg",
+    "userDetails": {
+        "userId": 43,
+        "userName": "shahzaibalam231",
+        "userEmail": "shahzaibalam231@gmail.com",
+        "accountCreationDate": "2022-03-23",
+        "accountStatus": false,
+        "roles": [
+            {
+                "roleId": 2,
+                "roleName": "SUPPLIER"
+            }
+        ],
+        "accountBan": false
+    }
+}
+
+
+
+[
+    {
+        "roleId": 1,
+        "roleName": "ADMIN"
+    },
+    {
+        "roleId": 2,
+        "roleName": "SUPPLIER"
+    },
+    {
+        "roleId": 3,
+        "roleName": "CUSTOMER"
+    }
+]

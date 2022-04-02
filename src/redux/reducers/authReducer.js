@@ -1,5 +1,4 @@
-import { constants } from "../../constants";
-
+import { constants } from "../constants";
 const intitState = {
   isLogin: false,
   userDetails: {},

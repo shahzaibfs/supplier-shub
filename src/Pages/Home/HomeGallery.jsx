@@ -1,7 +1,7 @@
 import React from "react";
 import { AiOutlineCaretRight } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import productCategoryMockData from "../productCategoryMockData.json";
+import productCategoryMockData from "../../services/productCategoryMockData.json";
 
 const HomeGallery = () => {
   const getProductCategoryUrl = (productCategory) => {

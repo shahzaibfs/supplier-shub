@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiFillCaretDown } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import categoryMockData from "./productCategoryMockData.json";
+import categoryMockData from "../../services/productCategoryMockData.json";
 
 const NavBAr = () => {
   const [isDropDown, setisDropDown] = useState(false);

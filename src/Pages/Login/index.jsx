@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "./__login.css";
 import LoginForm from "./LoginForm";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";

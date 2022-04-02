@@ -1,7 +1,9 @@
 import React from "react";
 import { Navigate, Route, Routes as Switch } from "react-router-dom";
 
-import { HomeLayout, Home } from "../Pages";
+import HomeView from "../Pages/Home__View"
+import Home from "../Pages/Home/Home"
+
 import Loader from "../Components/Loader/Loader";
 
 const Login = React.lazy(() => import("../Pages/Login"));
@@ -50,7 +52,7 @@ const Routes = () => {
     <React.Suspense fallback={<Loader />}>
       <Switch>
 
-        <Route path="/" element={<HomeLayout />}>
+        <Route path="/" element={<HomeView />}>
           <Route path="" element={<Home />} />
           <Route path="cart" element={<Cart />} />
           <Route path="supplier-hub" element={<SiteInfo />} >

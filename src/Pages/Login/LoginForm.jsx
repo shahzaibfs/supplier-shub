@@ -6,7 +6,7 @@ import TextField from "../../Components/Inputs/TextField";
 import PasswordField from "../../Components/Inputs/PasswordField";
 import { SiGmail } from "react-icons/si";
 import { useDispatch } from "react-redux";
-import { doAuthentication } from "../../Application/store/middleWares/AuthMiddleWare/authMiddleWare";
+import { doAuthentication } from "../../services/authMiddleWare";
 
 const LoginForm = () => {
   const [loginDetails, setloginDetails] = useState({

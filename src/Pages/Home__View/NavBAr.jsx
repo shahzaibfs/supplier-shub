@@ -26,10 +26,10 @@ const NavBAr = () => {
   };
   return (
     <nav
-      className="container-fluid container-xxl d-none mx-auto bg-primary d-md-block"
+      className="container-fluid  d-none mx-auto bg-primary-light d-md-block"
       style={{ height: "48px" }}
     >
-      <ul className="list-unstyled d-flex h-100 align-items-center ">
+      <ul className="list-unstyled container-xxl d-flex h-100 align-items-center ">
         {get1stHalf().map((category, id) => (
          <li
          style={{ cursor: "pointer" }}
@@ -49,7 +49,7 @@ const NavBAr = () => {
         >
           <AiFillCaretDown color="white"  cursor={"pointer"}/>
           {isDropDown && (
-            <ul className="position-absolute bg-primary list-unstyled p-2" style={{zIndex:10}}>
+            <ul className="position-absolute bg-primary-light list-unstyled p-2" style={{zIndex:10}}>
               {getLastHalf().map((category) => (
                <li
                style={{ cursor: "pointer" }}

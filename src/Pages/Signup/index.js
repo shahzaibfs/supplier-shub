@@ -1,10 +1,27 @@
 import React from "react";
-
-import SignupForm from "./SignupForm";
 import { Col, Row } from "antd";
 
+import SignupForm from "./SignupForm";
+
+const Signup = () => {
+  return (
+    <Row style={styles.parent}>
+      <Col className="bg-grid-color" xs={{ span: 0 }} md={{ span: 12 }} style={styles.illustration}>
+        <SignupFormIllustration width={"80%"} />
+      </Col>
+      <Col xs={{ span: 24 }} md={{ span: 12 }}>
+        <SignupForm />
+      </Col>
+    </Row>
+  );
+};
+
+export default Signup;
+
 const styles = {
-  parent: {height: "100vh", overflow: "hidden" ,flexFlow:"row" },
+  parent: {
+    height: "100vh", overflow: "hidden", flexFlow: "row"
+  },
 
   illustration: {
     display: "flex",
@@ -14,23 +31,6 @@ const styles = {
   },
 
 };
-
-const Signup = () => {
-  return (
-    <Row style={styles.parent}>
-      <Col className="bg-grid-color" xs={{ span: 0 }} md={{ span: 12 }} style={styles.illustration}>
-        <SignupFormIllustration width={"80%"} />
-      </Col>
-      <Col  xs={{ span: 24 }} md={{ span: 12 }}>
-        <SignupForm />
-      </Col>
-    </Row>
-  );
-};
-
-export default Signup;
-
-// illustration here
 
 const SignupFormIllustration = ({ width }) => {
   return (

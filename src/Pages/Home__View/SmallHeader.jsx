@@ -1,9 +1,10 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { MdNotificationsActive } from "react-icons/md";
 import { Popover } from "antd";
 import { GiConfirmed } from "react-icons/gi";
+
 
 const content = (data = [...Array(3)]) => (
   <div className="" style={{ minWidth: "300px" }}>
@@ -22,8 +23,7 @@ const content = (data = [...Array(3)]) => (
   </div>
 );
 
-const SmallHeader = ({ isLogin }) => {
-  const authReducer = useSelector((store) => store.authReducer);
+const SmallHeader = ({ user }) => {
 
   let navigate = useNavigate();
   const dispatch = useDispatch();
@@ -44,17 +44,17 @@ const SmallHeader = ({ isLogin }) => {
           p-0 mx-0 mx-md-auto p-md-2"
         style={{ height: "42px" }}
       >
-        Welcome~
+        Welcome
         <span className="text-weight-bold mx-md-1 ">
           {
-            isAuthenticated(authReducer.isLogin, authReducer.userDetails)
+            isAuthenticated(user.isLogin, user.userDetails)
               .getUsername
           }
         </span>
         <div></div>
-        {isAuthenticated(authReducer.isLogin).getNotificationButton}
+        {isAuthenticated(user.isLogin).getNotificationButton}
         <span className="ms-2 text-decoration-underline cursor-pointer">
-          {isAuthenticated(authReducer.isLogin).getAuthButton(handleLogout)}
+          {isAuthenticated(user.isLogin).getAuthButton(handleLogout)}
         </span>
       </div>
     </header>

@@ -1,7 +1,9 @@
 import { constants } from "../constants";
 const intitState = {
-  isLogin: false,
-  userDetails: {},
+  isLogin: true,
+  userDetails: {
+    accountType:"SUPPLIER"
+  },
   error: ""
 };
 

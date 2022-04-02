@@ -1,10 +1,12 @@
 import React from 'react'
-
-import { useSelector } from 'react-redux'
 import { Navigate, Outlet } from 'react-router-dom'
 
+import {useGetAuthenticatedUser} from "../../hooks/useGetAuthenticatedUser"
+
+
+
 const Index = () => {
-  const user = useSelector(store=>store.authReducer) 
+  const user = useGetAuthenticatedUser();
   if(!user.isLogin){
     return <Navigate to={"/login"} />
   }

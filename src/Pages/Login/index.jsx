@@ -1,10 +1,36 @@
-import React, { useEffect } from "react";
-import LoginForm from "./LoginForm";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React from "react";
+import { Navigate } from "react-router-dom";
 import { Col, Row } from "antd";
+
+import { useGetAuthenticatedUser } from "../../hooks/useGetAuthenticatedUser";
+import LoginForm from "./LoginForm";
+
+const Login = () => {
+  const user = useGetAuthenticatedUser();
+
+  return !user.isLogin ? (
+    <Row style={styles.parent}>
+      <Col
+        className="bg-grid-color"
+        xs={{ span: 0 }}
+        md={{ span: 12 }}
+        style={styles.illustration}
+      >
+        <LoginPageIllustration width={"80%"} />
+      </Col>
+      <Col xs={{ span: 24 }} md={{ span: 12 }}>
+        <LoginForm />
+      </Col>
+    </Row>
+  ) : (
+    <Navigate to={"/"} />
+  );
+};
+
+export default Login;
+
 const styles = {
-  parent: {height: "100vh", overflow: "hidden" ,flexFlow:"row" },
+  parent: { height: "100vh", overflow: "hidden", flexFlow: "row" },
 
   illustration: {
     display: "flex",
@@ -12,36 +38,11 @@ const styles = {
     alignItems: "center",
     marginBottom: "-20px",
   },
-
 };
 
-const Login = () => {
-  const authState = useSelector(store=>store.authReducer)
-  let navigate = useNavigate();
-  useEffect(()=>{
-    
-    if(authState.isLogin){
-      navigate("/", { replace: true });
-    }
-  })
+const LoginPageIllustration = ({ width }) => {
   return (
-    <Row style={styles.parent}>
-    <Col className="bg-grid-color" xs={{ span: 0 }} md={{ span: 12 }} style={styles.illustration}>
-      <LoginPageIllustration width={"80%"} />
-    </Col>
-    <Col  xs={{ span: 24 }} md={{ span: 12 }}>
-      <LoginForm />
-    </Col>
-  </Row>
-  );
-};
-
-export default Login;
-
-// Illustration for loginPage
-
-const LoginPageIllustration = ({width}) => {
-  return <svg
+    <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       data-name="Layer 1"
@@ -226,7 +227,7 @@ const LoginPageIllustration = ({width}) => {
         d="M621.69892,537.62665a2.14526,2.14526,0,0,1-4.29053,0"
         transform="translate(-156 -79.47583)"
         opacity="0.2"
-        style={{isolation:"isolate"}}
+        style={{ isolation: "isolate" }}
       />
       <rect
         x="456.16063"
@@ -249,7 +250,7 @@ const LoginPageIllustration = ({width}) => {
         d="M857.67571,643.22557a4.01574,4.01574,0,0,1-8.03148,0"
         transform="translate(-156 -79.47583)"
         opacity="0.2"
-        style={{isolation:"isolate"}}
+        style={{ isolation: "isolate" }}
       />
       <path
         d="M869.35522,714.27331H840.16367a2.997,2.997,0,0,0-2.96218,3.45275l4.41126,28.67321h25.33007l5.3581-28.5766a2.9971,2.9971,0,0,0-2.9457-3.54936Z"
@@ -375,5 +376,5 @@ const LoginPageIllustration = ({width}) => {
         fill="#3f3d56"
       />
     </svg>
-  
+  );
 };

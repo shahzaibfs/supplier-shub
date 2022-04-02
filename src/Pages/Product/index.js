@@ -8,7 +8,7 @@ import ProductPriceDetailSection from "./ProductPriceDetailSection";
 import { useGetProductHook } from '../../hooks/useGetProdcutHook'
 import Loader from "../../Components/Loader/Loader";
 
-function Product() {
+const Product = () => {
   let { id, productCategory } = useParams();
   const products = useSelector((store) => store.productReducer);
   const navigate = useNavigate();
@@ -16,7 +16,6 @@ function Product() {
 
   return (
     <>
-
       <p className="mt-3">{"products/" + productCategory} </p>
       {
         product === undefined || product === null ? <Loader /> :
@@ -28,17 +27,14 @@ function Product() {
             <ProductDetails product={product} />
           </main>
       }
-
     </>
   );
 }
 
 export default Product;
 
+const ProductSection = ({ product, children }) => {
 
-
-const ProductSection = ({ product,children }) => {
- 
   return (
     <section
       className="row flex-wrap justify-content-between mx-0"

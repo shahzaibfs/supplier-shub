@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 
-import "./__home.css";
 
-import HomeOverLay from "./HomeOverLay";
+
 import SmallHeader from "./SmallHeader";
 import SmallFooter from "./SmallFooter";
 import MainHeader from "./MainHeader";
@@ -29,11 +28,15 @@ function Home() {
   return (
     <section
       className="w-100 h-100  position-relative"
-      style={{ minHeight: "100vh", height: "max-content" }}
+      style={{
+        minHeight: "100vh"
+        , height: "max-content",
+        background :"linear-gradient(rgb(236, 244, 247) 18%, rgb(222, 230, 233) 34%, rgb(228 226 226 / 75%) 44%)"
+      }}
     >
-      <HomeOverLay />
+
       <section className=" mx-auto " style={{ zIndex: 1 }}>
-        <SmallHeader isLogin={state.authReducer.isLogin} />
+        <SmallHeader user={state.authReducer} />
         <MainHeader authReducer={state.authReducer} />
         <NavBAr />
         <section className="container-xxl position-relative" style={{ minHeight: "85vh" }}>

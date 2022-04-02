@@ -1,19 +1,21 @@
 import React from "react";
-import { useSelector } from "react-redux";
+
 
 import HomeBanner from "./HomeBanner";
 import HomeGallery from "./HomeGallery";
 import HomeHotSellers from "./HomeHotSellers";
+import "./__home.css";
 
 function Home() {
 
-  const authReducer = useSelector((store) => store.authReducer);
+
   
   return (
     <>
-      {!authReducer.isLogin && <HomeBanner />}
+      {<HomeBanner />}
 
       <HomeGallery />
+      
 
       <HomeHotSellers />
     </>

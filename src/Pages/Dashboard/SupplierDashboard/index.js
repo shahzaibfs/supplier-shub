@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Link, Navigate, Outlet, useLocation } from "react-router-dom";
 import { Layout, Menu, Breadcrumb } from "antd";
 import {
@@ -7,24 +6,23 @@ import {
   LaptopOutlined,
   NotificationOutlined,
 } from "@ant-design/icons";
+import { useGetAuthenticatedUser } from "../../../hooks/useGetAuthenticatedUser";
 
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
 
 
-const Index = () => {
-  const user = useSelector((store) => store.authReducer);
+const SupplierDashboard = () => {
+  const user = useGetAuthenticatedUser();
   const location = useLocation();
 
   const getBreadCrumbData = (location) => {
     return location.pathname.split("/").filter((name) => name !== "");
   };
 
-  if (!user.isLogin) {
-    return <Navigate to="/" />;
-  }
-  if (user.userDetails.accountType === "SUPPLIER") {
-    return (
+
+  return (
+    user.userDetails.accountType === "SUPPLIER" ?
       <div
         className="d-flex w-100"
         style={{ height: "100vh", marginTop: "10px", backgroundColor: "transparent" }}
@@ -88,10 +86,10 @@ const Index = () => {
           </Layout>
         </Layout>
       </div>
-    );
-  } else {
-    return <Navigate to="/" />;
-  }
+      :
+      <Navigate to="/" />
+  )
+
 };
 
-export default Index;
+export default SupplierDashboard;

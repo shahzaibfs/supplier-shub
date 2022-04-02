@@ -24,14 +24,7 @@ const HomeHotSellers = () => {
   return (
     <div className="container-fluid container-xxl">
       {/* Section header  */}
-      <header className="d-flex flex-column justify-content-center align-items-center py-4 my-2">
-        <h1 className="heading-2 text-primary text-weight-regular">
-          Hot Sellers
-        </h1>
-        <p className="body-2 text-primary-light-800">
-          Here is what`s trending on Luma right now
-        </p>
-      </header>
+      <SectionHeader title={"Hot Seller"} subtitle="some lorem ipsum should tdo the trick"/>
 
       <main className="row mx-0 justify-content-center justify-content-sm-between  flex-wrap px-0">
         {products.map((product) => (
@@ -102,3 +95,15 @@ const HomeHotSellers = () => {
 };
 
 export default HomeHotSellers;
+
+
+export const SectionHeader =({title,subtitle})=>{
+  return   <header className="d-flex flex-column justify-content-center align-items-center py-4 my-2">
+  <h1 className="heading-2 text-primary text-weight-regular">
+    {title}
+  </h1>
+  <p className="body-2 text-primary-light-800">
+{subtitle}
+  </p>
+</header>
+}

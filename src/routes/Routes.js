@@ -92,7 +92,6 @@ const Routes = () => {
               <Route path="reports/view-reports" element={<SupplierViewReports />} />
               <Route path="products/all-products" element={<SupplierAllPRoducts />} />
               <Route path="products/add-product" element={<SupplierAddProduct />} />
-
               <Route path="products/out-of-stock" element={<SupplierOutOfStockProducts />} />
             </Route>
 

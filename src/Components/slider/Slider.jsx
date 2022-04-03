@@ -1,18 +1,15 @@
 import { Button, Col, Row } from "antd"
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import "./__slider.css"
-function Slider({ data = [],negative =false ,mt=3,mb=3}) {
-
-  
-
+function Slider({ data = [], negative = false, mt = 3, mb = 3 }) {
+    const sliderRef = useRef(null) ;
     const slideLeft = () => {
-        let slider = document.getElementById("slider");
-        slider.scrollLeft -= 300
+        sliderRef.current.scrollLeft -= 300
     }
 
     const slideRight = () => {
-        let slider = document.getElementById("slider");
-        slider.scrollLeft += 300
+        sliderRef.current.scrollLeft += 300
     }
 
     return (
@@ -22,9 +19,9 @@ function Slider({ data = [],negative =false ,mt=3,mb=3}) {
             </Col>
 
             <Col className="overflow-hidden">
-                <Row wrap={false} id={"slider"} style={styles.sliderCard}>
+                <Row ref={sliderRef} wrap={false} id={"slider"} style={styles.sliderCard}>
                     {data.map((category) => (
-                        <Col key={category.categoryId} xs={7} md={6} xl={5} className="me-3 slider__card" >
+                        <Col key={category.categoryId} className="me-3 slider__card" >
                             <img src={category.coverPhoto} alt="somthing" style={styles.sliderCardImg} />
                             <Link to="/login" className="slider__card__name">{category.categoryName}</Link>
                         </Col>
@@ -52,5 +49,5 @@ const styles = {
     },
     sliderButton: { height: "100px" },
     sliderCard: { overflowX: "auto", scrollBehavior: "smooth" },
-    sliderCardImg: { width: "100%", height: "170px", objectFit: "cover" }
+    sliderCardImg: { width: "200px", height: "200px", objectFit: "cover" }
 }

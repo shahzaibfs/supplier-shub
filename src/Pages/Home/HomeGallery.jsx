@@ -8,9 +8,9 @@ import { SectionHeader } from "./HomeHotSellers";
 const HomeGallery = () => {
 
   return (<>
-    <Slider  data={productCategoryMockData} negative={true}  />
+    <Slider key={1} data={productCategoryMockData} negative={true}  />
     <SectionHeader title={"Newest Products"} subtitle={"lorem ipsum should do the trick "}/>
-    <Slider  data={productCategoryMockData} />
+    <Slider key={2} data={productCategoryMockData} />
     </>
   );
 

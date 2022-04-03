@@ -23,29 +23,29 @@ const HomeHotSellers = () => {
 
   return (
     <div className="container-fluid container-xxl">
-      {/* Section header  */}
+     
       <SectionHeader title={"Hot Seller"} subtitle="some lorem ipsum should tdo the trick"/>
 
       <main className="row mx-0 justify-content-center justify-content-sm-between  flex-wrap px-0">
         {products.map((product) => (
           <div
-            className="col-11 col-sm-5  col-md-3  col-xl-2  mx-0 mx-md-2 my-2  mx-xxl-2  px-0"
+            className="col-11 col-sm-5 bg-white col-md-3  col-xl-2  mx-0 mx-md-2 my-2  mx-xxl-2  px-0"
             style={{ minHeight: "400px" }}
             key={product.productId}
           >
-            {/* img */}
+          
             <Link
               to={`/products/${product.category.categoryName}/${product.productId}`}
             >
               <img
-                className="h-50  bg-primary"
-                style={{ objectFit: "cover" }}
-                width="200px"
+              className="bg-primary"
+                style={{ objectFit: "contain" }}
+                width="150px"
+                height={"150px"}
                 src={product.productCoverPictureUrl}
                 alt={product.productName}
               />
             </Link>
-            {/* section for card data */}
             <article className="my-3 px-2" >
               <Link
                 to={`/products/${product.category.categoryName}/${product.productId}`}
@@ -58,7 +58,7 @@ const HomeHotSellers = () => {
                 Rs {product.productPrice}| {product.productWeight}
               </div>
             </article>
-            {/* actions  */}
+           
             <div className="position-relative px-2">
               <div className="d-flex">
                 {[...Array(product.customerRating)].map((_, index) => (

@@ -1,109 +1,87 @@
-import React, {  useState } from "react";
-import { AiOutlineStar } from "react-icons/ai";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import Popup from "../../Components/Popup/Popup";
-
+import { Button, Card, Col, Grid, Rate, Row } from "antd";
+import React from "react";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { useSelector } from "react-redux";
+// import { useGetAuthenticatedUser } from "../../hooks/useGetAuthenticatedUser";
+const { useBreakpoint } = Grid;
+const { Meta } = Card;
 const HomeHotSellers = () => {
-  const [isPopupShow, setisPopupShow] = useState(false);
-
   const products = useSelector((store) => store.productReducer);
-  const authReducer = useSelector((store) => store.authReducer);
+  // const user = useGetAuthenticatedUser();
+  const { xs, lg, md } = useBreakpoint();
+  console.log(md);
+  // const dispatch = useDispatch();
 
-  const dispatch = useDispatch();
-
-  
-
-  const handleAddToCart = (product) => {
-    dispatch({
-      type: "ADD_TO_CART",
-      payload: product,
-    });
-  };
+  // const handleAddToCart = (product) => {
+  //   dispatch({
+  //     type: "ADD_TO_CART",
+  //     payload: product,
+  //   });
+  // };
 
   return (
-    <div className="container-fluid container-xxl">
-     
-      <SectionHeader title={"Hot Seller"} subtitle="some lorem ipsum should tdo the trick"/>
+    <>
+      <SectionHeader
+        title={"Hot Seller Products"}
+        subtitle="some lorem ipsum should tdo the trick"
+      />
 
-      <main className="row mx-0 justify-content-center justify-content-sm-between  flex-wrap px-0">
-        {products.map((product) => (
-          <div
-            className="col-11 col-sm-5 bg-white col-md-3  col-xl-2  mx-0 mx-md-2 my-2  mx-xxl-2  px-0"
-            style={{ minHeight: "400px" }}
-            key={product.productId}
-          >
-          
-            <Link
-              to={`/products/${product.category.categoryName}/${product.productId}`}
-            >
-              <img
-              className="bg-primary"
-                style={{ objectFit: "contain" }}
-                width="150px"
-                height={"150px"}
-                src={product.productCoverPictureUrl}
-                alt={product.productName}
-              />
-            </Link>
-            <article className="my-3 px-2" >
-              <Link
-                to={`/products/${product.category.categoryName}/${product.productId}`}
-              >
-                <p className="body-2 text-primary-light-700 text-decoration-underline">
-                  {product.companyName}
-                </p>
-              </Link>
-              <div className="text-weight-bold body-2">
-                Rs {product.productPrice}| {product.productWeight}
-              </div>
-            </article>
-           
-            <div className="position-relative px-2">
-              <div className="d-flex">
-                {[...Array(product.customerRating)].map((_, index) => (
-                  <div className="stars " key={index}>
-                    <AiOutlineStar />
-                  </div>
-                ))}
-              </div>
-              <p className="mb-2 text-muted text-decoration-underline">
-                Reviews
-              </p>
-              {
-                authReducer.userDetails.accountType !== "SUPPLIER" ?
-              <button
-                onClick={() => {
-                  handleAddToCart(product);
-                  setisPopupShow(true);
-                  setTimeout(()=>{
-                    setisPopupShow(false)
-                  },500)
-                }}
-                className="btn bg-primary my-0 text-white"
-              >
-                Add to cart
-              </button> :null
+      <Row
+        className="my-2"
+        gutter={16}
+        justify={lg ? "space-between" : "start"}
+      >
+        {products.map((product, idx) => (
+          <Col className="my-2" xs={!lg && 12} key={idx}>
+            <Card
+              className="py-2"
+              hoverable
+              style={{
+                width: lg ? 200 : "100%",
+                display: lg ? "block" : md ? "flex" : xs ? "block" : "",
+              }}
+              cover={
+                <img
+                  alt="example"
+                  src={product.productCoverPictureUrl}
+                  style={{
+                    width:  lg ? 200 : md ? 150 : xs ? 150 : 200,
+                    height:  lg ? 200 : md ? 150 : xs ? 150 : 200,
+                    objectFit: "contain",
+                  }}
+                />
               }
-            </div>
-          </div>
+            >
+              <Meta
+                title={product.productName}
+                description={"Rs: 4500 | Cotton"}
+              />
+              <Rate disabled defaultValue={2} />
+              <Button
+                type="primary"
+                block
+                className="d-flex justify-content-center align-items-center mt-2"
+                size="large"
+                icon={<AiOutlineShoppingCart className="me-2" />}
+                style={{ borderRadius: "7px" }}
+              >
+                Add to Cart
+              </Button>
+            </Card>
+          </Col>
         ))}
-      </main>
-      <Popup isShow={isPopupShow} message={"Product Added to Cart"}/>
-    </div>
+      </Row>
+    </>
   );
 };
 
 export default HomeHotSellers;
 
-
-export const SectionHeader =({title,subtitle})=>{
-  return   <header className="d-flex flex-column justify-content-center align-items-center py-4 my-2">
-  <h1 className="heading-2 text-primary text-weight-regular">
-    {title}
-  </h1>
-  <p className="body-2 text-primary-light-800">
-{subtitle}
-  </p>
-</header>
-}
+export const SectionHeader = ({ title = "", subtitle = "" }) => {
+  return (
+    <header className="d-flex flex-column  justify-content-center align-items-center py-2 my-2 ">
+      <h1 className="heading-2 text-primary text-weight-regular">{title}</h1>
+      <p className="body-2 text-primary-light-800">{subtitle}</p>
+    </header>
+  );
+};

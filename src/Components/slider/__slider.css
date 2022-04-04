@@ -1,0 +1,27 @@
+.slider__parent  ::-webkit-scrollbar {
+    display: none;
+}
+.slider__card {
+    position: relative;
+    cursor: pointer;
+}
+.slider__card > .slider__card__name {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.411);
+    font-weight: bolder;
+    text-decoration: underline;
+
+
+}
+
+.slider__card:hover .slider__card__name{
+    opacity: 1;
+}

@@ -1,0 +1,34 @@
+
+.margin-top-negative{
+    margin-top: -50px !important;
+}
+
+
+.banner__info{
+width: 100%;
+top: 20px;
+}
+
+.negative-marginTop-50{
+    margin-top: -50px !important;
+}
+
+@media (min-width: 576px) {  
+ .banner__info{
+    width: 500px;
+    height: 60%;
+    top: 40px;
+    right: 40px;
+    border-radius: 5px;
+ }
+
+}
+
+
+
+
+
+
+
+
+

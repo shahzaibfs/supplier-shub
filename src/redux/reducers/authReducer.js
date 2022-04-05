@@ -1,30 +1,34 @@
 import { constants } from "../constants";
 const intitState = {
   isLogin: false,
-  userDetails: {
-    accountType:"Customer"
-  },
-  error: ""
+  userDetails: {},
+  token: "",
 };
 
 export const authReducer = (state = intitState, action) => {
-
-  switch (action.type) 
-  {
+  switch (action.type) {
     case constants.loginAction:
-      console.log(action.payload)
+      console.log(action.payload);
       return { ...state, ...action.payload };
 
     case constants.logoutAction:
-      localStorage.removeItem("sessionID")
-      return { ...state, isLogin: false, errMessage: "" };
+      localStorage.removeItem("sessionID");
+      return { ...state, isLogin: false };
 
+    case constants.signupAction:
+      console.log(action);
+      return {
+        ...state,
+        isLogin: false,
+        userDetails: {
+          username: action.payload,
+        },
+      };
 
     default:
       if (localStorage.getItem("sessionID") != null) {
-        return { ...state, errMessage: "", isLogin: true }
+        return { ...state, isLogin: true };
       }
       return state;
-
   }
 };

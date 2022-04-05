@@ -7,18 +7,50 @@ import PasswordField from "../../Components/Inputs/PasswordField";
 import { SiGmail } from "react-icons/si";
 import { useDispatch } from "react-redux";
 import { doAuthentication } from "../../services/authMiddleWare";
+import {useGetAuthenticatedUser} from "../../hooks/useGetAuthenticatedUser"
 
 const LoginForm = () => {
   const [loginDetails, setloginDetails] = useState({
     username: "",
     password: "",
   });
+  const user = useGetAuthenticatedUser();
   const [isLoader, setisLoader] = useState(false);
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
   // TODO: Url needed to Authenticate : http://localhost:8080/api/v1.0/authenticate
 
+  const formFields = [
+    {
+      inputType: TextField,
+      label: "Username",
+      placeHolder: "your username",
+      name: "username",
+      type: "text",
+      defaultValue:user.userDetails.username ?? ""
+    },
+  
+    {
+      inputType: PasswordField,
+      label: "Password",
+      placeHolder: "your Password",
+      name: "password",
+      type: "password",
+    },
+  ];
+  
+  const styles = {
+    parent: {
+      padding: "5px",
+      alignItems: "center",
+      overflowY: "auto",
+    },
+    container: {
+      minHeight: "400px",
+    },
+  };
+  
   const handleInputs = (e) => {
     console.log(e.target.name + " " + e.target.value);
     setloginDetails((oldLoginDetails) => ({
@@ -27,6 +59,7 @@ const LoginForm = () => {
     }));
   };
 
+  console.log(user)
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -48,7 +81,7 @@ const LoginForm = () => {
             {formFields.map(({ inputType: INPUT, ...props }, idx) => (
               <INPUT
                 key={idx}
-                value={loginDetails[props.name]}
+                value={user.userDetails.name ?? ""}
                 onChange={handleInputs}
                 size={"large"}
                 {...props}
@@ -93,31 +126,3 @@ const LoginForm = () => {
 
 export default LoginForm;
 
-const formFields = [
-  {
-    inputType: TextField,
-    label: "Username",
-    placeHolder: "your username",
-    name: "username",
-    type: "text",
-  },
-
-  {
-    inputType: PasswordField,
-    label: "Password",
-    placeHolder: "your Password",
-    name: "password",
-    type: "password",
-  },
-];
-
-const styles = {
-  parent: {
-    padding: "5px",
-    alignItems: "center",
-    overflowY: "auto",
-  },
-  container: {
-    minHeight: "400px",
-  },
-};

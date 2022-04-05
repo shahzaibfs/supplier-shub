@@ -34,24 +34,13 @@ function Home() {
 
 export default Home;
 
-<<<<<<< HEAD
-
-const getHomeBanner = (user) => {
-  return user.isLogin && user.userDetails.accountType === "SUPPLIER" ?
-=======
 const getHomeBanner = (user) => {
   return user.isLogin && user.userDetails.accountType === "SUPPLIER" ? (
->>>>>>> 7966b44 (home page hotseller feature)
     <HomeBanner
       title="Hey! Wanna Add or Update the Products?"
       btn={{ link: "/dashboard/supplier", text: "Go to Dashboard" }}
     />
-<<<<<<< HEAD
-    : <HomeBanner />
-}
-=======
   ) : (
     <HomeBanner />
   );
 };
->>>>>>> 7966b44 (home page hotseller feature)

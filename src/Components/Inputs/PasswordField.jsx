@@ -1,27 +1,25 @@
 import React from "react";
-import { Input } from "antd";
-import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import { Form, Input } from "antd";
 
-function PasswordField({ label, placeHolder, width, size, onChange, name, required }) {
+function PasswordField({ label, placeHolder, width, size, name, required }) {
   return (
-    <div className="m-2" style={{ width: width }}>
-      {label && (
-        <>
-          <label>{label}</label> <br />
-        </>
-      )}
+    <Form.Item
+      name={name}
+      label={label}
+      rules={[
+        {
+          required: required,
+          message: "Please input your Password",
+        },
+      ]}
+      className="m-2"
+      style={{ width: width }}
+    >
       <Input.Password
-        onChange={onChange}
         size={size}
-        width={"100%"}
         placeholder={placeHolder}
-        iconRender={(visible) =>
-          visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-        }
-        name={name}
-        required={required}
       />
-    </div>
+    </Form.Item>
   );
 }
 

@@ -1,35 +1,33 @@
 import React from "react";
+import { Form, Input } from "antd";
 
-import TextArea from "antd/lib/input/TextArea";
+
 
 function TextAreaField({
   width,
-  placeHolder,
+
   label,
   name,
-  onChange,
-  type,
-  status,
-  value,
-  required
+  size,
+  required,
+ 
 }) {
   return (
-    <div style={{width:width}} className="m-2">
-      <label>{label}</label>
-      <br></br>
-      <TextArea
-         required={required}
-      rows={4}
-        status={status}
-        className="mb-0"
-        placeholder={placeHolder}
-        style={{width:"100%"}}
-        name={name}
-        type={type?? "text"}
-        onChange={onChange}
-        value={value}
-      />{" "}
-    </div>
+    <Form.Item
+      
+      name={name}
+      label={label}
+      rules={[
+        {
+          required: required,
+          message: "Please input your message",
+        },
+      ]}
+      className="m-2"
+      style={{ width: width }}
+    >
+      <Input.TextArea size={size} showCount maxLength={100} />
+    </Form.Item>
   );
 }
 

@@ -2,11 +2,9 @@ import { Button, Col, Row } from "antd"
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import "./__slider.css"
-<<<<<<< HEAD
-function Slider({ data = [], negative = false, mt = 3, mb = 3 }) {
-=======
+
+
 function Slider({ data = [], negative = false, mt = 2, mb = 2 }) {
->>>>>>> 7966b44 (home page hotseller feature)
     const sliderRef = useRef(null) ;
     const slideLeft = () => {
         sliderRef.current.scrollLeft -= 300
@@ -17,11 +15,7 @@ function Slider({ data = [], negative = false, mt = 2, mb = 2 }) {
     }
 
     return (
-<<<<<<< HEAD
-        <Row wrap={false} className={`pt-4 pb-4 mt-${mt} mb-${mb} bg-white slider__parent ${negative && "margin-top-negative"}`} align="middle" style={styles.sliderParent} >
-=======
         <Row wrap={false} className={`py-4 mt-${mt} mb-${mb} bg-white slider__parent ${negative && "margin-top-negative"}`} align="middle" style={styles.sliderParent} >
->>>>>>> 7966b44 (home page hotseller feature)
             <Col className="me-3" >
                 <Button onClick={slideLeft} style={styles.sliderButton}><b>{"<"}</b></Button>
             </Col>

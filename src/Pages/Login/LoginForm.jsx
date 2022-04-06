@@ -1,23 +1,22 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Button, Col, Row } from "antd";
+import { Link } from "react-router-dom";
+import { Col, Form, Row, Typography } from "antd";
 import { AiOutlineUser } from "react-icons/ai";
-import TextField from "../../Components/Inputs/TextField";
-import PasswordField from "../../Components/Inputs/PasswordField";
 import { SiGmail } from "react-icons/si";
 import { useDispatch } from "react-redux";
+
 import { doAuthentication } from "../../services/authMiddleWare";
-import {useGetAuthenticatedUser} from "../../hooks/useGetAuthenticatedUser"
+import { useGetAuthenticatedUser } from "../../hooks/useGetAuthenticatedUser";
+import ButtonField from "../../Components/Inputs/button-field";
+import TextField from "../../Components/Inputs/TextField";
+import PasswordField from "../../Components/Inputs/PasswordField";
+
+const { Title } = Typography;
 
 const LoginForm = () => {
-  const [loginDetails, setloginDetails] = useState({
-    username: "",
-    password: "",
-  });
   const user = useGetAuthenticatedUser();
   const [isLoader, setisLoader] = useState(false);
   const dispatch = useDispatch();
-  let navigate = useNavigate();
 
   // TODO: Url needed to Authenticate : http://localhost:8080/api/v1.0/authenticate
 
@@ -28,18 +27,21 @@ const LoginForm = () => {
       placeHolder: "your username",
       name: "username",
       type: "text",
-      defaultValue:user.userDetails.username ?? ""
+      rules: [
+        {
+          required: true,
+          message: "fill your username..",
+        },
+      ],
     },
-  
     {
       inputType: PasswordField,
       label: "Password",
       placeHolder: "your Password",
       name: "password",
-      type: "password",
-    },
+required:true    },
   ];
-  
+
   const styles = {
     parent: {
       padding: "5px",
@@ -48,71 +50,75 @@ const LoginForm = () => {
     },
     container: {
       minHeight: "400px",
+      borderRadius: "7px",
+      border: "1px solid #d8dee4",
+      background: "#f6f8fa",
+      maxWidth: "400px",
     },
-  };
-  
-  const handleInputs = (e) => {
-    console.log(e.target.name + " " + e.target.value);
-    setloginDetails((oldLoginDetails) => ({
-      ...oldLoginDetails,
-      [e.target.name]: e.target.value,
-    }));
+    smallContainer: { background: "white", border: "1px solid #d0d7de" },
   };
 
-  console.log(user)
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  console.log(user);
+  const handleSubmit = (loginDetails) => {
     setisLoader(true);
-
-    dispatch(doAuthentication(loginDetails, setisLoader, navigate));
+    dispatch(doAuthentication(loginDetails, setisLoader));
+    console.log(loginDetails);
   };
   return (
     <>
       <Row style={styles.parent} className="h-100" justify="center">
-        <Col xs={18} lg={16} style={styles.container}>
-          <header className="m-2">
-            <p className="text-primary body-1 mb-2">Welcome Guest</p>
-            <h1 className="heading-2 text-weight-bold">
+        <Col
+          sm={15}
+          xs={22}
+          md={24}
+          lg={22}
+          style={styles.container}
+          className="p-2"
+        >
+          <header className="m-2" style={{ borderBottom: "1px solid #d8dee4" }}>
+            <Title level={5} type="secondary">
+              Welcome ~Guest
+            </Title>
+            <Title level={2} className=" mt-1">
               Login To your Account
-            </h1>
+            </Title>
           </header>
-          <form onSubmit={handleSubmit}>
+          <Form onFinish={handleSubmit} layout={"vertical"}>
             {formFields.map(({ inputType: INPUT, ...props }, idx) => (
-              <INPUT
-                key={idx}
-                value={user.userDetails.name ?? ""}
-                onChange={handleInputs}
-                size={"large"}
-                {...props}
-                required={true}
-              />
+              <INPUT key={idx} size={"large"} {...props} />
             ))}
             <div className="m-2 mt-3">
-              <Button
+              <ButtonField
                 icon={<AiOutlineUser className="me-2" />}
-                type="primary"
-                className="btn-bg-success w-100 d-flex align-items-center justify-content-center"
+                type="success"
                 htmlType="submit"
                 size="large"
+                width="100"
+                circle
                 loading={isLoader}
               >
-                Login
-              </Button>
+                Login{" "}
+              </ButtonField>
             </div>
             <p className="body-2 text-center m-0">Or</p>
             <div className="m-2 ">
-              <Button
+              <ButtonField
                 icon={<SiGmail className="me-2" />}
-                type="primary"
-                className="btn-bg-primary w-100 d-flex justify-content-center align-items-center "
+                type="danger"
+                htmlType="submit"
                 size="large"
+                width="100"
+                circle
+                loading={isLoader}
               >
-                Or Login with Gmail
-              </Button>
+                Login with Gmail
+              </ButtonField>
             </div>
-          </form>
-          <footer className="body-2 text-center">
+          </Form>
+          <footer
+            className="body-2 text-center m-2 mt-3 pt-3 pb-3"
+            style={styles.smallContainer}
+          >
             Have an Account?{" "}
             <Link to="/signup" className="text-weight-bold body-2">
               Signup
@@ -125,4 +131,3 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-

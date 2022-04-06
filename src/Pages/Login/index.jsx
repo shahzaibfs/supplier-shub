@@ -1,14 +1,27 @@
-import React from "react";
-import { Navigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Col, Row } from "antd";
 
 import { useGetAuthenticatedUser } from "../../hooks/useGetAuthenticatedUser";
 import LoginForm from "./LoginForm";
 
+const getRoleLink = {
+  SUPPLIER : "/dashboard/supplier",
+  CUSTOMER : "/dashboard/customer"
+}
+
 const Login = () => {
   const user = useGetAuthenticatedUser();
+  const navigate = useNavigate();
 
-  return !user.isLogin ? (
+  useEffect(() => {
+    if (user.isLogin) {
+      navigate(getRoleLink[user.role]);
+    }
+     // eslint-disable-next-line
+  }, [user]);
+
+  return (
     <Row style={styles.parent}>
       <Col
         className="bg-grid-color"
@@ -22,8 +35,6 @@ const Login = () => {
         <LoginForm />
       </Col>
     </Row>
-  ) : (
-    <Navigate to={"/"} />
   );
 };
 

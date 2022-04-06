@@ -11,7 +11,8 @@ function TextField({
   size,
   rules = [],
   value,
-  defaultValue
+  defaultValue,
+  status
 }) {
   return (
     <Form.Item
@@ -22,6 +23,7 @@ function TextField({
       style={{ width: width }}
     >
       <Input
+      status={status ?? ""}
         value={value}
         type={type}
         placeholder={placeHolder}

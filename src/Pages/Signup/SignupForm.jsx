@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Link ,useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TextField from "../../Components/Inputs/TextField";
 import Select from "../../Components/Inputs/SelectField";
 import { Col, Form, Row, Typography } from "antd";
@@ -22,15 +22,20 @@ const styles = {
   },
   container: {
     minHeight: "400px",
-    border: "1px solid #1111110f",
+    borderRadius:"7px",
+    border: "1px solid #d8dee4",
+    background:"#f6f8fa",
+    maxWidth:"400px"
   },
+  smallContainer:{background:"white",border:"1px solid #d0d7de"}
 };
-const SignupForm = () => {
-  const [isLoader, setisLoader] = useState(false)
-  const roles = useGetRoles();
-  const dispatch  =useDispatch();
-  const navigate = useNavigate();
 
+const SignupForm = () => {
+  const [isLoader, setisLoader] = useState(false);
+  const [usernameUniqueException, setusernameUniqueException] = useState(false);
+  const roles = useGetRoles();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const formFields = [
     {
@@ -38,13 +43,14 @@ const SignupForm = () => {
       label: "Username",
       placeHolder: "your username",
       name: "username",
-      type:"text",
+      type: "text",
       rules: [
         {
           required: true,
           message: "Please input your Username",
         },
       ],
+      status: usernameUniqueException && "error",
     },
     {
       inputType: TextField,
@@ -79,26 +85,37 @@ const SignupForm = () => {
     },
   ];
 
-  const idToRole=(id)=>{
-    return roles.filter(role=>role.roleId===id*1)[0]
-  }
+  const idToRole = (id) => {
+    return roles.filter((role) => role.roleId === id * 1)[0];
+  };
 
   const handleSubmit = (formData) => {
-    setisLoader(true)
-    const reqData = {...formData, role:idToRole(formData.role)}
-    console.log(reqData)
+    setisLoader(true);
+    const reqData = { ...formData, role: idToRole(formData.role) };
     setTimeout(() => {
-      dispatch(doRegistration(reqData,setisLoader,navigate))
-    }, 100); 
-    
-    
+      dispatch(
+        doRegistration(
+          reqData,
+          { setisLoader, setusernameUniqueException },
+          navigate
+        )
+      );
+    }, 100);
   };
 
   return (
-    <Row style={styles.parent} className="h-100" justify="center">
-      <Col xs={22} lg={16} style={styles.container} className="p-2">
-        <header className="m-2">
-          <Title level={4} type="secondary">
+    <Row style={styles.parent} className="h-100 pt-4 pb-4" justify="center">
+      <Col
+        sm={15}
+        xs={22}
+        md={24}
+        lg={22}
+        style={styles.container}
+        className="p-2"
+      >
+        {" "}
+        <header className="m-2" style={{borderBottom:"1px solid #d8dee4"}}>
+          <Title level={5} type="secondary">
             Welcome ~Guest
           </Title>
           <Title level={2} className="mt-1">
@@ -136,14 +153,14 @@ const SignupForm = () => {
               type="danger"
               htmlType="submit"
               size="large"
-              width="75"
+              width="100"
               circle
             >
               Login with Gmail
             </ButtonField>
           </div>
         </Form>
-        <footer className="body-2 text-center m-2">
+        <footer className="body-2 text-center m-2 mt-3 pt-3 pb-3" style={styles.smallContainer}>
           Have an Account?{" "}
           <Link to="/login" className="text-weight-bold body-2">
             Login

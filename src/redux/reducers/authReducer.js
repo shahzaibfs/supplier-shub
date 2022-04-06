@@ -3,17 +3,24 @@ const intitState = {
   isLogin: false,
   userDetails: {},
   token: "",
+  role: "",
 };
 
 export const authReducer = (state = intitState, action) => {
   switch (action.type) {
     case constants.loginAction:
       console.log(action.payload);
-      return { ...state, ...action.payload };
+      return {
+        ...state,
+        isLogin: true,
+        userDetails: action.payload.userDetails,
+        token: action.payload.token,
+        role : action.payload.userDetails.roles[0].roleName
+      };
 
     case constants.logoutAction:
       localStorage.removeItem("sessionID");
-      return { ...state, isLogin: false };
+      return { ...state,...intitState};
 
     case constants.signupAction:
       console.log(action);

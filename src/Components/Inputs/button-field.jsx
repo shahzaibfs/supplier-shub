@@ -1,5 +1,5 @@
-import { Button ,Typography } from "antd";
-const {Text} = Typography
+import { Button, Typography } from "antd";
+const { Text } = Typography;
 
 function ButtonField({
   icon = null,
@@ -9,21 +9,32 @@ function ButtonField({
   width = "50",
   circle = false,
   children,
-  loading
+  loading,
 }) {
   return (
     <Button
       icon={icon ?? null}
-      type={type}
-      className={`w-${width} d-flex justify-content-center text-white align-items-center mx-auto btn-bg-${type}`}
+      className={`w-${width} d-flex justify-content-center text-white align-items-center mx-auto `}
       htmlType={htmlType}
       size={size}
-      style={{ borderRadius: circle && "100px",boxShadow:" 0px 2px 8px rgba(0, 0, 0, 0.1)"}}
+      style={{
+        background:getBtnBackgroundColor[type],
+        borderRadius: circle && "7px",
+        boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.1)",
+      }}
       loading={loading}
     >
-      <Text style={{color:"inherit"}}>{children}</Text>
+      <Text strong style={{ color: "inherit" }}>
+        {children}
+      </Text>
     </Button>
   );
 }
 
 export default ButtonField;
+
+
+const getBtnBackgroundColor = {
+  success:"#2da44e",
+  danger:"#d9534f"
+}

@@ -1,5 +1,5 @@
-import React from "react";
-import { Link, Navigate, Outlet, useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Layout, Menu, Breadcrumb } from "antd";
 import {
   UserOutlined,
@@ -18,13 +18,21 @@ const CustomerDashboard = () => {
 
   const user = useGetAuthenticatedUser();
   const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(user.role !== "CUSTOMER"){
+        navigate("/login")
+    }
+    // eslint-disable-next-line
+  }, []);
 
   const getBreadCrumbData = (location) => {
     return location.pathname.split("/").filter((name) => name !== "");
   };
 
   return (
-    user.userDetails.accountType === "CUSTOMER" ? <div
+    <div
       className="d-flex w-100"
       style={{ height: "100vh", marginTop: "10px", backgroundColor: "transparent" }}
     >
@@ -74,8 +82,7 @@ const CustomerDashboard = () => {
       </Layout>
     </div>
 
-      :
-      <Navigate to="/login" />
+    
   )
 
 };

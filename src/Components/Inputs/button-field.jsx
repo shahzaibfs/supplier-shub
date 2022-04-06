@@ -1,5 +1,6 @@
-import { Button, Typography } from "antd";
-const { Text } = Typography;
+import { Button } from "antd";
+import "./input.css"
+
 
 function ButtonField({
   icon = null,
@@ -10,23 +11,26 @@ function ButtonField({
   circle = false,
   children,
   loading,
+  height,
+  classnames
 }) {
   return (
     <Button
+
       icon={icon ?? null}
-      className={`w-${width} d-flex justify-content-center text-white align-items-center mx-auto `}
+      className={`w-${width} h-${height} ${classnames} btn-custom d-flex justify-content-center align-items-center mx-auto `}
       htmlType={htmlType}
       size={size}
       style={{
-        background:getBtnBackgroundColor[type],
+        ...getBtnBackgroundColor[type],
         borderRadius: circle && "7px",
         boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.1)",
       }}
       loading={loading}
     >
-      <Text strong style={{ color: "inherit" }}>
+      
         {children}
-      </Text>
+
     </Button>
   );
 }
@@ -35,6 +39,7 @@ export default ButtonField;
 
 
 const getBtnBackgroundColor = {
-  success:"#2da44e",
-  danger:"#d9534f"
+  success: {background:"#2da44e",color:"white"},
+  danger:{background:"#d9534f",color:"white"},
+  ghost: {background:"transparent", color: "white"}
 }

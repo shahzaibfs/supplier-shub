@@ -10,28 +10,35 @@ const options = (token) => ({
   },
 });
 
-export const getSupplierProfileData = (token) =>
-  axios.get("http://localhost:8081/api/v1.0/supplier", options(token));
 
-const supplierEditApi = (supplierProfileDetails, token) =>
+const editUserAPi = (userDetails, token) =>
   axios.post(
-    "http://localhost:8081/api/v1.0/supplier/edit",
-    supplierProfileDetails,
+    "http://localhost:8081/api/v1.0/user/edit",
+    userDetails,
     options(token)
   );
 
-export const doEditSupplierDetails =
-  (supplierProfileDetails, token, { setrefreshData }) =>
-  (dispatch) => {
-    
-    supplierEditApi(supplierProfileDetails, token)
+export const doEditUser =
+  (userDetails, token,{seterrorOnEdit,setisModalVisible,setisLoader}) =>
+ async (dispatch) => {
+ 
+   editUserAPi(userDetails, token)
       .then((response) => {
         console.log(response);
         message.success("the record has been updated")
-        setrefreshData((old) => !old);
+        seterrorOnEdit(false)
+        setisModalVisible(false)
+        setisLoader(false)
+       
       })
       .catch((error) => {
         message.error("Some Error Happedn on Backend ")
-        console.log(error);
+       console.log(error.response)
+       seterrorOnEdit(true)
+       setisModalVisible(true)
+       setisLoader(false)
+       
       });
+
+
   };

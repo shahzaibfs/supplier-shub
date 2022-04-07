@@ -14,15 +14,12 @@ import { useGetSupplierData } from "../../../../hooks/useGetSupplierProfileData"
 import ButtonField from "../../../../Components/Inputs/button-field";
 
 const styles = {
-
   parent: {
     borderRadius: "7px",
     border: "1px solid #d8dee4",
     background: "#f6f8fa",
   },
 };
-
-
 
 function SupplierDetails() {
   const [refreshData, setrefreshData] = useState(false);
@@ -79,7 +76,10 @@ function SupplierDetails() {
     dispatch(doEditSupplierDetails(reqData, user.token, { setrefreshData }));
   };
   return (
-    <section className="  p-4 d-flex flex-wrap justify-content-evenly " style={styles.parent}>
+    <section
+      className="  p-4 d-flex flex-wrap justify-content-evenly "
+      style={styles.parent}
+    >
       <div
         className="profile-picture-section   mt-2 mb-2"
         style={{ width: "150px" }}

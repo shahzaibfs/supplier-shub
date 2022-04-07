@@ -19,7 +19,10 @@ const styles = {
 };
 
 function AccountDetails() {
-  const [errorOnEdit, seterrorOnEdit] = useState(false);
+  const [errorOnEdit, seterrorOnEdit] = useState({
+    isErr:false,
+    err:""
+  });
   const [isModalVisible, setisModalVisible] = useState(false);
   const [isLoader, setisLoader] = useState(false);
   const [form] = Form.useForm();
@@ -50,10 +53,12 @@ function AccountDetails() {
   const handleModalOk = () => {
     setisLoader(true);
     const reqData = {
-      username: form.getFieldValue("username"),
-      password: form.getFieldValue("password"),
+      username: form.getFieldValue("username") ?? '',
+      password: form.getFieldValue("password") ?? '',
+      email:form.getFieldValue("email") ?? '' ,
       oldPassword: oldPassForm.getFieldValue("oldPassword"),
     };
+    console.log(reqData)
     dispatch(
       doEditUser(reqData, user.token, {
         seterrorOnEdit,
@@ -122,10 +127,9 @@ function AccountDetails() {
         </Text>
 
         {modelForm}
-        {errorOnEdit && (
+        {errorOnEdit.isErr && (
           <Text type="danger">
-            Login Details Not Matched Your Account Will be logged out
-            automatically in few seconds
+          {errorOnEdit.err}
           </Text>
         )}
       </Modal>

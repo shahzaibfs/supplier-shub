@@ -28,7 +28,7 @@ function SupplierDetails() {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
-  console.log(supplierProfileData);
+
 
   useEffect(() => {
     if (Object.keys(supplierProfileData).length !== 0) {

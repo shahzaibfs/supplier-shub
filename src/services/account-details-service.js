@@ -26,15 +26,20 @@ export const doEditUser =
       .then((response) => {
         console.log(response);
         message.success("the record has been updated")
-        seterrorOnEdit(false)
+        seterrorOnEdit(old=>({
+          isErr:false,
+          err:''
+        }))
         setisModalVisible(false)
         setisLoader(false)
        
       })
       .catch((error) => {
-        message.error("Some Error Happedn on Backend ")
        console.log(error.response)
-       seterrorOnEdit(true)
+       seterrorOnEdit(old=>({
+         isErr:true,
+         err:error.response.data.error
+       }))
        setisModalVisible(true)
        setisLoader(false)
        

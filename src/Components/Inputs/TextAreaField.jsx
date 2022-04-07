@@ -5,12 +5,11 @@ import { Form, Input } from "antd";
 
 function TextAreaField({
   width,
-
   label,
   name,
   size,
   required,
- 
+ placeHolder
 }) {
   return (
     <Form.Item
@@ -26,7 +25,7 @@ function TextAreaField({
       className="m-2"
       style={{ width: width }}
     >
-      <Input.TextArea size={size} showCount maxLength={100} />
+      <Input.TextArea placeholder={placeHolder} size={size} showCount maxLength={100} />
     </Form.Item>
   );
 }

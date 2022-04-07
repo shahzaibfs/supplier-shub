@@ -5,7 +5,7 @@ const { Option } = Select;
 
 function SelectField({
   options = [],
-  label,
+  label="",
   width,
   name,
   size,
@@ -13,6 +13,7 @@ function SelectField({
   valueIndex,
   required,
   placeHolder,
+  noMargin=false,
 }) {
   return (
     <Form.Item
@@ -24,13 +25,14 @@ function SelectField({
           message: "Please input your message",
         },
       ]}
-      className="m-2"
-      style={{ width: width }}
+      className={`m-${noMargin ? "0" : "2"}`}
+      style={{ width: width ?? "" }}
+  
     >
-      <Select size={size} placeholder={placeHolder}>
+      <Select size={size ?? "small"}  placeholder={placeHolder}>
         {options.map((option, idx) => (
           <Option key={idx} value={option[valueIndex]}>
-            {option[dataIndex]}
+           {option[dataIndex]}
           </Option>
         ))}
       </Select>

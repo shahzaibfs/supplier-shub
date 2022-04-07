@@ -12,14 +12,15 @@ function TextField({
   rules = [],
   value,
   defaultValue,
-  status
+  status,
+  classname=""
 }) {
   return (
     <Form.Item
       name={name}
       label={label}
       rules={rules}
-      className="m-2"
+      className={`m-2 ${classname} `}
       style={{ width: width }}
     >
       <Input

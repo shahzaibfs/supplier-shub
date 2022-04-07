@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Input } from "antd";
 
-function PasswordField({ label, placeHolder, width, size, name, required }) {
+function PasswordField({ label, placeHolder, width, size, name, required ,classname }) {
   return (
     <Form.Item
       name={name}
@@ -12,7 +12,7 @@ function PasswordField({ label, placeHolder, width, size, name, required }) {
           message: "Please input your Password",
         },
       ]}
-      className="m-2"
+      className={`m-2 ${classname}`}
       style={{ width: width }}
     >
       <Input.Password

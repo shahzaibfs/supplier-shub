@@ -1,15 +1,85 @@
-import { Button, Divider } from "antd";
-import React from "react";
+import { Divider, Form } from "antd";
+import React, { useEffect, useState } from "react";
 import { AiFillFacebook, AiFillInstagram } from "react-icons/ai";
 import { BsFillPatchCheckFill } from "react-icons/bs";
 import { FaEdit } from "react-icons/fa";
 import TextAreaField from "../../../../Components/Inputs/TextAreaField";
 import TextField from "../../../../Components/Inputs/TextField";
+import PhoneField from "../../../../Components/Inputs/phone-field";
+import SelectField from "../../../../Components/Inputs/SelectField";
+import { useDispatch } from "react-redux";
+import { doEditSupplierDetails } from "../../../../services/supplier-services/supplier-profile-service";
+import { useGetAuthenticatedUser } from "../../../../hooks/useGetAuthenticatedUser";
+import { useGetSupplierData } from "../../../../hooks/useGetSupplierProfileData";
+import ButtonField from "../../../../Components/Inputs/button-field";
+
+const styles = {
+
+  parent: {
+    borderRadius: "7px",
+    border: "1px solid #d8dee4",
+    background: "#f6f8fa",
+  },
+};
+
+
 
 function SupplierDetails() {
+  const [refreshData, setrefreshData] = useState(false);
+  const user = useGetAuthenticatedUser();
+  const supplierProfileData = useGetSupplierData(user.token, refreshData);
+  const dispatch = useDispatch();
+  const [form] = Form.useForm();
+
+  console.log(supplierProfileData);
+
+  useEffect(() => {
+    if (Object.keys(supplierProfileData).length !== 0) {
+      form.setFieldsValue({
+        firstName: supplierProfileData.supplierFirstname,
+        lastName: supplierProfileData.supplierLastname,
+        brandName: supplierProfileData.brandName,
+        brandOwnerName: supplierProfileData.brandOwnerName,
+        bio: supplierProfileData.supplierBio,
+        contactNo: supplierProfileData.supplierContactNo.split("-")[1],
+        prefixSelectorContactNo:
+          supplierProfileData.supplierContactNo.split("-")[0],
+        city: supplierProfileData.supplierBrandAddresses[0].city,
+        address: supplierProfileData.supplierBrandAddresses[0].address,
+        postalCode: supplierProfileData.supplierBrandAddresses[0].postalCode,
+        instagramUrl: supplierProfileData.instagram.instagram_url,
+        facebookUrl: supplierProfileData.facebook.facebookUrl,
+      });
+    }
+    // eslint-disable-next-line
+  }, [supplierProfileData, refreshData]);
+
+  const handleSubmit = (data) => {
+    const reqData = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      profileUrl: "http://something-photo.com",
+      bio: data.bio,
+      contactNo: data.prefixSelectorContactNo + "-" + data.contactNo,
+      brandName: data.brandName,
+      brandOwnerName: data.brandOwnerName,
+      brandAddress: {
+        address: data.address,
+        city: data.city,
+        postalCode: data.postalCode,
+      },
+      facebook: {
+        facebookUrl: data.facebookUrl,
+      },
+      instagram: {
+        instagram_url: data.instagramUrl,
+      },
+    };
+
+    dispatch(doEditSupplierDetails(reqData, user.token, { setrefreshData }));
+  };
   return (
-    //   TODO : profile picture section && form section
-    <section className="  p-3 d-flex flex-wrap justify-content-evenly">
+    <section className="  p-4 d-flex flex-wrap justify-content-evenly " style={styles.parent}>
       <div
         className="profile-picture-section   mt-2 mb-2"
         style={{ width: "150px" }}
@@ -25,62 +95,188 @@ function SupplierDetails() {
             height="100%"
           />
         </div>
-        <Button
-          type="primary"
-          icon={<FaEdit className="me-1" />}
-          className="w-100 mt-2 justify-content-center d-flex align-items-center"
-          size={"large"}
-        >
-          Edit Profile{" "}
-        </Button>
+        <div className="m-2">
+          {" "}
+          <ButtonField
+            type="success"
+            icon={<FaEdit className="me-1" />}
+            className=""
+            size={"large"}
+            width="100"
+            circle
+          >
+            Edit Profile{" "}
+          </ButtonField>
+        </div>
       </div>
-      <form className=" form section d-flex flex-wrap  w-75 justify-content-evenly">
+      <Form
+        layout="vertical"
+        className=" form section d-flex flex-wrap  w-75 justify-content-evenly"
+        onFinish={handleSubmit}
+        form={form}
+      >
         <div
           className="border-right-primary-light me-1 d-flex justify-content-between align-content-start flex-wrap pe-4"
           style={{ width: "49%" }}
         >
-          <TextField label="First Name" width={"45%"} type="text" />
-          <TextField label="Last Name" width={"45%"} type="text" />
-          <TextAreaField label="Bio" width={"100%"} />
-          <TextAreaField label="Brand Address" width={"100%"} />
-          <TextField label="Contact-No" width={"100%"} type="number" />
-
-          <Button
-            className="m-2 w-100"
-            type="primary"
-            icon={<BsFillPatchCheckFill className="me-2" />}
-            size={"large"}
-          >
-            Update Profile
-          </Button>
+          {leftFormFields.map(({ inputType: INPUT, ...rest }, idx) => (
+            <INPUT width={"100%"} size={"large"} {...rest} />
+          ))}
+          <div className="m-2 w-100">
+            <ButtonField
+              type="success"
+              icon={<BsFillPatchCheckFill className="me-2" />}
+              size={"large"}
+              htmlType="submit"
+              classnames={""}
+              width="100"
+              circle
+            >
+              Update Profile
+            </ButtonField>
+          </div>
         </div>
-        <div
-          style={{ width: "49%" }}
-          className="d-flex ps-4   justify-content-between align-content-start flex-wrap pe-3"
-        >
-          <TextField label="Brand Name" width={"100%"} type="text" />
-          <TextField label="Brand Owner Name" width={"100%"} type="text" />
-          <TextField label="City" width={"100%"} type="text" />
-          <TextField label="Postal Code " width={"100%"} type="number" />
-
-          <Divider />
-          <h1 className="body-2 text-primary">Social Profiles</h1>
-          <TextField
-            placeHolder={"https://something.com"}
-            addOnBefore={<AiFillInstagram />}
-            width={"100%"}
-            type="text"
-          />
-          <TextField
-            placeHolder={"https://something.com"}
-            addOnBefore={<AiFillFacebook />}
-            width={"100%"}
-            type="text"
-          />
+        <div style={{ width: "49%" }} className="ps-4   pe-3">
+          {rightFormFields.map(({ inputType: INPUT, ...rest }, idx) => (
+            <>
+              {idx === 4 && (
+                <Divider orientation="center">Social Profiles</Divider>
+              )}
+              <INPUT key={idx} {...rest} width="100%" size={"large"} />
+            </>
+          ))}
         </div>
-      </form>
+      </Form>
     </section>
   );
 }
 
 export default SupplierDetails;
+
+const prefixSelector = (
+  <SelectField
+    dataIndex={"data"}
+    name={"prefixSelectorContactNo"}
+    placeHolder={"+92"}
+    valueIndex={"value"}
+    key="contact-key"
+    options={[{ value: 92, data: "+92" }]}
+    noMargin={true}
+  />
+);
+
+const leftFormFields = [
+  {
+    inputType: TextField,
+    label: "Firstname",
+    placeHolder: "your firstname",
+    name: "firstName",
+    type: "text",
+    width: "45%",
+    rules: [
+      {
+        required: true,
+        message: "fill your firstname..",
+      },
+    ],
+  },
+  {
+    inputType: TextField,
+    label: "Lastname",
+    placeHolder: "your lastname",
+    name: "lastName",
+    type: "text",
+    width: "45%",
+    rules: [
+      {
+        required: true,
+        message: "fill your lastname..",
+      },
+    ],
+  },
+  {
+    inputType: TextAreaField,
+    label: "Bio",
+    placeHolder: "Tell us about your self",
+    name: "bio",
+  },
+  {
+    inputType: TextAreaField,
+    label: "Brand Address",
+    placeHolder: "your brand address",
+    name: "address",
+  },
+  {
+    inputType: PhoneField,
+    label: "Contact-no",
+    placeHolder: "348xxxxxxx",
+    name: "contactNo",
+    addonBefore: prefixSelector,
+    rules: [
+      {
+        required: true,
+        message: "fill your contact-no..",
+      },
+    ],
+  },
+];
+
+const rightFormFields = [
+  {
+    inputType: TextField,
+    label: "Brandname",
+    placeHolder: "your BrandName",
+    name: "brandName",
+    type: "text",
+    rules: [
+      {
+        required: true,
+        message: "fill your Brandname..",
+      },
+    ],
+  },
+  {
+    inputType: TextField,
+    label: "Brand Owner Name",
+    placeHolder: "your brand owner",
+    name: "brandOwnerName",
+    type: "text",
+    rules: [
+      {
+        required: true,
+        message: "fill your lastname..",
+      },
+    ],
+  },
+  {
+    inputType: TextField,
+    label: "City",
+    placeHolder: "Islamabad",
+    name: "city",
+    type: "text",
+    rules: [
+      {
+        required: true,
+        message: "fill your lastname..",
+      },
+    ],
+  },
+  {
+    inputType: TextField,
+    label: "Postal Code",
+    placeHolder: "46000",
+    name: "postalCode",
+  },
+  {
+    inputType: TextField,
+    placeHolder: "http://yoursocialprofile.com",
+    name: "instagramUrl",
+    addOnBefore: <AiFillInstagram />,
+  },
+  {
+    inputType: TextField,
+    placeHolder: "http://yoursocialprofile.com",
+    name: "facebookUrl",
+    addOnBefore: <AiFillFacebook />,
+  },
+];

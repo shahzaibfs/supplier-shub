@@ -102,6 +102,8 @@ const SupplierDashboard = () => {
               backgroundColor: "transparent",
               margin: 0,
               minHeight: "400px",
+            
+              
             }}
           >
             <Outlet />

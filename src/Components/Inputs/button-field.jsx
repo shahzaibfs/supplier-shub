@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Button, Dropdown } from "antd";
 import "./input.css"
 
 
@@ -12,13 +12,18 @@ function ButtonField({
   children,
   loading,
   height,
-  classnames
+  classnames,
+  onClick=null,
+  menu=<></>,
+  placement="",
+  menuTrigger=[]
 }) {
   return (
+    <Dropdown overlay={menu} placement={placement} trigger={menuTrigger}>
     <Button
-
+      onClick={onClick}
       icon={icon ?? null}
-      className={`w-${width} h-${height} ${classnames} btn-custom d-flex justify-content-center align-items-center mx-auto `}
+      className={`w-${width} h-${height}  btn-custom d-flex justify-content-center align-items-center mx-auto ${classnames}`}
       htmlType={htmlType}
       size={size}
       style={{
@@ -32,6 +37,7 @@ function ButtonField({
         {children}
 
     </Button>
+    </Dropdown>
   );
 }
 

@@ -13,10 +13,11 @@ function callback(key) {
 
 function Profile() {
   return (
-    <Tabs defaultActiveKey="1" onChange={callback}>
+    <Tabs defaultActiveKey="1" className="" onChange={callback}>
       <TabPane
+       className=""
         tab={
-          <div className="d-flex align-items-center ">
+          <div className=" d-flex align-items-center justify-content-start ">
             <BsFillPersonFill className="me-1" />
             Supplier Details
           </div>

@@ -1,20 +1,23 @@
 import React from "react";
-import { Avatar, Badge, Col, Layout, Row, Grid } from "antd";
+import { Avatar, Badge, Col, Layout, Row, Grid, Menu } from "antd";
 import { useSelector } from "react-redux";
 import { HiLocationMarker } from "react-icons/hi";
 
 import StyledButton from "../../Components/Inputs/StyledButton";
 import SearchField from "../../Components/Inputs/search-filed";
 import { FaUserCircle } from "react-icons/fa";
-import { HiOutlineShoppingCart ,HiOutlineMenuAlt1} from "react-icons/hi";
+import { HiOutlineShoppingCart, HiOutlineMenuAlt1 } from "react-icons/hi";
 import { RiNotification4Fill } from "react-icons/ri";
 import { useGetAuthenticatedUser } from "../../hooks/useGetAuthenticatedUser";
+import { Link, useNavigate } from "react-router-dom";
 
 const { useBreakpoint } = Grid;
 const MainHeader = () => {
   const cart = useSelector((store) => store.cartReducer.products);
   const user = useGetAuthenticatedUser();
   const { md } = useBreakpoint();
+  const navigate = useNavigate()
+
 
   return (
     <Layout
@@ -70,26 +73,34 @@ const MainHeader = () => {
             justifyContent: "center",
           }}
         >
-          <Badge
-            count={5}
-            status={"success"}
-            className="me-1"
-            color={"gold"}
-            offset={[-7, 0]}
-          >
-            <Avatar
-              className="d-flex justify-content-center align-items-center bg-primary-light border-primary"
-              shape="square"
-              size="large"
-              icon={<RiNotification4Fill />}
+          {user.isLogin &&
+            <Badge
+              count={5}
+              status={"success"}
+              className="me-1"
+              color={"gold"}
+              offset={[-7, 0]}
+            >
+              <Avatar
+                className="d-flex justify-content-center align-items-center bg-primary-light border-primary"
+                shape="square"
+                size="large"
+                icon={<RiNotification4Fill />}
+              />
+            </Badge>
+          }
+          
+            <StyledButton
+              Icon={FaUserCircle}
+              type="ghost"
+              title={user.isLogin ? "Wanna Logout" : "Account Login"}
+              subtitle={`Welcome ~${user.isLogin ? user.userDetails.userName.substring(0,5)+".." : "Guest"}`}
+              onClick={()=>handleClickOnLoginOrLogoutBtn(user,navigate)}
+              menu={user.isLogin ? menu(user) : <></>}
+              menuTrigger={["click"]}
+            
             />
-          </Badge>
-          <StyledButton
-            Icon={FaUserCircle}
-            type="ghost"
-            title={user.isLogin ? "Logout" : "Account Login"}
-            subtitle={`Welcome ~${user.userDetails.username ?? "Guest"}`}
-          />
+         
           <StyledButton type="ghost" title="& Orders" subtitle="Returns" />
           <StyledButton
             Icon={HiOutlineShoppingCart}
@@ -105,3 +116,47 @@ const MainHeader = () => {
 };
 
 export default MainHeader;
+
+
+
+const handleClickOnLoginOrLogoutBtn = (user,navigate) => {
+  if(user.isLogin){
+    return 
+  }else{
+    navigate("/login")
+  }
+};
+
+
+const getDashboardLinkFromUserDetails ={
+  "SUPPLIER" : "/dashboard/supplier",
+  "CUSTOMER" : "/dashboard/customer"
+}
+
+
+const menu = (user)=>{
+  console.log("i am here")
+  return (
+  <Menu>
+    <Menu.Item key={1}>
+    <Link
+       to={getDashboardLinkFromUserDetails[user.role]+"/orders/track-orders" ?? ""}
+      >
+       Dashboard
+      </Link>
+    </Menu.Item>
+    <Menu.Item key={2}>
+      <Link
+       to={getDashboardLinkFromUserDetails[user.role]+"/settings/view-profile" ?? ""}
+      >
+       Settings
+      </Link>
+    </Menu.Item>
+    <Menu.Item key={3}>
+      <p
+      >
+        3rd menu item
+      </p>
+    </Menu.Item>
+  </Menu>
+);}

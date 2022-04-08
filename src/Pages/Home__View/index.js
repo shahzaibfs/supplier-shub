@@ -7,6 +7,7 @@ import MainHeader from "./MainHeader";
 import MainFooter from "./MainFooter";
 import NavBAr from "./NavBAr";
 
+import "./home-view.css"
 import { productMiddleWare } from "../../services/productMiddleWare";
 
 function Home() {

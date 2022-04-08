@@ -16,8 +16,7 @@ const MainHeader = () => {
   const cart = useSelector((store) => store.cartReducer.products);
   const user = useGetAuthenticatedUser();
   const { md } = useBreakpoint();
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   return (
     <Layout
@@ -42,6 +41,8 @@ const MainHeader = () => {
             alt=""
             height={"100%"}
             width="100%"
+            onClick={() => navigate("/")}
+            style={{ cursor: "pointer" }}
           />
           <StyledButton
             Icon={HiLocationMarker}
@@ -73,11 +74,11 @@ const MainHeader = () => {
             justifyContent: "center",
           }}
         >
-          {user.isLogin &&
+          {user.isLogin && (
             <Badge
               count={5}
               status={"success"}
-              className="me-1"
+              className="me-2"
               color={"gold"}
               offset={[-7, 0]}
             >
@@ -88,27 +89,33 @@ const MainHeader = () => {
                 icon={<RiNotification4Fill />}
               />
             </Badge>
-          }
-          
-            <StyledButton
-              Icon={FaUserCircle}
-              type="ghost"
-              title={user.isLogin ? "Wanna Logout" : "Account Login"}
-              subtitle={`Welcome ~${user.isLogin ? user.userDetails.userName.substring(0,5)+".." : "Guest"}`}
-              onClick={()=>handleClickOnLoginOrLogoutBtn(user,navigate)}
-              menu={user.isLogin ? menu(user) : <></>}
-              menuTrigger={["click"]}
-            
-            />
-         
-          <StyledButton type="ghost" title="& Orders" subtitle="Returns" />
+          )}
+
           <StyledButton
-            Icon={HiOutlineShoppingCart}
+            Icon={FaUserCircle}
             type="ghost"
-            title="Cart"
-            subtitle={`- ${cart.length}`}
-            iconSize={40}
+            title={user.isLogin ? "Wanna Logout" : "Account Login"}
+            subtitle={`Welcome ~${
+              user.isLogin
+                ? user.userDetails.userName.substring(0, 5) + ".."
+                : "Guest"
+            }`}
+            onClick={() => handleClickOnLoginOrLogoutBtn(user, navigate)}
+            menu={user.isLogin ? menu(user) : <></>}
+            menuTrigger={["click"]}
           />
+
+          <StyledButton type="ghost" title="& Orders" subtitle="Returns" />
+          { !user.isLogin || user.role ==="CUSTOMER" ?
+            <StyledButton
+              Icon={HiOutlineShoppingCart}
+              type="ghost"
+              title="Cart"
+              subtitle={`- ${cart.length}`}
+              iconSize={40}
+            />
+            : null
+          }
         </Col>
       </Row>
     </Layout>
@@ -117,46 +124,46 @@ const MainHeader = () => {
 
 export default MainHeader;
 
-
-
-const handleClickOnLoginOrLogoutBtn = (user,navigate) => {
-  if(user.isLogin){
-    return 
-  }else{
-    navigate("/login")
+const handleClickOnLoginOrLogoutBtn = (user, navigate) => {
+  if (user.isLogin) {
+    return;
+  } else {
+    navigate("/login");
   }
 };
 
+const getDashboardLinkFromUserDetails = {
+  SUPPLIER: "/dashboard/supplier",
+  CUSTOMER: "/dashboard/customer",
+};
 
-const getDashboardLinkFromUserDetails ={
-  "SUPPLIER" : "/dashboard/supplier",
-  "CUSTOMER" : "/dashboard/customer"
-}
-
-
-const menu = (user)=>{
-  console.log("i am here")
+const menu = (user) => {
+  console.log("i am here");
   return (
-  <Menu>
-    <Menu.Item key={1}>
-    <Link
-       to={getDashboardLinkFromUserDetails[user.role]+"/orders/track-orders" ?? ""}
-      >
-       Dashboard
-      </Link>
-    </Menu.Item>
-    <Menu.Item key={2}>
-      <Link
-       to={getDashboardLinkFromUserDetails[user.role]+"/settings/view-profile" ?? ""}
-      >
-       Settings
-      </Link>
-    </Menu.Item>
-    <Menu.Item key={3}>
-      <p
-      >
-        3rd menu item
-      </p>
-    </Menu.Item>
-  </Menu>
-);}
+    <Menu>
+      <Menu.Item key={1}>
+        <Link
+          to={
+            getDashboardLinkFromUserDetails[user.role] +
+              "/orders/track-orders" ?? ""
+          }
+        >
+          Dashboard
+        </Link>
+      </Menu.Item>
+      <Menu.Item key={2}>
+        <Link
+          to={
+            getDashboardLinkFromUserDetails[user.role] +
+              "/settings/view-profile" ?? ""
+          }
+        >
+          Settings
+        </Link>
+      </Menu.Item>
+      <Menu.Item key={3}>
+        <p>3rd menu item</p>
+      </Menu.Item>
+    </Menu>
+  );
+};

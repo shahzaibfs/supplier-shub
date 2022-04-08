@@ -1,0 +1,37 @@
+.navbar__Link__main {
+  cursor: pointer;
+  display:flex;
+  align-items: center;
+}
+
+.navbar__Link__child_parent,
+.navbar__Link__child_children {
+  display: none !important;
+
+
+}
+
+.navbar__Link__child_children_links,
+.navbar__Link__child_parent_links {
+
+display: flex;
+justify-content: space-between;
+align-items: center;
+color: black;
+transition: ease-in 100ms;
+
+}
+.navbar__Link__child_parent_links:hover,
+.navbar__Link__child_children_links:hover{
+    background-color: #232f3e;
+    color: white;
+}
+
+.navbar__Link__main:hover .navbar__Link__child_parent,
+.navbar__Link__child_parent_links:hover > .navbar__Link__child_children,
+.navbar__Link__child_parent_links:hover
+  > .navbar__Link__child_children:hover
+  > .navbar__Link__child_children_links:hover
+  > .navbar__Link__child_children {
+  display: block !important;
+}

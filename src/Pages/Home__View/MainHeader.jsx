@@ -1,15 +1,18 @@
 import React from "react";
-import { Avatar, Badge, Col, Layout, Row, Grid, Menu } from "antd";
-import { useSelector } from "react-redux";
+import { Avatar, Badge, Col, Layout, Row, Grid, Menu ,Typography} from "antd";
+import { useDispatch, useSelector } from "react-redux";
 import { HiLocationMarker } from "react-icons/hi";
 
 import StyledButton from "../../Components/Inputs/StyledButton";
 import SearchField from "../../Components/Inputs/search-filed";
 import { FaUserCircle } from "react-icons/fa";
 import { HiOutlineShoppingCart, HiOutlineMenuAlt1 } from "react-icons/hi";
-import { RiNotification4Fill } from "react-icons/ri";
+import { RiNotification4Fill ,RiLogoutBoxRFill,RiSettings5Fill,RiDashboardFill} from "react-icons/ri";
 import { useGetAuthenticatedUser } from "../../hooks/useGetAuthenticatedUser";
 import { Link, useNavigate } from "react-router-dom";
+import {logoutAction} from '../../redux/actions/logoutAction'
+
+const {Text} = Typography
 
 const { useBreakpoint } = Grid;
 const MainHeader = () => {
@@ -17,6 +20,7 @@ const MainHeader = () => {
   const user = useGetAuthenticatedUser();
   const { md } = useBreakpoint();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   return (
     <Layout
@@ -101,7 +105,7 @@ const MainHeader = () => {
                 : "Guest"
             }`}
             onClick={() => handleClickOnLoginOrLogoutBtn(user, navigate)}
-            menu={user.isLogin ? menu(user) : <></>}
+            menu={user.isLogin ? menu(user,dispatch) : <></>}
             menuTrigger={["click"]}
           />
 
@@ -137,11 +141,12 @@ const getDashboardLinkFromUserDetails = {
   CUSTOMER: "/dashboard/customer",
 };
 
-const menu = (user) => {
+const menu = (user,dispatch) => {
   console.log("i am here");
   return (
     <Menu>
       <Menu.Item key={1}>
+        <RiDashboardFill size={20} className="me-1" />
         <Link
           to={
             getDashboardLinkFromUserDetails[user.role] +
@@ -152,6 +157,7 @@ const menu = (user) => {
         </Link>
       </Menu.Item>
       <Menu.Item key={2}>
+        <RiSettings5Fill size={20} className="me-1"/>
         <Link
           to={
             getDashboardLinkFromUserDetails[user.role] +
@@ -161,8 +167,11 @@ const menu = (user) => {
           Settings
         </Link>
       </Menu.Item>
-      <Menu.Item key={3}>
-        <p>3rd menu item</p>
+      <Menu.Item key={3} onClick={()=>dispatch(logoutAction())}>
+        <RiLogoutBoxRFill size={20}  className="me-1"/>
+        <Text>
+          Logout
+        </Text>
       </Menu.Item>
     </Menu>
   );

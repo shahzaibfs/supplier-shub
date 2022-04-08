@@ -1,10 +1,13 @@
+import { Typography } from "antd";
 import React from "react";
 
-function PageHeader({heading,subtitle}) {
+const { Text, Title } = Typography;
+
+function PageHeader({ heading = "", subtitle = "",classname }) {
   return (
-    <div className=" pageHeader">
-      <h1 className="heading-2 text-primary mb-1">{heading && heading}</h1>
-      <p className="body-2">{subtitle&& subtitle}</p>
+    <div className={` pageHeader bg-white p-3 ${classname}`} style={{borderRadius:7,border:"1px solid rgb(216, 222, 228)"}}>
+      <Title level={2} className="mb-1">{heading}</Title>
+      <Text>{subtitle}</Text>
     </div>
   );
 }

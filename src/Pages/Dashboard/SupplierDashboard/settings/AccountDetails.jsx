@@ -7,6 +7,7 @@ import TextField from "../../../../Components/Inputs/TextField";
 import { useGetAuthenticatedUser } from "../../../../hooks/useGetAuthenticatedUser";
 import { useDispatch } from "react-redux";
 import { doEditUser } from "../../../../services/account-details-service";
+import PageHeader from "../../../../Components/PageHeader/PageHeader";
 
 const { Text } = Typography;
 
@@ -75,12 +76,8 @@ function AccountDetails() {
   return (
     <>
       <section className="h-100 w-50  p-4" style={styles.parent}>
-        <div className="ms-2 me-2">
-          <h1 className="heading-2 text-primary mb-1">Account Info</h1>
-          <p className="body-2 text-muted">
-            Here you can change your Username and Password{" "}
-          </p>
-        </div>
+        <PageHeader heading="Account Info" subtitle="Here you can change your Username and Password"  />
+      
         <Form
           form={form}
           onFinish={onFinish}

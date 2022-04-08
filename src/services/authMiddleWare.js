@@ -3,28 +3,39 @@ import { message } from "antd";
 import axios from "axios";
 import { signupAction } from "../redux/actions/signup-action";
 
+const options = (token) => ({
+  headers: {
+    Authorization: "bearer " + token,
+    "Access-Control-Allow-Headers": "*",
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json",
+  },
+});
+
 const doAuth = (loginDetails) =>
   axios.post("http://localhost:8081/api/v1.0/authenticate", loginDetails);
 
 const doSignup = (signupDetails) =>
   axios.post("http://localhost:8081/api/v1.0/user/create", signupDetails);
 
-
+const getAuthenticatedUserFromTokenAPi = (token) =>
+  axios.get(
+    "http://localhost:8081/api/v1.0/user/",
+    options(token)
+  );
 
 export const doAuthentication = (loginDetails, setisLoader) => {
   return (dispatch) => {
     doAuth(loginDetails)
       .then((response) => {
-        
         dispatch(loginAction(response.data));
         setisLoader(false);
-       
       })
       .catch((error) => {
         setTimeout(() => {
           setisLoader(false);
         }, 1000);
-        console.log(error.response)
+        console.log(error.response);
         if (error.response.status === 500) {
           message.error(
             "INTERNAL SERVER ERRROR => Please Try Again Later !",
@@ -68,3 +79,22 @@ export const doRegistration = (
       });
   };
 };
+
+
+export const doCheckAuthenticatedUserFromAPi=(token)=>(dispatch)=>{
+  getAuthenticatedUserFromTokenAPi(token)
+  .then(
+    response=>{
+      console.log(response)
+      dispatch(loginAction({
+        token,
+        userDetails:{...response.data}
+      }))
+    }
+  )
+  .catch(
+    error=>{
+      console.log(error.response)
+    }
+  )
+}

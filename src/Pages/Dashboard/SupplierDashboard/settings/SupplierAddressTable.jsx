@@ -74,7 +74,7 @@ function SupplierAddressTable({ showModal }) {
   return (
     <>
       <Table
-      className=" mt-2"
+      className="mt-2"
         loading={{ spinning: false, indicator: <Loader /> }}
         
         columns={columns}

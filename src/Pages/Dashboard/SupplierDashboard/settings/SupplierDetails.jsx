@@ -120,7 +120,7 @@ function SupplierDetails() {
           style={{ width: "49%" }}
         >
           {leftFormFields.map(({ inputType: INPUT, ...rest }, idx) => (
-            <INPUT width={"100%"} size={"large"} {...rest} />
+            <INPUT key={idx} width={"100%"} size={"large"} {...rest} />
           ))}
           <div className="m-2 w-100">
             <ButtonField
@@ -138,12 +138,12 @@ function SupplierDetails() {
         </div>
         <div style={{ width: "49%" }} className="ps-4   pe-3">
           {rightFormFields.map(({ inputType: INPUT, ...rest }, idx) => (
-            <>
+            <div key={idx}>
               {idx === 4 && (
                 <Divider orientation="center">Social Profiles</Divider>
               )}
-              <INPUT key={idx} {...rest} width="100%" size={"large"} />
-            </>
+              <INPUT  {...rest} width="100%" size={"large"} />
+            </div>
           ))}
         </div>
       </Form>

@@ -9,10 +9,8 @@ const intitState = {
 export const authReducer = (state = intitState, action) => {
   switch (action.type) {
     case constants.loginAction:
-      console.log(action.payload);
       localStorage.setItem('session-token',JSON.stringify(action.payload.token))
       return {
-        ...state,
         isLogin: true,
         userDetails: action.payload.userDetails,
         token: action.payload.token,
@@ -20,6 +18,7 @@ export const authReducer = (state = intitState, action) => {
       };
 
     case constants.logoutAction:
+      console.log("in logout aciton")
       localStorage.removeItem("session-token");
       return {...intitState};
 
@@ -34,8 +33,10 @@ export const authReducer = (state = intitState, action) => {
       };
 
     default:
-      if (localStorage.getItem("session-") != null) {
-        return { ...state, isLogin: true };
+    
+
+      if (localStorage.getItem("session-token") != null && !state.isLogin) {
+        return { ...state,token:JSON.parse(localStorage.getItem("session-token"))};
       }
       return state;
   }

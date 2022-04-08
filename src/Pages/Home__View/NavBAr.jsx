@@ -11,7 +11,7 @@ const NavBAr = () => {
     <Layout className="bg-primary-light" style={{ height: 45 }}>
       <Row className="container-xxl mx-auto h-100 text-white" align="middle">
         {navbarData.map((eachcateg) => (
-          <Col className="position-relative navbar__Link__main h-100  me-3">
+          <Col key={eachcateg.id} className="position-relative navbar__Link__main h-100  me-3">
             <li className="list-unstyled ">
               {eachcateg.name} {eachcateg.children && <AiFillCaretDown />}
             </li>
@@ -40,20 +40,20 @@ const PrintCategChildren = ({ categ }) => {
       }}
     >
       {categ.map((eachCategory) => (
-        <li className="list-unstyled p-2 px-3 navbar__Link__child_parent_links">
+        <div key={eachCategory.id} className="list-unstyled p-2 px-3 navbar__Link__child_parent_links">
           {eachCategory.name}
           {eachCategory.children && <AiFillCaretRight className="ms-2" />}
           {eachCategory.children && (
             <ChildNode subCateg={eachCategory.children} />
           )}
-        </li>
+        </div>
       ))}
     </div>
   );
 };
 
 const ChildNode = ({ subCateg }) => {
-  console.log(subCateg);
+ 
   return (
     <div
       className="position-absolute h-100  bg-white navbar__Link__child_children"
@@ -66,15 +66,15 @@ const ChildNode = ({ subCateg }) => {
       }}
     >
       {subCateg.map((eachSubCateg) => (
-        <>
-          <p className="navbar__Link__child_children_links m-0 p-2 px-3">
+        
+          <div key={eachSubCateg.id} className="navbar__Link__child_children_links m-0 p-2 px-3">
             {eachSubCateg.name}{" "}
             {eachSubCateg.children && <AiFillCaretRight className="ms-2" />}
             {eachSubCateg.children && (
               <ChildNode subCateg={eachSubCateg.children} />
             )}
-          </p>
-        </>
+          </div>
+        
       ))}
     </div>
   );
@@ -160,20 +160,20 @@ const navbarData = [
         parentId: 2,
         children: [
           {
-            id: 2323232,
+            id: 23223232323232,
             name: "cafiene",
             coverPhoto: "something.com",
             parentId: 2323,
             children: null,
           },
           {
-            id: 232323326,
+            id: 232322323233326,
             name: "tea",
             coverPhoto: "something.com",
             parentId: 2323,
             children: [
               {
-                id: 7,
+                id: 72232323,
                 name: "tapal",
                 coverPhoto: "something.com",
                 parentId: 232323326,
@@ -186,7 +186,7 @@ const navbarData = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     name: "snacks",
     coverPhoto: "something.com",
     parentId: null,

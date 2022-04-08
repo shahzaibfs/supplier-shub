@@ -2,6 +2,7 @@ import { Button } from 'antd'
 import React from 'react'
 import { MdAddBox } from 'react-icons/md'
 import { Link } from 'react-router-dom'
+import TextField from '../../../../Components/Inputs/TextField'
 import PageHeader from  "../../../../Components/PageHeader/PageHeader"
 import SearchForm from  "../../../../Components/SearchContainer/SearchForm"
 import AllProductsTable from './AllProductsTable'
@@ -39,7 +40,7 @@ const buttonInfo  = {
 
 const formFields  = [
   {
-    inputField : "TextField",
+    inputField : TextField,
     label : "Name or Category",
     name:"productName",
   }

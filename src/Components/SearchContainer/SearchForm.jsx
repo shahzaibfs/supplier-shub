@@ -1,8 +1,6 @@
 import { Form } from "antd";
 import React from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import TextAreaField from "../Inputs/TextAreaField";
-import TextField from "../Inputs/TextField";
 import ButtonField from "../Inputs/button-field";
 
 const styles = {
@@ -26,25 +24,9 @@ function SearchForm({
       style={styles.parent}
       onFinish={handleSubmit}
     >
-      {formFields.map((formField, idx) =>
-        formField.inputField === "TextField" ? (
-          <TextField
-            key={idx}
-            label={formField.label}
-            type={formField.type}
-            name={formField.name}
-            placeHolder={formField.placeholder}
-            size="large"
-          />
-        ) : (
-          <TextAreaField
-            key={idx}
-            label={"Shipping Address"}
-            name={formField.name}
-            size="large"
-          />
-        )
-      )}
+      {formFields.map(({ inputType: INPUT, ...rest }, idx) => (
+        <INPUT key={idx} {...rest} />
+      ))}
 
       <div className="mx-2 my-1">
         <ButtonField

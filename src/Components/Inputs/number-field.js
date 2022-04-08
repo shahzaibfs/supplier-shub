@@ -1,19 +1,17 @@
 import React from "react";
-import { Form, Input } from "antd";
+import { Form, InputNumber } from "antd";
 
-function TextField({
+function InputNumberField({
   addOnBefore,
   width,
   placeHolder,
   label,
   name,
-  type="text",
   size,
   rules = [],
-  value,
   defaultValue,
   status,
-  classname=""
+  classname = "",
 }) {
   return (
     <Form.Item
@@ -23,17 +21,16 @@ function TextField({
       className={`m-2 ${classname} `}
       style={{ width: width }}
     >
-      <Input
-      status={status ?? ""}
-        value={value}
-        type={type}
+      <InputNumber
+        status={status ?? ""}
         placeholder={placeHolder}
         size={size}
         defaultValue={defaultValue ?? ""}
         addonBefore={addOnBefore}
+        style={{width:width}}
       />
     </Form.Item>
   );
 }
 
-export default TextField;
+export default InputNumberField;

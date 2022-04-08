@@ -1,4 +1,5 @@
 import React from 'react'
+import TextField from '../../../../Components/Inputs/TextField'
 import PageHeader from "../../../../Components/PageHeader/PageHeader"
 import SearchForm from "../../../../Components/SearchContainer/SearchForm"
 import CompletedProductsTable from './CompletedOrderTable'
@@ -23,7 +24,7 @@ const buttonInfo = {
 
 const formFields = [
   {
-    inputField: "TextField",
+    inputField: TextField,
     label: "Id or category",
     name: "productName",
     placeholder: "search any Order"

@@ -1,4 +1,5 @@
 import React from 'react'
+import TextField from '../../../../Components/Inputs/TextField'
 
 import PageHeader from '../../../../Components/PageHeader/PageHeader'
 import SearchForm from '../../../../Components/SearchContainer/SearchForm'
@@ -27,7 +28,7 @@ const buttonInfo = {
 
 const formFields = [
   {
-    inputField: "TextField",
+    inputField: TextField,
     label: "Name or Category",
     name: "productName",
     placeholder: "search in OutofStock table"

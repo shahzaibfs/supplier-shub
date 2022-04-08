@@ -8,6 +8,10 @@ import { MdAddBox } from "react-icons/md";
 import { Modal } from "antd";
 import TextField from "../../../../Components/Inputs/TextField";
 import TextAreaField from "../../../../Components/Inputs/TextAreaField";
+import { useDispatch } from "react-redux";
+import { doEditOrSaveSupplierAddresses } from "../../../../services/supplier-services/supplier-setting-address-service";
+import { useGetAuthenticatedUser } from "../../../../hooks/useGetAuthenticatedUser";
+import InputNumberField from "../../../../Components/Inputs/number-field";
 
 const styles = {
   parent: {
@@ -18,7 +22,7 @@ const styles = {
 };
 
 const addressInterface = {
-  name: "",
+  id: 0,
   postalCode: 0,
   city: "",
   address: "",
@@ -27,11 +31,12 @@ const addressInterface = {
 function SupplierAddresses() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalTitle, setmodalTitle] = useState("");
-  const [modalForm]  = Form.useForm();
-
+  const [currModalData, setCurrModalData] = useState(null);
+  const [isLoader, setisLoader] = useState(false);
+  const [modalForm] = Form.useForm();
+  const dispatch = useDispatch();
+  const user = useGetAuthenticatedUser();
   //TODO : modal ftns
-
-  console.log(Object.keys(addressInterface));
 
   const showModal = (addressData, { key }) => {
     if (key === "NEW_ADDRESS") {
@@ -39,17 +44,24 @@ function SupplierAddresses() {
     } else {
       setmodalTitle("Edit Address");
     }
-
-    modalForm.setFieldsValue(addressData)
+    setCurrModalData({
+      ...addressInterface,
+      id: addressData.No ?? 0,
+    });
+    modalForm.setFieldsValue(addressData);
     setIsModalVisible(true);
   };
 
   const handleOk = () => {
+    setisLoader(true)
     modalForm
       .validateFields()
       .then((values) => {
         modalForm.resetFields();
-        console.log(values);
+        const reqData = { ...currModalData, ...values };
+        setIsModalVisible(false)
+        dispatch(doEditOrSaveSupplierAddresses(reqData,user.token,{setisLoader}))
+
       })
       .catch((info) => {
         console.log("Validate Failed:", info);
@@ -58,7 +70,6 @@ function SupplierAddresses() {
   };
 
   const handleCancel = () => {
-  
     setIsModalVisible(false);
   };
 
@@ -70,11 +81,12 @@ function SupplierAddresses() {
 
   const searchFormFields = [
     {
-      inputField: "TextField",
+      inputType: TextField,
       type: "text",
       label: "City",
       placeHolder: "City",
       name: "cityName",
+      size: "large",
     },
   ];
 
@@ -83,12 +95,6 @@ function SupplierAddresses() {
     size: "large",
     circle: false,
     text: "Search",
-  };
-
- 
-
-  const handleNewAddressSubmit = (data) => {
-    console.log(data);
   };
 
   return (
@@ -115,7 +121,7 @@ function SupplierAddresses() {
         >
           Add Address
         </Button>
-        <SupplierAddressTable showModal={showModal} />{" "}
+        <SupplierAddressTable isLoader={isLoader} showModal={showModal} />{" "}
       </div>
 
       <Modal
@@ -125,15 +131,23 @@ function SupplierAddresses() {
         cancelText="Cancel"
         onCancel={handleCancel}
         onOk={handleOk}
+        okButtonProps={{
+          size: "large",
+          type: "primary",
+        }}
+        cancelButtonProps={{
+          size: "large",
+          type: "primary",
+          danger: true,
+        }}
       >
-        <Form form={modalForm} layout="vertical" onFinish={handleNewAddressSubmit}>
-          {newAddressModalData.map((field, index) => (
-            <field.inputField
+        <Form form={modalForm} layout="vertical">
+          {newAddressModalData.map(({inputField:INPUT,...rest}, index) => (
+            <INPUT
               key={index}
-              name={field.name}
-              label={field.label}
-              type={field.type}
-              placeHolder={field.placeHolder}
+           {...rest}
+              size="large"
+             width={"100%"}
             />
           ))}
         </Form>
@@ -147,17 +161,12 @@ export default SupplierAddresses;
 const newAddressModalData = [
   {
     inputField: TextField,
-    type: "text",
-    label: "Address Name",
-    placeHolder: "name",
-    name: "name",
-  },
-  {
-    inputField: TextField,
-    type: "text",
     label: "City",
     placeHolder: "City",
     name: "city",
+    rules:[
+      {required:true,message:"cannot be null"}
+    ]
   },
   {
     inputField: TextAreaField,
@@ -165,12 +174,16 @@ const newAddressModalData = [
     label: "Address",
     placeHolder: "Address",
     name: "address",
+    required:true
   },
   {
-    inputField: TextField,
-    type: "number",
+    inputField: InputNumberField,
     label: "Postal Code",
     placeHolder: "46000",
     name: "postalCode",
+    rules:[
+      {type:"number",message:"should be a number"},
+      {required:true,message:"cannot be null"}
+    ]
   },
 ];

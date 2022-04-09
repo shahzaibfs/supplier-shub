@@ -117,6 +117,7 @@ const MainHeader = () => {
               title="Cart"
               subtitle={`- ${cart.length}`}
               iconSize={40}
+              onClick={()=>{navigate("/cart")}}
             />
             : null
           }

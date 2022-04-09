@@ -1,12 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Typography } from "antd";
 
 import backgroundImage from "../../Assets/images/fyp.jpg";
+import ButtonField from "../../Components/Inputs/button-field";
+import {MdTouchApp} from 'react-icons/md'
+
+const { Text, Title } = Typography;
 
 const HomeBanner = ({
   title = "Buy The Items in Whole Sale rate directly from Suppliers ",
   btn = { link: "/cart", text: "Go to Shopping Cart" },
 }) => {
+  const navigate = useNavigate();
   const backgroundImageUrl = backgroundImage;
 
   return (
@@ -22,19 +28,28 @@ const HomeBanner = ({
       }}
     >
       <div className="position-relative w-100 h-100">
-        <div className="banner__info  position-absolute bg-primary-light-700 p-4 d-flex flex-column justify-content-center ">
-          <p className="body-1 text-muted text-weight-regular">Welcome ~</p>
-          <h1
-            className="heading-2 text-primary-light  text-weight-bold"
-            style={{ maxWidth: "22ch" }}
-          >
+        <div
+          className="banner__info  position-absolute p-4 d-flex flex-column justify-content-center "
+          style={styles.parent}
+        >
+          <Text>Welcome ~</Text>
+          <Title className="my-2" level={3}>
+            {" "}
             {title}
-          </h1>
-          <Link to={btn.text}>
-            <button className="btn bg-primary text-white mt-3 w-50 body-2">
-              {btn.text}
-            </button>
-          </Link>
+          </Title>
+
+          <ButtonField
+            onClick={() => {
+              navigate(btn.link);
+            }}
+            icon={<MdTouchApp className="me-2"  size={20}/>}
+            classnames={"my-2 ms-0"}
+            circle
+            type="success"
+            size="large"
+          >
+            {btn.text}
+          </ButtonField>
         </div>
       </div>
     </section>
@@ -42,3 +57,11 @@ const HomeBanner = ({
 };
 
 export default HomeBanner;
+
+const styles = {
+  parent: {
+    borderRadius: "7px",
+    border: "1px solid #d8dee4",
+    background: "#f6f8fa8a",
+  },
+};

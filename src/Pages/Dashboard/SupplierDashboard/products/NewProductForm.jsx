@@ -27,10 +27,13 @@ const props = {
 };
 
 function NewProductForm() {
+  const handleSubmit = (productData)=>{
+    console.log(productData)
+  }
   return (
-    <Form layout="vertical" className="row  p-3 my-2" style={styles.parent}>
-      <Row justify="center">
-        <Col xs={24} md={4} className="my-2">
+    <Form layout="vertical" className="row  p-3 my-2" style={styles.parent} onFinish={handleSubmit}>
+      <Row justify="space-around">
+        <Col className="my-2">
           <img src="" alt="" width={"150px"} height="150px" />
           <Upload
             {...props}
@@ -49,7 +52,11 @@ function NewProductForm() {
           </Upload>
         </Col>
         <Col xs={24} className="ms-2" md={18}>
-          <PageHeader level={4} heading="Fill the Required Product Fields" subtitle="make sure to add category ,this will help your product come in top" />
+          <PageHeader
+            level={4}
+            heading="Fill the Required Product Fields"
+            subtitle="make sure to add category ,this will help your product come in top"
+          />
           <Row justify="space-between">
             {newProductFields.map(
               ({ inputField: InputField, ...rest }, index) => (
@@ -151,6 +158,7 @@ const newProductFields = [
     label: "Category",
     placeHolder: "choose product category",
     required: true,
+    name:"category"
   },
 ];
 

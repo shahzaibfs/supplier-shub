@@ -1,32 +1,34 @@
-import { Card, Col, Row, Grid } from "antd";
+import { Grid, Row, Typography } from "antd";
 import React from "react";
+const {useBreakpoint} =Grid
+const { Text } = Typography;
 
-const { Meta } = Card;
-const { useBreakpoint } = Grid;
+function CategoryCards({ mt = 0, mb = 0, negative }) {
+  const {xl} = useBreakpoint();
 
-function CategoryCards() {
-  const { md } = useBreakpoint();
   return (
     <Row
-      className="my-2  py-2 negative-marginTop-50"
-      justify={md ? "space-between" : "start"}
-    >
-      {[...Array(8)].map((_, idx) => (
-        <Col className="my-2" xs={!md && 24} key={idx}>
-          <Card
+      className={`mb-${mb}  mt-${mt}  ${negative && "negative-marginTop-50"} `}
+      justify="space-between"
+      wrap={xl}
+      style={{ maxWidth: "100%" ,overflowX:!xl ?"auto" : "hidden" }}
+    > 
+      {[...Array(16)].map((_, idx) => (
+        <div key={idx}>
+          <div
             hoverable
-            style={{ width: md ? 300 : "100%", display: !md && "flex" }}
-            cover={
-              <img
-                alt="example"
-                src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-                style={{ width: !md && 150 }}
-              />
-            }
+            className="d-flex justify-content-center align-items-center flex-column ant-card-bordered bg-white ant-card-hoverable"
+            style={{ width: 150, height: 150 }}
           >
-            <Meta title="Categrory Name" description="maybe Action" />
-          </Card>
-        </Col>
+            <img
+              style={{ width: 80 }}
+              height={80}
+              alt="example"
+              src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+            />
+            <Text className="mt-1">some text </Text>
+          </div>
+        </div>
       ))}
     </Row>
   );

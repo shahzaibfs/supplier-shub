@@ -39,7 +39,8 @@ const LoginForm = () => {
       label: "Password",
       placeHolder: "your Password",
       name: "password",
-required:true    },
+      required: true,
+    },
   ];
 
   const styles = {
@@ -105,11 +106,10 @@ required:true    },
               <ButtonField
                 icon={<SiGmail className="me-2" />}
                 type="danger"
-                htmlType="submit"
+                htmlType="button"
                 size="large"
                 width="100"
                 circle
-                loading={isLoader}
               >
                 Login with Gmail
               </ButtonField>

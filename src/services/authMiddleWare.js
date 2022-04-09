@@ -42,7 +42,7 @@ export const doAuthentication = (loginDetails, setisLoader) => {
             10000
           );
         } else {
-          message.error("This is an error message");
+          message.error(error.response.data.error);
         }
       });
   };

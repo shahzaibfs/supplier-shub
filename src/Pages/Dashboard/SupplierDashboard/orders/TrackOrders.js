@@ -25,7 +25,7 @@ const buttonInfo = {
 
 const formFields = [
   {
-    inputField: TextField,
+    inputType: TextField,
     label: "Id or category",
     name: "productName",
     placeholder: "search any Order"

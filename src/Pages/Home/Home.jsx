@@ -8,7 +8,7 @@ import Slider from "../../Components/slider/Slider";
 import productCategoryMockData from "../../services/productCategoryMockData.json";
 import CategoryCards from "./CategoryCards";
 import CompanyCard from "./CompanyCard";
-import PageHeader from "../../Components/PageHeader/PageHeader"
+import PageHeader from "../../Components/PageHeader/PageHeader";
 
 function Home() {
   const user = useGetAuthenticatedUser();
@@ -27,16 +27,14 @@ function Home() {
         />
         <Slider key={1}>
           {productCategoryMockData.map((category) => (
-           
-              <CompanyCard
-                companyLogo={category.coverPhoto}
-                photo={
-                  "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-                }
-                title={category.categoryName}
-                subtitle="something good"
-              />
-           
+            <CompanyCard
+              companyLogo={category.coverPhoto}
+              photo={
+                "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+              }
+              title={category.categoryName}
+              subtitle="something good"
+            />
           ))}
         </Slider>
       </>

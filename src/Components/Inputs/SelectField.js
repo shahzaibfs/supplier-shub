@@ -9,11 +9,12 @@ function SelectField({
   width,
   name,
   size,
-  dataIndex,
-  valueIndex,
+  dataIndex ="name",
+  valueIndex ="value",
   required,
   placeHolder,
   noMargin=false,
+  classname
 }) {
   return (
     <Form.Item
@@ -22,14 +23,14 @@ function SelectField({
       rules={[
         {
           required: required,
-          message: "Please input your message",
-        },
+          message: "Please provide the above details",
+        }
       ]}
-      className={`m-${noMargin ? "0" : "2"}`}
+      className={`m-${noMargin ? "0" : "2"} ${classname}`}
       style={{ width: width ?? "" }}
   
     >
-      <Select size={size ?? "small"}  placeholder={placeHolder}>
+      <Select  size={size ?? "small"}  placeholder={placeHolder}>
         {options.map((option, idx) => (
           <Option key={idx} value={option[valueIndex]}>
            {option[dataIndex]}

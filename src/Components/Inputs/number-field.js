@@ -12,6 +12,7 @@ function InputNumberField({
   defaultValue,
   status,
   classname = "",
+  controls=false
 }) {
   return (
     <Form.Item
@@ -22,6 +23,7 @@ function InputNumberField({
       style={{ width: width }}
     >
       <InputNumber
+      controls={controls}
         status={status ?? ""}
         placeholder={placeHolder}
         size={size}

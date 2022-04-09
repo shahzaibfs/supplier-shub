@@ -9,7 +9,8 @@ function TextAreaField({
   name,
   size,
   required,
- placeHolder
+ placeHolder,
+ classname
 }) {
   return (
     <Form.Item
@@ -22,7 +23,7 @@ function TextAreaField({
           message: "Please input your message",
         },
       ]}
-      className="m-2"
+      className={`m-2 ${classname}`}
       style={{ width: width }}
     >
       <Input.TextArea placeholder={placeHolder} size={size} showCount maxLength={100} />

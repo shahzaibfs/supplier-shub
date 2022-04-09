@@ -28,7 +28,7 @@ const buttonInfo = {
 
 const formFields = [
   {
-    inputField: TextField,
+    inputType: TextField,
     label: "Name or Category",
     name: "productName",
     placeholder: "search in OutofStock table"

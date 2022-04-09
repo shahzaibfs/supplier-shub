@@ -1,14 +1,11 @@
-import { Button, message, Upload } from "antd";
+import { Button, Col, Form, message, Row, Upload } from "antd";
 import React from "react";
-import {
-
-  AiFillFolderAdd,
-
-  AiOutlineUpload,
-} from "react-icons/ai";
+import { AiFillFolderAdd, AiOutlineUpload } from "react-icons/ai";
 import TextField from "../../../../Components/Inputs/TextField";
 import TextAreaField from "../../../../Components/Inputs/TextAreaField";
 import SelectField from "../../../../Components/Inputs/SelectField";
+import InputNumberField from "../../../../Components/Inputs/number-field";
+import PageHeader from "../../../../Components/PageHeader/PageHeader";
 
 const props = {
   name: "file",
@@ -31,49 +28,55 @@ const props = {
 
 function NewProductForm() {
   return (
-    <form className="row  p-2" style={{ minHeight: "100%" }}>
-      <section className="image-section  col-12 col-lg-3  d-flex flex-column align-items-center border-right-primary-light">
-        <div className=" p-2" style={{ width: "200px" }}>
-          <img src="" alt="" width={"100%"} height="200px" />
+    <Form layout="vertical" className="row  p-3 my-2" style={styles.parent}>
+      <Row justify="center">
+        <Col xs={24} md={4} className="my-2">
+          <img src="" alt="" width={"150px"} height="150px" />
           <Upload
             {...props}
             className="d-flex flex-column"
-            style={{ width: "100%" }}
+            style={{ width: "150px" }}
           >
             <Button
               className="d-flex align-items-center justify-content-center mt-2"
               icon={<AiOutlineUpload className="me-2" />}
               size="large"
               type="primary"
-              style={{ width: "100%" }}
+              style={{ width: "150px" }}
             >
               Upload Picture
             </Button>{" "}
           </Upload>
-        </div>
-      </section>
+        </Col>
+        <Col xs={24} className="ms-2" md={18}>
+          <PageHeader level={4} heading="Fill the Required Product Fields" subtitle="make sure to add category ,this will help your product come in top" />
+          <Row justify="space-between">
+            {newProductFields.map(
+              ({ inputField: InputField, ...rest }, index) => (
+                <Col xs={24} md={11} key={index}>
+                  <InputField
+                    classname={"mx-0"}
+                    size={"large"}
+                    {...rest}
+                    width={"100%"}
+                  />
+                </Col>
+              )
+            )}
 
-      <section className="p-2 col-lg-9 row flex-wrap align-content-start ">
-        <h1 className="heading-3 col-12 text-primary-light-800 w-100">
-          Fill All the product Details{" "}
-        </h1>
-        {newProductFields.map(({ inputField: InputField, ...rest }, index) => (
-          <div className="col-12  col-lg-6" key={index}>
-            <InputField {...rest} width={"100%"} />
-          </div>
-        ))}
-        <div className="m-2 col-12 ">
-          <Button
-            className="d-flex  align-items-center justify-content-center "
-            icon={<AiFillFolderAdd className="me-2" />}
-            size="large"
-            type="primary"
-          >
-            Add Product
-          </Button>{" "}
-        </div>
-      </section>
-    </form>
+            <Button
+              className="d-flex mt-2 align-items-center justify-content-center "
+              icon={<AiFillFolderAdd className="me-2" />}
+              size="large"
+              type="primary"
+              htmlType="submit"
+            >
+              Add Product
+            </Button>
+          </Row>
+        </Col>
+      </Row>
+    </Form>
   );
 }
 
@@ -86,13 +89,18 @@ const newProductFields = [
     type: "text",
     placeHolder: "your product name",
     name: "productName",
+    rules: [{ required: true, message: "Product name must not be empty " }],
   },
   {
-    inputField: TextField,
+    inputField: InputNumberField,
     label: "Price",
     type: "number",
     placeHolder: "45.00",
     name: "productPrice",
+    rules: [
+      { type: "number", message: "must be number" },
+      { required: true, message: "Product Weight must be filled " },
+    ],
   },
   {
     inputField: TextAreaField,
@@ -100,6 +108,7 @@ const newProductFields = [
     type: "text",
     placeHolder: "your Product Description",
     name: "productDescription",
+    required: true,
   },
   {
     inputField: TextAreaField,
@@ -114,20 +123,24 @@ const newProductFields = [
     type: "text",
     placeHolder: "i.e : cootton, kg ,liters",
     name: "productWeight",
+    rules: [{ required: true, message: "Product Weight must be filled " }],
   },
   {
-    inputField: TextField,
+    inputField: InputNumberField,
     label: "Prduct size",
     type: "number",
     placeHolder: "your product size",
     name: "productSize",
+    rules: [{ required: true, message: "Product size must be filled " }],
   },
   {
-    inputField: TextField,
+    inputField: InputNumberField,
     label: "Minimum Order",
-    type: "number",
     placeHolder: "Minimum Order",
     name: "productMinOrder",
+    rules: [
+      { required: true, message: "Product Minimum order must be filled " },
+    ],
   },
   {
     inputField: SelectField,
@@ -136,5 +149,15 @@ const newProductFields = [
       { name: "somthing2", value: "something2" },
     ],
     label: "Category",
+    placeHolder: "choose product category",
+    required: true,
   },
 ];
+
+const styles = {
+  parent: {
+    borderRadius: "7px",
+    border: "1px solid #d8dee4",
+    background: "#f6f8fa",
+  },
+};

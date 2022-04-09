@@ -3,6 +3,7 @@ import {
   setSupplierAddresses,
   updateSupplierAddress,
 } from "../../redux/actions/supplier-actions";
+import { message } from "antd";
 
 const options = (token) => ({
   headers: {
@@ -26,6 +27,12 @@ const editOrSaveSupplierAddressApi = (supplierAddress, token) =>
     options(token)
   );
 
+const deleteSupplierAddressApi = (supplierAddressId, token) =>
+  axios.delete(
+    `http://localhost:8081/api/v1.0/supplier/brand-address/${supplierAddressId}`,
+    options(token)
+  );
+
 export const doGetSupplierAddressesFromDatabase = (token) => (dispatch) => {
   getSupplierAddressApi(token)
     .then((response) => {
@@ -43,10 +50,12 @@ export const doEditOrSaveSupplierAddresses =
     editOrSaveSupplierAddressApi(supplierAddress, token)
       .then((response) => {
         let supplierAddresses = state((store) => store);
+
         if (supplierAddress.id <= 0) {
           let newSupplierAddresses = supplierAddresses.supplierAddressesReducer;
-          newSupplierAddresses.splice(1, 0,{...response.data});
+          newSupplierAddresses.splice(1, 0, { ...response.data });
           dispatch(updateSupplierAddress(newSupplierAddresses));
+          message.success("successfuly Added the address ");
         } else {
           let newSupplierAddresses =
             supplierAddresses.supplierAddressesReducer.map((address) => {
@@ -57,14 +66,35 @@ export const doEditOrSaveSupplierAddresses =
               return address;
             });
           dispatch(updateSupplierAddress(newSupplierAddresses));
+          message.success("successfuly Updated the address ");
         }
-
-        setTimeout(() => {
-          setisLoader(false);
-        }, 1000);
+        setisLoader(false);
       })
       .catch((error) => {
         console.log(error);
+        message.error(error.response.data.error);
+
+        setisLoader(false);
+      });
+  };
+
+export const doDeleteSupplierAddressFromDatabase =
+  (supplierAddress, token, { setisLoader }) =>
+  async (dispatch, getState) => {
+    deleteSupplierAddressApi(supplierAddress.No, token)
+      .then((response) => {
+        console.log(response);
+        const {supplierAddressesReducer} = getState()
+        let newState= [...supplierAddressesReducer]
+        newState.splice(supplierAddress.key,1) 
+    
+        dispatch(updateSupplierAddress(newState))
+        message.success("deleted successfully");
+        setisLoader(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        message.error("error happend please wait a while and try again ");
         setisLoader(false);
       });
   };

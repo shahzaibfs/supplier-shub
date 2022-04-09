@@ -50,18 +50,20 @@ function SupplierAddresses() {
     });
     modalForm.setFieldsValue(addressData);
     setIsModalVisible(true);
+    setisLoader(true);
   };
 
   const handleOk = () => {
-    setisLoader(true)
+    setisLoader(true);
     modalForm
       .validateFields()
       .then((values) => {
         modalForm.resetFields();
         const reqData = { ...currModalData, ...values };
-        setIsModalVisible(false)
-        dispatch(doEditOrSaveSupplierAddresses(reqData,user.token,{setisLoader}))
-
+        setIsModalVisible(false);
+        dispatch(
+          doEditOrSaveSupplierAddresses(reqData, user.token, { setisLoader })
+        );
       })
       .catch((info) => {
         console.log("Validate Failed:", info);
@@ -71,6 +73,7 @@ function SupplierAddresses() {
 
   const handleCancel = () => {
     setIsModalVisible(false);
+    setisLoader(false);
   };
 
   //TODO : search field ftns
@@ -121,7 +124,7 @@ function SupplierAddresses() {
         >
           Add Address
         </Button>
-        <SupplierAddressTable isLoader={isLoader} showModal={showModal} />{" "}
+        <SupplierAddressTable setisLoader={setisLoader} isLoader={isLoader} showModal={showModal} />{" "}
       </div>
 
       <Modal
@@ -142,13 +145,8 @@ function SupplierAddresses() {
         }}
       >
         <Form form={modalForm} layout="vertical">
-          {newAddressModalData.map(({inputField:INPUT,...rest}, index) => (
-            <INPUT
-              key={index}
-           {...rest}
-              size="large"
-             width={"100%"}
-            />
+          {newAddressModalData.map(({ inputField: INPUT, ...rest }, index) => (
+            <INPUT key={index} {...rest} size="large" width={"100%"} />
           ))}
         </Form>
       </Modal>
@@ -164,9 +162,7 @@ const newAddressModalData = [
     label: "City",
     placeHolder: "City",
     name: "city",
-    rules:[
-      {required:true,message:"cannot be null"}
-    ]
+    rules: [{ required: true, message: "cannot be null" }],
   },
   {
     inputField: TextAreaField,
@@ -174,16 +170,16 @@ const newAddressModalData = [
     label: "Address",
     placeHolder: "Address",
     name: "address",
-    required:true
+    required: true,
   },
   {
     inputField: InputNumberField,
     label: "Postal Code",
     placeHolder: "46000",
     name: "postalCode",
-    rules:[
-      {type:"number",message:"should be a number"},
-      {required:true,message:"cannot be null"}
-    ]
+    rules: [
+      { type: "number", message: "should be a number" },
+      { required: true, message: "cannot be null" },
+    ],
   },
 ];

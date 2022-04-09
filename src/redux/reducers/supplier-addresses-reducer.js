@@ -8,7 +8,6 @@ export const supplierAddressesReducer = (state = initState, action) => {
       console.log(action.payload);
       return [...action.payload];
     case constants["UPDATE-supplier-address-data"]:
- 
       return [...action.payload];
 
     default:

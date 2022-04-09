@@ -8,22 +8,22 @@ import {
 } from "react-icons/ai";
 import Loader from "../../../../Components/Loader/Loader";
 import { useDispatch } from "react-redux";
-import { doGetSupplierAddressesFromDatabase } from "../../../../services/supplier-services/supplier-setting-address-service";
+import { doDeleteSupplierAddressFromDatabase, doGetSupplierAddressesFromDatabase } from "../../../../services/supplier-services/supplier-setting-address-service";
 import { useGetAuthenticatedUser } from "../../../../hooks/useGetAuthenticatedUser";
 import { useGetSupplierAddresses } from "../../../../hooks/useGetSupplierAddresses";
 
 const { Text } = Typography;
 
-function SupplierAddressTable({ showModal,isLoader }) {
+function SupplierAddressTable({ showModal, isLoader ,setisLoader}) {
   const user = useGetAuthenticatedUser();
   const dispatch = useDispatch();
   const supplierAddresses = useGetSupplierAddresses();
-  console.log("supplier addressesupdate : ", supplierAddresses)
+  console.log("supplier addressesupdate : ", supplierAddresses);
   useEffect(() => {
     if (supplierAddresses.length <= 0) {
       dispatch(doGetSupplierAddressesFromDatabase(user.token));
     }
-     // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [supplierAddresses]);
 
   const data = [
@@ -38,8 +38,11 @@ function SupplierAddressTable({ showModal,isLoader }) {
     })),
   ];
 
-  const cancel = () => {
+  const handleDelete = (data) => {
     console.log("hurrah i am deleted ");
+    console.log(data)
+    setisLoader(true)
+    dispatch(doDeleteSupplierAddressFromDatabase(data,user.token,{setisLoader}))
   };
 
   // Todo : table columns
@@ -56,7 +59,11 @@ function SupplierAddressTable({ showModal,isLoader }) {
         return (
           <div>
             <Text>{text}</Text>
-          {data.main &&   <Text type="danger" className="ms-2">(Main)</Text>  }
+            {data.main && (
+              <Text type="danger" className="ms-2">
+                (Main)
+              </Text>
+            )}
           </div>
         );
       },
@@ -91,10 +98,10 @@ function SupplierAddressTable({ showModal,isLoader }) {
           <Popconfirm
             icon={<AiOutlineQuestionCircle color="red" />}
             title="Sure to Delete?"
-            onConfirm={cancel}
+            onConfirm={()=>handleDelete(data)}
           >
             <Button
-            disabled={data.main && true}
+              disabled={data.main && true}
               className="bg-danger text-white ms-1"
               icon={<AiFillDelete />}
             ></Button>

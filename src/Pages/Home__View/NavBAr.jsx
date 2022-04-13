@@ -1,18 +1,28 @@
 import { Col, Layout, Row } from "antd";
 import React from "react";
 import { AiFillCaretRight, AiFillCaretDown } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const NavBAr = () => {
   // const getClearLink = (name) => {
   //   return name.split(" ").join("-");
   // };
+  const navigate = useNavigate();
 
   return (
     <Layout className="bg-primary-light" style={{ height: 45 }}>
       <Row className="container-xxl mx-auto h-100 text-white" align="middle">
         {navbarData.map((eachcateg) => (
-          <Col key={eachcateg.id} className="position-relative navbar__Link__main h-100  me-3">
-            <li className="list-unstyled ">
+          <Col
+            key={eachcateg.id}
+            className="position-relative navbar__Link__main h-100  me-3"
+          >
+            <li
+              className="list-unstyled "
+              onClick={() =>
+                !eachcateg.children && navigate("/products/"+eachcateg.name)
+              }
+            >
               {eachcateg.name} {eachcateg.children && <AiFillCaretDown />}
             </li>
             {eachcateg.children !== null && (
@@ -28,6 +38,7 @@ const NavBAr = () => {
 export default NavBAr;
 
 const PrintCategChildren = ({ categ }) => {
+  const navigate = useNavigate();
   return (
     <div
       className="position-absolute bg-white text-primary navbar__Link__child_parent"
@@ -40,7 +51,12 @@ const PrintCategChildren = ({ categ }) => {
       }}
     >
       {categ.map((eachCategory) => (
-        <div key={eachCategory.id} className="list-unstyled p-2 px-3 navbar__Link__child_parent_links">
+        <div
+          key={eachCategory.id}
+          className="list-unstyled p-2 px-3 navbar__Link__child_parent_links"
+          onClick={() =>
+            !eachCategory.children && navigate("/products/"+eachCategory.name)}
+        >
           {eachCategory.name}
           {eachCategory.children && <AiFillCaretRight className="ms-2" />}
           {eachCategory.children && (
@@ -53,7 +69,7 @@ const PrintCategChildren = ({ categ }) => {
 };
 
 const ChildNode = ({ subCateg }) => {
- 
+  const navigate = useNavigate();
   return (
     <div
       className="position-absolute h-100  bg-white navbar__Link__child_children"
@@ -66,15 +82,18 @@ const ChildNode = ({ subCateg }) => {
       }}
     >
       {subCateg.map((eachSubCateg) => (
-        
-          <div key={eachSubCateg.id} className="navbar__Link__child_children_links m-0 p-2 px-3">
-            {eachSubCateg.name}{" "}
-            {eachSubCateg.children && <AiFillCaretRight className="ms-2" />}
-            {eachSubCateg.children && (
-              <ChildNode subCateg={eachSubCateg.children} />
-            )}
-          </div>
-        
+        <div
+          key={eachSubCateg.id}
+          className="navbar__Link__child_children_links m-0 p-2 px-3"
+          onClick={() =>
+            !eachSubCateg.children && navigate("/products/"+eachSubCateg.name)}
+        >
+          {eachSubCateg.name}{" "}
+          {eachSubCateg.children && <AiFillCaretRight className="ms-2" />}
+          {eachSubCateg.children && (
+            <ChildNode subCateg={eachSubCateg.children} />
+          )}
+        </div>
       ))}
     </div>
   );

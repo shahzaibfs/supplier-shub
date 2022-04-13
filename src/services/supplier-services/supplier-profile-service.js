@@ -1,5 +1,6 @@
 import { message } from "antd";
 import axios from "axios";
+import { updateSupplierProfile } from "../../redux/actions/supplier-actions";
 
 const options = (token) => ({
   headers: {
@@ -10,7 +11,7 @@ const options = (token) => ({
   },
 });
 
-export const getSupplierProfileData = (token) =>
+ const getSupplierProfileData = (token) =>
   axios.get("http://localhost:8081/api/v1.0/supplier", options(token));
 
 const supplierEditApi = (supplierProfileDetails, token) =>
@@ -23,15 +24,26 @@ const supplierEditApi = (supplierProfileDetails, token) =>
 export const doEditSupplierDetails =
   (supplierProfileDetails, token, { setrefreshData }) =>
   (dispatch) => {
-    
     supplierEditApi(supplierProfileDetails, token)
       .then((response) => {
         console.log(response);
-        message.success("the record has been updated")
+        message.success("the record has been updated");
         setrefreshData((old) => !old);
       })
       .catch((error) => {
-        message.error("Some Error Happedn on Backend ")
+        message.error("Some Error Happedn on Backend ");
         console.log(error);
       });
   };
+
+export const doGetSupplierProfileData = (token) => (dispatch) => {
+  getSupplierProfileData(token)
+      .then((response) => {
+        console.log(response)
+        dispatch(updateSupplierProfile(response.data))
+        
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+};

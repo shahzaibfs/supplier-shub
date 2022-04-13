@@ -8,9 +8,9 @@ import TextField from "../../../../Components/Inputs/TextField";
 import PhoneField from "../../../../Components/Inputs/phone-field";
 import SelectField from "../../../../Components/Inputs/SelectField";
 import { useDispatch } from "react-redux";
-import { doEditSupplierDetails } from "../../../../services/supplier-services/supplier-profile-service";
+import { doEditSupplierDetails, doGetSupplierProfileData } from "../../../../services/supplier-services/supplier-profile-service";
 import { useGetAuthenticatedUser } from "../../../../hooks/useGetAuthenticatedUser";
-import { useGetSupplierData } from "../../../../hooks/useGetSupplierProfileData";
+import { useGetSupplierProfileData } from "../../../../hooks/useGetSupplierProfileData";
 import ButtonField from "../../../../Components/Inputs/button-field";
 
 const styles = {
@@ -24,7 +24,7 @@ const styles = {
 function SupplierDetails() {
   const [refreshData, setrefreshData] = useState(false);
   const user = useGetAuthenticatedUser();
-  const supplierProfileData = useGetSupplierData(user.token, refreshData);
+  const supplierProfileData = useGetSupplierProfileData();
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
@@ -32,6 +32,7 @@ function SupplierDetails() {
 
   useEffect(() => {
     if (Object.keys(supplierProfileData).length !== 0) {
+
       form.setFieldsValue({
         firstName: supplierProfileData.supplierFirstname,
         lastName: supplierProfileData.supplierLastname,
@@ -47,9 +48,12 @@ function SupplierDetails() {
         instagramUrl: supplierProfileData.instagram.instagram_url,
         facebookUrl: supplierProfileData.facebook.facebookUrl,
       });
+    }else{
+      dispatch(doGetSupplierProfileData(user.token))
     }
+   
     // eslint-disable-next-line
-  }, [supplierProfileData, refreshData]);
+  }, [supplierProfileData, refreshData,dispatch]);
 
   const handleSubmit = (data) => {
     const reqData = {

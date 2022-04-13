@@ -9,3 +9,8 @@ export const updateSupplierAddress = (payload)=>({
     type: constants["UPDATE-supplier-address-data"],
     payload
 })
+
+export const updateSupplierProfile = (payload)=>({
+    type: constants["UPDATE-supplier-profile-data"],
+    payload
+})

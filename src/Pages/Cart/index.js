@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import ProccedToCheckout from "./ProccedToCheckout";
 import ShoppingCartTable from "./ShoppingCartTable";
 import { useSelector } from "react-redux";
+import PageHeader from "../../Components/PageHeader/PageHeader"
 
 function Cart() {
   const [getProductsDetails, setgetProductsDetails] = useState(null);
@@ -17,9 +18,7 @@ function Cart() {
 
   return (
     <>
-      <h1 className="heading-2 text-primary-light-700 text-weight-regular my-2 py-3">
-        Shopping Cart
-      </h1>
+     <PageHeader heading="Shopping Cart" classname={"my-3"} /> 
       {/* for two sec  */}
       <main className="row mx-0 ">
         <ShoppingCartTable

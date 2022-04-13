@@ -4,6 +4,7 @@ import { AiOutlineRight } from "react-icons/ai";
 import CategorySideBar from "./CategorySideBar";
 import CategoryMain from "./CategoryMain";
 import { useSelector } from "react-redux";
+import PageHeader from "../../Components/PageHeader/PageHeader";
 
 function Catalog() {
   const { productCategory } = useParams();
@@ -27,9 +28,7 @@ function Catalog() {
       </p>
 
       {/* then page header  */}
-      <h1 className="text-weight-regular text-primary-light-700 heading-2 py-2">
-        {productCategory}
-      </h1>
+      <PageHeader classname={"my-3"} heading={productCategory} />
       <main className="my-3 row mx-0 min-vh-100">
         {/* side bar   */}
         <CategorySideBar />

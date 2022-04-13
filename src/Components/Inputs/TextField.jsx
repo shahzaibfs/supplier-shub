@@ -2,8 +2,8 @@ import React from "react";
 import { Form, Input } from "antd";
 
 function TextField({
-  addOnBefore,
-  width,
+  addOnBefore=null,
+  width=0||"",
   placeHolder,
   label,
   name,

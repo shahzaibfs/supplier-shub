@@ -80,13 +80,13 @@ const HomeHotSellers = () => {
 
 export default HomeHotSellers;
 
-export const SectionHeader = ({ title = "", subtitle = "" }) => {
+export const SectionHeader = ({ title = "",level=2 , subtitle = "" ,justify="center", classnames=""}) => {
   return (
     <header
       style={styles.parent}
-      className="d-flex flex-column  justify-content-center align-items-center py-3 my-3"
+      className={`d-flex flex-column py-3 my-3  justify-content-${justify} align-items-center  ${classnames}`}
     >
-      <Title level={2} className="mb-1">
+      <Title level={level} className="mb-1">
         {title}
       </Title>
       <Text>{subtitle}</Text>

@@ -1,11 +1,14 @@
 import { Button, Col, Form, message, Row, Upload } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import { AiFillFolderAdd, AiOutlineUpload } from "react-icons/ai";
 import TextField from "../../../../Components/Inputs/TextField";
 import TextAreaField from "../../../../Components/Inputs/TextAreaField";
-import SelectField from "../../../../Components/Inputs/SelectField";
 import InputNumberField from "../../../../Components/Inputs/number-field";
 import PageHeader from "../../../../Components/PageHeader/PageHeader";
+import { useDispatch } from "react-redux";
+import doGetCategoriesFromDatabase from "../../../../services/category-service"
+import {useGetCategories} from "../../../../hooks/useGetCategories"
+import TreeSelectField from "../../../../Components/Inputs/TreeSelectField"
 
 const props = {
   name: "file",
@@ -27,6 +30,16 @@ const props = {
 };
 
 function NewProductForm() {
+const dispatch  = useDispatch();
+const categories = useGetCategories();
+console.log(categories)
+
+useEffect(() => {
+   dispatch(doGetCategoriesFromDatabase())
+}, [dispatch])
+
+
+
   const handleSubmit = (productData)=>{
     console.log(productData)
   }
@@ -89,6 +102,13 @@ function NewProductForm() {
 
 export default NewProductForm;
 
+  
+  
+  
+
+
+
+  
 const newProductFields = [
   {
     inputField: TextField,
@@ -150,15 +170,10 @@ const newProductFields = [
     ],
   },
   {
-    inputField: SelectField,
-    options: [
-      { name: "somthing1", value: "something1" },
-      { name: "somthing2", value: "something2" },
-    ],
-    label: "Category",
-    placeHolder: "choose product category",
-    required: true,
-    name:"category"
+    inputField: TreeSelectField,
+    name:"category",
+    label:"Categories"
+    
   },
 ];
 
@@ -169,3 +184,9 @@ const styles = {
     background: "#f6f8fa",
   },
 };
+
+
+
+
+
+

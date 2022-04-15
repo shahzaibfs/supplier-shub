@@ -1,16 +1,19 @@
 import React from "react";
-import { Avatar, Badge, Col, Layout, Row, Grid, Menu ,Typography} from "antd";
+import { Avatar, Badge, Col, Row, Grid, Menu ,Typography} from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { HiLocationMarker } from "react-icons/hi";
+import { Header } from "antd/lib/layout/layout";
 
-import StyledButton from "../../Components/Inputs/StyledButton";
-import SearchField from "../../Components/Inputs/search-filed";
 import { FaUserCircle } from "react-icons/fa";
 import { HiOutlineShoppingCart, HiOutlineMenuAlt1 } from "react-icons/hi";
 import { RiNotification4Fill ,RiLogoutBoxRFill,RiSettings5Fill,RiDashboardFill} from "react-icons/ri";
 import { useGetAuthenticatedUser } from "../../hooks/useGetAuthenticatedUser";
 import { Link, useNavigate } from "react-router-dom";
 import {logoutAction} from '../../redux/actions/logoutAction'
+
+
+import StyledButton from "../../Components/Inputs/StyledButton";
+import SearchField from "../../Components/Inputs/search-filed";
 
 const {Text} = Typography
 
@@ -23,9 +26,9 @@ const MainHeader = () => {
   const dispatch = useDispatch();
 
   return (
-    <Layout
-      className="bg-primary"
+    <Header
       style={{ height: "max-content", padding: 0 }}
+      
     >
       <Row
         className="container-xxl mx-auto"
@@ -61,7 +64,7 @@ const MainHeader = () => {
         </Col>
         <Col
           xs={24}
-          className={`mb-${!md && "3"}`}
+          className={`mb-${!md && "3"} d-flex`}
           sm={12}
           md={12}
           lg={6}
@@ -124,7 +127,7 @@ const MainHeader = () => {
           }
         </Col>
       </Row>
-    </Layout>
+    </Header>
   );
 };
 

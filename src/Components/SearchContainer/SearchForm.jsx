@@ -32,7 +32,7 @@ function SearchForm({
         <ButtonField
           htmlType="submit"
           classnames={"ms-auto me-0"}
-          type={buttonInfo.type}
+          type={buttonInfo.type ?? "success"}
           size={buttonInfo.size}
           icon={<AiOutlineSearch className="me-2" />}
           onClick={buttonInfo.onHandleClick}

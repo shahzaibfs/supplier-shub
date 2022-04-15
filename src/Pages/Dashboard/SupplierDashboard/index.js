@@ -37,12 +37,12 @@ const SupplierDashboard = () => {
       }}
     >
       <Layout style={{ backgroundColor: "transparent" }}>
-        <Sider theme="dark" width={200} className="">
+        <Sider  width={200} className="" style={{borderRadius:10 }} >
           <Menu
             mode="inline"
             defaultSelectedKeys={["1"]}
             defaultOpenKeys={["sub1"]}
-            style={{ height: "100%", borderRight: 0 }}
+            style={{ height: "100%", borderRight: 0 , borderRadius:10}}
           >
             <SubMenu key="sub1" icon={<UserOutlined />} title="Settings">
               <Menu.Item key="1">

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { message } from "antd";
 
 const options = (token) => ({
   headers: {
@@ -10,9 +9,28 @@ const options = (token) => ({
   },
 });
 
-const supplierEditApi = (supplierProfileDetails, token) =>
+const supplierProductSaveOrEditApi = (productDetails, token) =>
   axios.post(
-    "http://localhost:8081/api/v1.0/supplier/edit",
-    supplierProfileDetails,
+    "http://localhost:8081/api/v1.0/product-supplier/save-or-edit",
+    productDetails,
     options(token)
   );
+
+export const doSaveOrUpdateProduct =
+  (
+    productDetails = {},
+    token = "",
+    { setIsProductSaving },
+    navigate = null
+  ) =>
+  () => {
+    supplierProductSaveOrEditApi(productDetails, token)
+      .then((response) => {
+        setIsProductSaving("loaded")
+        console.log(response);
+      })
+      .catch((error) => {
+        setIsProductSaving("error")
+        console.log(error.response);
+      });
+  };

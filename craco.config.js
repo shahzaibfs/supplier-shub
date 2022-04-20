@@ -13,6 +13,8 @@ module.exports = {
               "@success-color": "#2da44e",
               "@error-color": "#d9534f",
 
+              "@label-required-color" :"@error-color",
+
               "@layout-header-background": "#131921",
 
               "@menu-bg": "@layout-header-background",

@@ -1,14 +1,16 @@
 import React from "react";
 import { Form, Input } from "antd";
 
+
+
 function TextAreaField({
-  width="",
-  label="",
-  name="",
-  size="",
+  width = "",
+  label = "",
+  name = "",
+  size = "",
   required,
-  placeHolder="",
-  classname="",
+  placeHolder = "",
+  classname = "",
 }) {
   return (
     <Form.Item
@@ -22,9 +24,11 @@ function TextAreaField({
       ]}
       className={`m-2 ${classname}`}
       style={{ width: width }}
+      initialValue=""
     >
       <Input.TextArea
         placeholder={placeHolder}
+        defaultValue={null}
         size={size}
         showCount
         maxLength={100}

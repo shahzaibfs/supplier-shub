@@ -1,4 +1,3 @@
-import { message } from "antd";
 import axios from "axios";
 import { updateCategoryDataOnRedux } from "../redux/actions/public-actions";
 
@@ -20,7 +19,6 @@ const doGetCategoriesFromDatabase = () => (dispatch) => {
   getCategoriesApi
     .then((response) => {
       console.log(response.data);
-      message.success("suucessfully get the Category data");
       dispatch(updateCategoryDataOnRedux(response.data));
     })
     .catch((error) => console.log(error.response));

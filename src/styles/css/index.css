@@ -239,3 +239,21 @@ position: relative;
         max-width: 100 !important ;
       }
 }
+
+
+
+.error__anim {
+ 
+  position: absolute;
+  animation: mymove 200ms alternate-reverse ;
+}
+
+
+@keyframes mymove {
+  0% {left: 0;}
+  25% {left: 10px;}
+  75% {left:-10px}
+  100% {left: 0;}
+
+  
+}

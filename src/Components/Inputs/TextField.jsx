@@ -22,10 +22,12 @@ function TextField({
       rules={rules}
       className={`m-2 ${classname} `}
       style={{ width: width }}
+      initialValue=""
     >
       <Input
       status={status ?? ""}
-        value={value}
+        
+       value={""}
         type={type}
         placeholder={placeHolder}
         size={size}

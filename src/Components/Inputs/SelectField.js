@@ -22,6 +22,7 @@ function SelectField({
     <Form.Item
       name={name}
       label={label}
+      key={defaultValue}
       rules={[
         {
           required: required,
@@ -30,6 +31,7 @@ function SelectField({
       ]}
       className={`m-${noMargin ? "0" : "2"} ${classname}`}
       style={{ width: width ?? "" }}
+      initialValue={""}
     >
       <Select
         disabled={disabled}

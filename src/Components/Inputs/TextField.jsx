@@ -2,18 +2,18 @@ import React from "react";
 import { Form, Input } from "antd";
 
 function TextField({
-  addOnBefore=null,
-  width=0||"",
+  addOnBefore = null,
+  width = 0 || "",
   placeHolder,
   label,
   name,
-  type="text",
+  type = "text",
   size,
   rules = [],
   value,
   defaultValue,
   status,
-  classname=""
+  classname = "",
 }) {
   return (
     <Form.Item
@@ -22,16 +22,14 @@ function TextField({
       rules={rules}
       className={`m-2 ${classname} `}
       style={{ width: width }}
-      initialValue=""
+      initialValue={defaultValue ?? ""}
     >
       <Input
-      status={status ?? ""}
-        
-       value={""}
+        status={status ?? ""}
+        value={""}
         type={type}
         placeholder={placeHolder}
         size={size}
-        defaultValue={defaultValue ?? ""}
         addonBefore={addOnBefore}
       />
     </Form.Item>

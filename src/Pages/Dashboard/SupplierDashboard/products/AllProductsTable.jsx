@@ -77,10 +77,14 @@ function AllProductsTable() {
   const cancel = () => {
     console.log("hurrah i am deleted ");
   };
-  const handleProductDelete =(productId) =>{
+  const handleProductDelete = (productId) => {
     setisFetching(true);
-    dispatch(doDeleteSupplierProductFromDatabase(productId,user.token,{setisFetching}))
-  }
+    dispatch(
+      doDeleteSupplierProductFromDatabase(productId, user.token, {
+        setisFetching,
+      })
+    );
+  };
   const columns = [
     {
       title: "Photo",
@@ -121,7 +125,7 @@ function AllProductsTable() {
     {
       title: "Category",
       dataIndex: "category",
-      key: "category",
+      key: "categorys",
       render: (category, data) => {
         return (
           <SelectField
@@ -132,6 +136,7 @@ function AllProductsTable() {
             dataIndex="categoryName"
             valueIndex="categoryId"
             data
+            name="category"
           />
         );
       },
@@ -172,7 +177,7 @@ function AllProductsTable() {
           <Popconfirm
             icon={<AiOutlineQuestionCircle color="red" />}
             title="Sure to Delete?"
-            onConfirm={()=>handleProductDelete(data.productId)}
+            onConfirm={() => handleProductDelete(data.productId)}
           >
             <Button
               className="bg-danger text-white"
@@ -240,11 +245,9 @@ const EditProductFormFields = ({
     dispatch(doGetCategoriesFromDatabase());
   }, [dispatch, categories]);
 
-  
-    setTimeout(() => {
-      setHandleOkFtn((old) => handleOk);
-    }, 200);
-  
+  setTimeout(() => {
+    setHandleOkFtn((old) => handleOk);
+  }, 200);
 
   const handleOk = React.useCallback(() => {
     if (productState !== "filled") {
@@ -273,7 +276,7 @@ const EditProductFormFields = ({
     productPicture,
     productState,
     setIsProductSaving,
-    dispatch
+    dispatch,
   ]);
 
   //Effect for setting up inital values
@@ -285,7 +288,7 @@ const EditProductFormFields = ({
     });
     setProductPicture(productData.productCoverUrl);
     setproductState("filled");
-  }, [productData,modalForm]);
+  }, [productData, modalForm]);
 
   // ** props for Upload Button
   const uploadProps = {

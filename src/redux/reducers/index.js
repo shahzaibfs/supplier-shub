@@ -7,6 +7,7 @@ import {checkoutReducer} from "./checkOutReducer"
 import { supplierAddressesReducer } from "./supplier-addresses-reducer"
 import { supplierProfileReducer } from "./supplier-profile-reducer"
 import { categoryReducer } from "./category-reducer"
+import {supplierProductReducer} from "./supplier-product-reducer"
 
 export default combineReducers(
     {
@@ -16,7 +17,8 @@ export default combineReducers(
         checkoutReducer,
         supplierAddressesReducer,
         supplierProfileReducer,
-        categoryReducer
+        categoryReducer,
+        supplierProductReducer
         
 
     }

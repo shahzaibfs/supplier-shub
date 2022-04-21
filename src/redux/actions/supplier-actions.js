@@ -14,3 +14,13 @@ export const updateSupplierProfile = (payload)=>({
     type: constants["UPDATE-supplier-profile-data"],
     payload
 })
+
+export const updateSupplierProducts = (payload)=>({
+    type: constants["UPDATE-supplier-products-data"],
+    payload
+})
+
+export const AddSupplierProductData = (payload)=>({
+    type: constants["ADD-supplier-product-data"],
+    payload
+})

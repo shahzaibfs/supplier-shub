@@ -26,20 +26,18 @@ export const doEditSupplierDetails =
   (dispatch) => {
     supplierEditApi(supplierProfileDetails, token)
       .then((response) => {
-        console.log(response);
         message.success("the record has been updated");
         setrefreshData((old) => !old);
       })
       .catch((error) => {
         message.error("Some Error Happedn on Backend ");
-        console.log(error);
+      
       });
   };
 
 export const doGetSupplierProfileData = (token) => (dispatch) => {
   getSupplierProfileData(token)
       .then((response) => {
-        console.log(response)
         dispatch(updateSupplierProfile(response.data))
         
       })

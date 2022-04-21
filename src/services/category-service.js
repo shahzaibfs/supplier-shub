@@ -18,7 +18,6 @@ const getCategoriesApi = axios.get(
 const doGetCategoriesFromDatabase = () => (dispatch) => {
   getCategoriesApi
     .then((response) => {
-      console.log(response.data);
       dispatch(updateCategoryDataOnRedux(response.data));
     })
     .catch((error) => console.log(error.response));

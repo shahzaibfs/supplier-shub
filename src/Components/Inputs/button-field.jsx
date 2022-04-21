@@ -4,7 +4,7 @@ import "./input.css";
 function ButtonField({
   icon = null,
   type = "primary",
-  htmlType = "",
+  htmlType = "empty",
   size = "middle",
   width = "50",
   circle = false,

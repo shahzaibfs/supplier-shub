@@ -35,7 +35,6 @@ export const doAuthentication = (loginDetails, setisLoader) => {
         setTimeout(() => {
           setisLoader(false);
         }, 1000);
-        console.log(error.response);
         if (error.response.status === 500) {
           message.error(
             "INTERNAL SERVER ERRROR => Please Try Again Later !",
@@ -85,7 +84,7 @@ export const doCheckAuthenticatedUserFromAPi=(token)=>(dispatch)=>{
   getAuthenticatedUserFromTokenAPi(token)
   .then(
     response=>{
-      console.log(response)
+      
       dispatch(loginAction({
         token,
         userDetails:{...response.data}

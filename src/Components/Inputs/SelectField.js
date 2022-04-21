@@ -5,16 +5,18 @@ const { Option } = Select;
 
 function SelectField({
   options = [],
-  label="",
+  label = "",
   width,
   name,
   size,
-  dataIndex ="name",
-  valueIndex ="value",
+  dataIndex = "name",
+  valueIndex = "value",
   required,
   placeHolder,
-  noMargin=false,
-  classname
+  noMargin = false,
+  classname,
+  defaultValue = "",
+  disabled = false,
 }) {
   return (
     <Form.Item
@@ -24,16 +26,20 @@ function SelectField({
         {
           required: required,
           message: "Please provide the above details",
-        }
+        },
       ]}
       className={`m-${noMargin ? "0" : "2"} ${classname}`}
       style={{ width: width ?? "" }}
-  
     >
-      <Select  size={size ?? "small"}  placeholder={placeHolder}>
+      <Select
+        disabled={disabled}
+        size={size ?? "small"}
+        defaultValue={defaultValue}
+        placeholder={placeHolder}
+      >
         {options.map((option, idx) => (
           <Option key={idx} value={option[valueIndex]}>
-           {option[dataIndex]}
+            {option[dataIndex]}
           </Option>
         ))}
       </Select>

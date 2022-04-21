@@ -1,18 +1,22 @@
-import { Col, Form, Image, message, Row, Typography, Upload } from "antd";
 import React, { useEffect, useState } from "react";
+import { Col, Form, Image, message, Row, Typography, Upload } from "antd";
 import { AiFillFolderAdd, AiOutlineUpload } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+
+import { useGetCategories } from "../../../../hooks/useGetCategories";
+import { useGetAuthenticatedUser } from "../../../../hooks/useGetAuthenticatedUser";
+
+import { doSaveOrUpdateProduct } from "../../../../services/supplier-services/supplier-product-service";
+import doGetCategoriesFromDatabase from "../../../../services/category-service";
+
+import TreeSelectField from "../../../../Components/Inputs/TreeSelectField";
+import ButtonField from "../../../../Components/Inputs/button-field";
 import TextField from "../../../../Components/Inputs/TextField";
 import TextAreaField from "../../../../Components/Inputs/TextAreaField";
 import InputNumberField from "../../../../Components/Inputs/number-field";
-import PageHeader from "../../../../Components/PageHeader/PageHeader";
-import { useDispatch } from "react-redux";
-import doGetCategoriesFromDatabase from "../../../../services/category-service";
-import { useGetCategories } from "../../../../hooks/useGetCategories";
-import TreeSelectField from "../../../../Components/Inputs/TreeSelectField";
-import ButtonField from "../../../../Components/Inputs/button-field";
 
-import { useGetAuthenticatedUser } from "../../../../hooks/useGetAuthenticatedUser";
-import { doSaveOrUpdateProduct } from "../../../../services/supplier-services/supplier-product-service";
+import PageHeader from "../../../../Components/PageHeader/PageHeader";
+
 const { Text } = Typography;
 
 function NewProductForm() {
@@ -24,11 +28,11 @@ function NewProductForm() {
     "loaded" || "loading" || "error"
   );
 
-  console.log(productSaving);
   const dispatch = useDispatch();
   const categories = useGetCategories();
   const user = useGetAuthenticatedUser();
 
+  // ** This Effect will Get Categroies only if they are not in redux store ......
   useEffect(() => {
     if (categories.length <= 0) dispatch(doGetCategoriesFromDatabase());
   }, [dispatch, categories]);
@@ -39,7 +43,8 @@ function NewProductForm() {
       return;
     }
     setproductState("filled");
-    setIsProductSaving("loading")
+    setIsProductSaving("loading");
+
     const productDetails = {
       productId: 0,
       ...productData,
@@ -49,7 +54,9 @@ function NewProductForm() {
       },
     };
 
-    dispatch(doSaveOrUpdateProduct(productDetails, user.token,{setIsProductSaving}));
+    dispatch(
+      doSaveOrUpdateProduct(productDetails, user.token, { setIsProductSaving })
+    );
   };
 
   // ** props for Upload Button
@@ -67,6 +74,8 @@ function NewProductForm() {
         setProductPicture(info.file.response);
         setproductState("filled");
       } else if (info.file.status === "error") {
+        setProductPicture("");
+        setproductState("error");
         message.error(`${info.file.name} file upload failed.`);
       }
     },
@@ -139,14 +148,15 @@ function NewProductForm() {
               width="25"
               classnames={"ms-0 me-auto mt-2"}
               circle
-              loading={productSaving==="loading" && true}
+              loading={productSaving === "loading" && true}
             >
               Add Product
             </ButtonField>
-            {
-              productSaving === "error" && 
-              <Text type="danger">Something Went Wrong with Server Please Wait for While</Text>
-            }
+            {productSaving === "error" && (
+              <Text type="danger">
+                Something Went Wrong with Server Please Wait for While
+              </Text>
+            )}
           </Row>
         </Form>
       </Col>

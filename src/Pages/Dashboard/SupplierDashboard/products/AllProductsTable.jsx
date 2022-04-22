@@ -16,6 +16,7 @@ import {
   Typography,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
 
 import {
   AiFillDelete,
@@ -34,6 +35,7 @@ import {
   doDeleteSupplierProductFromDatabase,
   doGetAllSupplierProductsFromDatabase,
   doSaveOrUpdateProduct,
+  doUpdateProductToOutOfStock,
 } from "../../../../services/supplier-services/supplier-product-service";
 import { useGetCategories } from "../../../../hooks/useGetCategories";
 import TextField from "../../../../Components/Inputs/TextField";
@@ -74,8 +76,17 @@ function AllProductsTable() {
     setIsModalVisible(false);
   };
 
-  const cancel = () => {
-    console.log("hurrah i am deleted ");
+  const handleOutOfStock = (productId) => {
+    setisFetching(true);
+    const outOfStockReqData = {
+      outOfStockDate: moment().format("YYYY-MM-DDTHH:mm:ss.SSS"),
+      productId: productId,
+    };
+    dispatch(
+      doUpdateProductToOutOfStock(outOfStockReqData, user.token, {
+        setisFetching,
+      })
+    );
   };
   const handleProductDelete = (productId) => {
     setisFetching(true);
@@ -151,15 +162,17 @@ function AllProductsTable() {
       key: "out-of-stock",
       render: (text, data) => (
         <Popconfirm
-          className="mx-auto"
+          className=""
           icon={<FaBoxOpen />}
           title="You Sure its Out of Stock"
-          onConfirm={cancel}
+          onConfirm={() => handleOutOfStock(data.productId)}
         >
           <Button
-            className="bg-warning text-white"
-            icon={<FaBoxOpen />}
-          ></Button>
+            className="d-flex align-items-center justify-content-center bg-warning text-white"
+            icon={<FaBoxOpen className="me-2" />}
+          >
+            out-of-stock
+          </Button>
         </Popconfirm>
       ),
     },

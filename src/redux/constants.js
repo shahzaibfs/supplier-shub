@@ -11,5 +11,8 @@ export const constants = {
   "UPDATE-supplier-address-data" :"UPDATE_SUPPLIER_ADDRESS_TABLE",
   "UPDATE-supplier-profile-data"  : "UPDATE_SUPPLIER_PROFILE_DATA",
   "UPDATE-supplier-products-data"  :"UPDATE_SUPPLIER_PRODUCTS_DATA",
-  "ADD-supplier-product-data" : "ADD_SUPPLIER_PRODUCT_DATA"
+  "ADD-supplier-product-data" : "ADD_SUPPLIER_PRODUCT_DATA",
+  "UPDATE-supplier-outOfStock-products-data" : "UPDATE_SUPPLIER_OUTOFSTOCK_PRODUCTS_DATA",
+  "ADD-supplier-outOfStock-products-data" : "ADD_SUPPLIER_OUTOFSTOCK_PRODUCTS_DATA",
+
   };

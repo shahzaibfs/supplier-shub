@@ -8,6 +8,7 @@ import { supplierAddressesReducer } from "./supplier-addresses-reducer"
 import { supplierProfileReducer } from "./supplier-profile-reducer"
 import { categoryReducer } from "./category-reducer"
 import {supplierProductReducer} from "./supplier-product-reducer"
+import { supplierProductOutOfStockReducer } from "./supplier-product-outOfStock-reducer"
 
 export default combineReducers(
     {
@@ -18,7 +19,8 @@ export default combineReducers(
         supplierAddressesReducer,
         supplierProfileReducer,
         categoryReducer,
-        supplierProductReducer
+        supplierProductReducer,
+        supplierProductOutOfStockReducer
         
 
     }

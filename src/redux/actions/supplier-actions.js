@@ -24,3 +24,13 @@ export const AddSupplierProductData = (payload)=>({
     type: constants["ADD-supplier-product-data"],
     payload
 })
+
+export const updateSupplierOutOfStockProductAction = (payload)=>({
+    type: constants["UPDATE-supplier-outOfStock-products-data"],
+    payload
+})
+
+export const addSupplierOutOfStockProductAction = (payload)=>({
+    type: constants["ADD-supplier-outOfStock-products-data"],
+    payload
+})

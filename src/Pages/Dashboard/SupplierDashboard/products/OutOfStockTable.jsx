@@ -2,7 +2,7 @@ import React from "react";
 import { Table, Button, Popconfirm } from "antd";
 
 import { AiOutlineQuestionCircle } from "react-icons/ai";
-import {BsFillCalendar2DateFill} from "react-icons/bs"
+import { BsFillCalendar2DateFill } from "react-icons/bs";
 import Loader from "../../../../Components/Loader/Loader";
 
 const data = [
@@ -27,12 +27,12 @@ function OutOfStockTable() {
       key: "coverPhotoUrl",
       render: (text, data) => (
         <img
-        className="border-primary-light"
+          className="border-primary-light"
           src={data.coverPhotoUrl}
           alt="productPhoto"
           width={"60px"}
           height="60px"
-          style={{ objectFit: "contain" ,borderRadius:"6px" }}
+          style={{ objectFit: "contain", borderRadius: "6px" }}
         />
       ),
     },
@@ -45,10 +45,10 @@ function OutOfStockTable() {
       title: (
         <p
           className="bg-danger m-0 text-white p-2 body-2 d-flex align-items-center"
-          style={{ width: "max-content" ,borderRadius:"6px"}}
+          style={{ width: "max-content", borderRadius: "6px" }}
         >
           Out Of Stock Date
-          <BsFillCalendar2DateFill  className="ms-2"/>
+          <BsFillCalendar2DateFill className="ms-2" />
         </p>
       ),
       dataIndex: "outOfStockDate",
@@ -82,9 +82,8 @@ function OutOfStockTable() {
   return (
     <>
       <Table
-      style={{width:"80%"}}
         loading={{ spinning: false, indicator: <Loader /> }}
-        className="mx-auto mt-2"
+        className="mt-3"
         columns={columns}
         dataSource={data}
       />

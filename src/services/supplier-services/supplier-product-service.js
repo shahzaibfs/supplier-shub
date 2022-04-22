@@ -67,6 +67,9 @@ export const doGetAllSupplierProductsFromDatabase =
     getSupplierProductsApi(token)
       .then((response) => {
         setisFetching(false);
+        if(response.data.length <=0){
+          return 
+        }
         dispatch(updateSupplierProducts(response.data));
       })
       .catch((error) => {

@@ -31,7 +31,6 @@ const SupplierDashboard = () => {
     <div
       className="d-flex w-100"
       style={{
-        height: "100vh",
         marginTop: "10px",
         backgroundColor: "transparent",
       }}

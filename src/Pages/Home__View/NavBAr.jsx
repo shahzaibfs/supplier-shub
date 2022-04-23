@@ -1,35 +1,50 @@
 import { Col, Layout, Row } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import { AiFillCaretRight, AiFillCaretDown } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useGetCategories } from "../../hooks/useGetCategories";
+import doGetCategoriesFromDatabase from "../../services/category-service";
 
 const NavBAr = () => {
-  // const getClearLink = (name) => {
-  //   return name.split(" ").join("-");
-  // };
+  const categoriesFromRedux = useGetCategories();
+  const dispatch = useDispatch();
+  console.log(categoriesFromRedux)
+
+  let categories = [...categoriesFromRedux].slice(0, 9);
+  useEffect(() => {
+    if (categories.length > 0) return;
+    
+    dispatch(doGetCategoriesFromDatabase());
+  }, [dispatch, categories]);
+
   const navigate = useNavigate();
+ 
 
   return (
     <Layout className="bg-primary-light" style={{ height: 45 }}>
       <Row className="container-xxl mx-auto h-100 text-white" align="middle">
-        {navbarData.map((eachcateg) => (
-          <Col
-            key={eachcateg.id}
-            className="position-relative navbar__Link__main h-100  me-3"
-          >
-            <li
-              className="list-unstyled "
-              onClick={() =>
-                !eachcateg.children && navigate("/products/"+eachcateg.name)
-              }
+        {categories.length > 0 &&
+          categories.map((eachcateg) => (
+            <Col
+              key={eachcateg.categoryId}
+              className="position-relative navbar__Link__main h-100  me-3"
             >
-              {eachcateg.name} {eachcateg.children && <AiFillCaretDown />}
-            </li>
-            {eachcateg.children !== null && (
-              <PrintCategChildren categ={eachcateg.children} />
-            )}
-          </Col>
-        ))}
+              <li
+                className="list-unstyled "
+                onClick={() =>
+                  eachcateg.categories.length <= 0 &&
+                  navigate("/products/" + eachcateg.categoryName)
+                }
+              >
+                {eachcateg.categoryName}{" "}
+                {eachcateg.categories.length > 0 && <AiFillCaretDown />}
+              </li>
+              {eachcateg.categories.length > 0 && (
+                <PrintCategChildren categ={eachcateg.categories} />
+              )}
+            </Col>
+          ))}
       </Row>
     </Layout>
   );
@@ -41,26 +56,31 @@ const PrintCategChildren = ({ categ }) => {
   const navigate = useNavigate();
   return (
     <div
-      className="position-absolute bg-white text-primary navbar__Link__child_parent"
+      className="position-absolute  bg-white text-primary navbar__Link__child_parent"
       style={{
         zIndex: 22,
         minWidth: 200,
         width: "max-content",
         top: 45,
         left: 0,
+        boxShadow: "0 0 4px 0 rgb(0 0 0 / 25%)",
       }}
     >
       {categ.map((eachCategory) => (
         <div
-          key={eachCategory.id}
+          key={eachCategory.categoryId}
           className="list-unstyled p-2 px-3 navbar__Link__child_parent_links"
           onClick={() =>
-            !eachCategory.children && navigate("/products/"+eachCategory.name)}
+            eachCategory.categories.length <= 0 &&
+            navigate("/products/" + eachCategory.categoryName)
+          }
         >
-          {eachCategory.name}
-          {eachCategory.children && <AiFillCaretRight className="ms-2" />}
-          {eachCategory.children && (
-            <ChildNode subCateg={eachCategory.children} />
+          {eachCategory.categoryName}
+          {eachCategory.categories.length > 0 && (
+            <AiFillCaretRight className="ms-2" />
+          )}
+          {eachCategory.categories.length > 0 && (
+            <ChildNode subCateg={eachCategory.categories} />
           )}
         </div>
       ))}
@@ -83,15 +103,19 @@ const ChildNode = ({ subCateg }) => {
     >
       {subCateg.map((eachSubCateg) => (
         <div
-          key={eachSubCateg.id}
+          key={eachSubCateg.categoryId}
           className="navbar__Link__child_children_links m-0 p-2 px-3"
           onClick={() =>
-            !eachSubCateg.children && navigate("/products/"+eachSubCateg.name)}
+            eachSubCateg.categories.length <= 0 &&
+            navigate("/products/" + eachSubCateg.categoryName)
+          }
         >
-          {eachSubCateg.name}{" "}
-          {eachSubCateg.children && <AiFillCaretRight className="ms-2" />}
-          {eachSubCateg.children && (
-            <ChildNode subCateg={eachSubCateg.children} />
+          {eachSubCateg.categoryName}{" "}
+          {eachSubCateg.categories.length > 0 && (
+            <AiFillCaretRight className="ms-2" />
+          )}
+          {eachSubCateg.categories.length > 0 && (
+            <ChildNode subCateg={eachSubCateg.categories} />
           )}
         </div>
       ))}
@@ -99,116 +123,3 @@ const ChildNode = ({ subCateg }) => {
   );
 };
 
-const navbarData = [
-  {
-    id: 1,
-    name: "baverages",
-    coverPhoto: "something.com",
-    parentId: null,
-    children: [
-      {
-        id: 2,
-        name: "Water",
-        coverPhoto: "something.com",
-        parentId: 1,
-        children: null,
-      },
-      {
-        id: 3,
-        name: "Milk",
-        coverPhoto: "something.com",
-        parentId: 1,
-        children: null,
-      },
-      {
-        id: 4,
-        name: "Tea && Coffee",
-        coverPhoto: "something.com",
-        parentId: 1,
-        children: [
-          {
-            id: 5,
-            name: "cafiene",
-            coverPhoto: "something.com",
-            parentId: 4,
-            children: null,
-          },
-          {
-            id: 6,
-            name: "tea",
-            coverPhoto: "something.com",
-            parentId: 4,
-            children: [
-              {
-                id: 7,
-                name: "tapal",
-                coverPhoto: "something.com",
-                parentId: 6,
-                children: null,
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "snacks",
-    coverPhoto: "something.com",
-    parentId: null,
-    children: [
-      {
-        id: 22323,
-        name: "Water",
-        coverPhoto: "something.com",
-        parentId: 2,
-        children: null,
-      },
-      {
-        id: 2323234,
-        name: "Milk",
-        coverPhoto: "something.com",
-        parentId: 2,
-        children: null,
-      },
-      {
-        id: 2323,
-        name: "Tea && Coffee",
-        coverPhoto: "something.com",
-        parentId: 2,
-        children: [
-          {
-            id: 23223232323232,
-            name: "cafiene",
-            coverPhoto: "something.com",
-            parentId: 2323,
-            children: null,
-          },
-          {
-            id: 232322323233326,
-            name: "tea",
-            coverPhoto: "something.com",
-            parentId: 2323,
-            children: [
-              {
-                id: 72232323,
-                name: "tapal",
-                coverPhoto: "something.com",
-                parentId: 232323326,
-                children: null,
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: "snacks",
-    coverPhoto: "something.com",
-    parentId: null,
-    children: null,
-  },
-];

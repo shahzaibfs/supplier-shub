@@ -6,7 +6,7 @@ export const categoryReducer = (state = initState, action) => {
   switch (action.type) {
     case constants["UPDATE-CATEGORY-DATA"]:
     
-      return [...state,...action.payload];
+      return [...action.payload];
     default:
       return state;
   }

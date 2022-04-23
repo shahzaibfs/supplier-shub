@@ -17,11 +17,12 @@ function Home() {
     <>
       {getHomeBanner(user)}
       <div style={styles.parent} className="p-3 negative-marginTop-50">
-        <PageHeader heading="Categories" />
+        <PageHeader level={4} heading="Categories" />
         <CategoryCards mt={3} mb={0} />
       </div>
       <>
         <SectionHeader
+          level={3}
           title={"Top Rated Companies"}
           subtitle="some lorem ipsum should tdo the trick"
         />
@@ -39,7 +40,14 @@ function Home() {
         </Slider>
       </>
 
-      <HomeHotSellers />
+      <>
+        <SectionHeader
+          level={3}
+          title={"Hot Seller Products"}
+          subtitle="some lorem ipsum should tdo the trick"
+        />
+        <HomeHotSellers />
+      </>
     </>
   );
 }

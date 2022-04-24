@@ -19,7 +19,7 @@ const {Text} = Typography
 
 const { useBreakpoint } = Grid;
 const MainHeader = () => {
-  const cart = useSelector((store) => store.cartReducer.products);
+  const cart = useSelector((store) => store.cartReducer);
   const user = useGetAuthenticatedUser();
   const { md } = useBreakpoint();
   const navigate = useNavigate();

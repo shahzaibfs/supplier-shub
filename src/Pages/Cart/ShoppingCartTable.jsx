@@ -1,193 +1,169 @@
-import React, { useEffect, useState } from "react";
-import { AiFillDelete } from "react-icons/ai";
-import { useDispatch } from "react-redux";
-import Popup from "../../Components/Popup/Popup";
-import {SectionHeader} from "../Home/HomeHotSellers"
+import {
+  Button,
+  Image,
+  InputNumber,
+  Popconfirm,
+  Table,
+  Typography,
+ 
+} from "antd";
+import React from "react";
+import {
+  AiFillDelete,
+  AiFillEdit,
+  AiOutlineQuestionCircle,
+} from "react-icons/ai";
+import { FaBoxOpen } from "react-icons/fa";
+import Loader from "../../Components/Loader/Loader";
+import { SectionHeader } from "../Home/HomeHotSellers";
 
-const ShoppingCartTable = ({ products, setProductsDetailsRef }) => {
-  const [quantities, setquantities] = useState(null);
-  const [isPopupShow, setisPopupShow] = useState(false);
+const { Text } = Typography;
 
-  const [prices, setPrices] = useState(null);
-  const dispatch = useDispatch();
+const ShoppingCartTable = ({ products, setQuantities }) => {
+  const handleQuantityChange = ({ data, productId }) => {
+    setQuantities((oldQuantities) => {
+      const Existing_Object = oldQuantities.findIndex(
+        (eachObj) => eachObj.productId === productId
+      );
 
-  useEffect(() => {
-    setProductsDetailsRef({
-      quantities: quantities !== null ? quantities : 0,
-      prices: prices !== null ? prices : 0,
+      if (Existing_Object >= 0) {
+        let quntitiesAfterDelete = [...oldQuantities];
+        quntitiesAfterDelete.splice(Existing_Object, 1);
+
+        return [...quntitiesAfterDelete, { data, productId }];
+      }
+
+      return [
+        ...oldQuantities,
+        {
+          data,
+          productId,
+        },
+      ];
     });
-  }, [quantities, prices, setProductsDetailsRef]);
-
-  const handleOnLoad = (productId, minimumOrder, productPrice) => {
-    setquantities((old) => ({
-      ...old,
-      [productId]: minimumOrder * 1,
-    }));
-
-    setPrices((old) => ({
-      ...old,
-      [productId]: productPrice * minimumOrder,
-    }));
   };
 
-  const handleQuantityChange = (e, product) => {
-    console.log(e.target.value);
-    setquantities((old) => ({
-      ...old,
-      [e.target.name]: e.target.value * 1,
-    }));
-    if (e.target.value < quantities[product.productId]) {
-      console.log("in lesser");
-      setPrices((old) => ({
-        ...old,
-        [e.target.name]: prices[e.target.name] - product.productPrice,
-      }));
-    } else if (e.target.value * 1 === quantities[product.productId]) {
-      console.log("fomr eqqual");
-    } else {
-      console.log("in greater");
-      setPrices((old) => ({
-        ...old,
-        [e.target.name]: prices[e.target.name] + product.productPrice,
-      }));
-    }
-  };
+  const columns = [
+    {
+      title: "Photo",
+      key: "productCoverUrl",
+      render: (text, data) => (
+        <Image
+          width={60}
+          height={60}
+          src={data.productCoverPictureUrl}
+          alt="productPhoto"
+          className=" mx-2"
+          style={{ objectFit: "contain", borderRadius: 7 }}
+          fallback="data:image/png;base64,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"
+        />
+      ),
+    },
+    {
+      title: "Name",
+      dataIndex: "productName",
+      key: "productName",
+    },
+    {
+      title: "Price",
+      dataIndex: "productPrice",
+      key: "productPrice",
+      render: (text, data) => <Text>Rs {text}</Text>,
+    },
+    {
+      title: "Weight",
+      dataIndex: "productWeight",
+      key: "productWeight",
+    },
+    {
+      title: "Size",
+      dataIndex: "productSize",
+      key: "productSize",
+    },
 
-  const handleDeleteProduct = (productId) => {
-    setisPopupShow(true);
-    setTimeout(() => {
-      setisPopupShow(false);
-    }, 2000);
-    dispatch({
-      type: "REMOVE_FROM_CART",
-      payload: {
-        productId,
+    {
+      title: "Quantity",
+      dataIndex: "minimumOrder",
+      key: "minimumOrder",
+      render: (text, data) => {
+        return (
+          <InputNumber
+            onChange={(inputData) =>
+              handleQuantityChange({
+                data: inputData,
+                productId: data.productId,
+              })
+            }
+            min={text}
+            defaultValue={text}
+          />
+        );
       },
-    });
+    },
+    {
+      title: "Out-Of-Stock",
+      key: "out-of-stock",
+      render: (text, data) => (
+        <Popconfirm
+          className=""
+          icon={<FaBoxOpen />}
+          title="You Sure its Out of Stock"
+          onConfirm={() => console.log(data)}
+        >
+          <Button
+            className="d-flex align-items-center justify-content-center bg-warning text-white"
+            icon={<FaBoxOpen className="me-2" />}
+          >
+            out-of-stock
+          </Button>
+        </Popconfirm>
+      ),
+    },
+    {
+      title: "Actions",
+      key: "actions",
+      render: (text, data) => (
+        <>
+          <Button
+            className="bg-success text-white"
+            icon={<AiFillEdit />}
+            onClick={() => console.log(data)}
+          ></Button>
 
-    setquantities((old) => ({
-      ...old,
-      [productId]: 0,
-    }));
-
-    setPrices((old) => ({
-      ...old,
-      [productId]: 0,
-    }));
-  };
-
+          <Popconfirm
+            icon={<AiOutlineQuestionCircle color="red" />}
+            title="Sure to Delete?"
+            onConfirm={() => console.log(data)}
+          >
+            <Button
+              className="bg-danger text-white"
+              icon={<AiFillDelete />}
+            ></Button>
+          </Popconfirm>
+        </>
+      ),
+    },
+  ];
   return (
-    <section
-      className="col px-0  me-1 "
-      style={{ overflowX: "auto" }}
-    >
-      <Popup
-        isShow={isPopupShow}
-        color={"warning"}
-        message={"Product Remove from Cart"}
-      />
-
+    <section className="col px-0  me-1 " style={{ overflowX: "auto" }}>
       {!products.length ? (
-        <SectionHeader key={23} level={4} classnames={"mt-0"} title="Your Cart is Empty" />
+        <SectionHeader
+          key={23}
+          level={4}
+          classnames={"mt-0"}
+          title="Your Cart is Empty"
+        />
       ) : (
-        <table width="100%" className=" h-50 ">
-          <thead className="border-bottom-primary" style={{ height: "50px" }}>
-            <tr>
-              <th width="60%" className="ps-4 body-1 text-primary-light-700">
-                Item
-              </th>
-              <th className="body-1 text-primary-light-700 px-2">Price</th>
-              <th className="body-1 text-primary-light-700 px-2" width="15%">
-                Quantity
-              </th>
-              <th className="body-1 text-primary-light-700 px-2">Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {[...products].reverse().map((product, index) => (
-              <tr
-                key={product.productId}
-                onLoad={() =>
-                  handleOnLoad(
-                    product.productId,
-                    product.minimumOrder,
-                    product.productPrice
-                  )
-                }
-                className={`position-relative ${
-                  products.length - 1 === index ? "" : "border-bottom-primary"
-                }`}
-              >
-                <td className="py-3 ps-4">
-                  <div className="d-flex">
-                    <div>
-                      <img
-                        src={product.productCoverPictureUrl}
-                        width="150px"
-                        height="150px"
-                        className="bg-primary"
-                        alt=""
-                        style={{ objectFit: "contain" }}
-                      />
-                      <p className="text-muted my-2 text-decoration-underline">
-                        Add to wishlist
-                      </p>
-                    </div>
-
-                    <div className="flex-item ms-4">
-                      <h1 className="body-1 text-primary-light-700  text-decoration-underline">
-                        {product.productName}
-                      </h1>
-                      <div>
-                        <span className="body-2 text-weight-bold ext-primary-light-700">
-                          company
-                        </span>
-                        <span className="body-2 text-primary-light-700">
-                          : {product.companyName}
-                        </span>
-                      </div>
-                      <div>
-                        <span className="body-2 text-weight-bold ext-primary-light-700">
-                          Email
-                        </span>
-                        <span className="body-2 text-primary-light-700">
-                          : loremIpsum231@gmail.com
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td className="px-2 py-3 body-1 text-primary-light-700 d-block">
-                  {product.productPrice}Rs
-                </td>
-                <td className="px-2 position-relative">
-                  {" "}
-                  <input
-                    type={"number"}
-                    className=" form-control  text-primary body-2 position-absolute mt-3"
-                    min={product.minimumOrder}
-                    style={{ width: "70px", top: 0 }}
-                    name={product.productId}
-                    onChange={(e) => handleQuantityChange(e, product)}
-                    placeholder={product.minimumOrder}
-                  />
-                </td>
-                <td className="ps-4 position-relative py-3 body-1 d-block text-primary-light-700 h-100">
-                  {prices !== null ? prices[product.productId] : "loading"}Rs
-                  <div
-                    className=" py-1 position-absolute d-block text-primary-light-700 mb-4 ms-3 "
-                    style={{ top: "150px", cursor: "pointer" }}
-                  >
-                    <AiFillDelete
-                      onClick={() => handleDeleteProduct(product.productId)}
-                      style={{ fontSize: "1.5rem" }}
-                    />
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <Table
+          loading={{
+            spinning: false,
+            indicator: <Loader />,
+          }}
+          className=""
+          columns={columns}
+          dataSource={products}
+          rowKey={(product) => product.productId}
+        />
       )}
     </section>
   );

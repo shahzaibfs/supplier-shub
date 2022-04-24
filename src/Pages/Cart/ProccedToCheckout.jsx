@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ButtonField from "../../Components/Inputs/button-field";
 
@@ -11,30 +11,39 @@ const styles = {
   },
 };
 
-const ProccedToCheckout = ({ products, getProductsDetails }) => {
+const ProccedToCheckout = ({ products, quantities }) => {
   const user = useSelector((store) => store.authReducer);
 
-  const checkoutState = useSelector((store) => store.checkoutReducer);
-
-  const dispatch = useDispatch();
-  console.log(checkoutState);
-  const handleProccedToCheckout = () => {
-    dispatch({
-      type: "PROCCED_TO_CHECKOUT",
-      payload: {
-        products: products,
-        totalPrice: Object.values(
-          getProductsDetails.prices === 0
-            ? { key: 0 }
-            : getProductsDetails.prices
-        ).reduce((partialSum, a) => partialSum + a),
-        quantities: getProductsDetails.quantities,
-      },
-    });
+  const check_in_quantities = (productId, minOrder) => {
+    const foundedQuantity = quantities.findIndex(
+      (eachQuantity) => eachQuantity.productId === productId
+    );
+    if (foundedQuantity >= 0) {
+      return quantities[foundedQuantity].data;
+    }
+    return minOrder;
   };
 
+  const getTotalPrice = () => {
+    const total = products.reduce((sum, cur) => {
+      console.log(sum);
+      console.log("curr-->", cur);
+      return (
+        sum +
+        check_in_quantities(cur.productId, cur.minimumOrder) * cur.productPrice
+      );
+    }, 0);
+
+    return total;
+  };
+
+  const handleProccedToCheckout = () => {};
+
   return (
-    <section className="col-lg-3  flex-grow-0 mt-3 mt-lg-0" style={styles.parent}>
+    <section
+      className="col-lg-3  flex-grow-0 mt-3 mt-lg-0"
+      style={styles.parent}
+    >
       <header
         className=" d-flex align-items-center body-1 text-primary-light-700 text-weight-bold border-bottom-primary mb-2"
         style={{ height: "50px" }}
@@ -89,7 +98,7 @@ const ProccedToCheckout = ({ products, getProductsDetails }) => {
             Subtotal
           </p>
           <p className="text-primary-light-700 text-weight-regular body-2 mb-0">
-            $90.00
+            Rs 90.00
           </p>
         </div>
         <div className="d-flex justify-content-between align-items-center">
@@ -97,28 +106,17 @@ const ProccedToCheckout = ({ products, getProductsDetails }) => {
             tax
           </p>
           <p className="text-primary-light-700 text-weight-regular body-2 mb-0">
-            $00.00
+            Rs 00.00
           </p>
         </div>
       </div>
       <div className="d-flex justify-content-between align-items-center py-2">
         <p className="text-primary text-weight-regular body-1 mb-0">Total</p>
         <p className="text-primary text-weight-regular body-1 mb-0">
-          {getProductsDetails === null
-            ? "null"
-            : Object.values(
-                getProductsDetails.prices === 0
-                  ? { key: 0 }
-                  : getProductsDetails.prices
-              ).reduce((partialSum, a) => partialSum + a)}
+          Rs {getTotalPrice()}
         </p>
       </div>
-      <ButtonField 
-      size="large"
-      type="success"
-      classnames={"my-3"}
-      width="100"
-      >
+      <ButtonField size="large" type="success" classnames={"my-3"} width="100">
         {user.isLogin && products.length ? (
           <Link to={"/checkout"} onClick={handleProccedToCheckout}>
             Procced to Checkout

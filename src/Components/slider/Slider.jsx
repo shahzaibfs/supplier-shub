@@ -1,5 +1,5 @@
 import { Button, Col, Row } from "antd";
-import { useRef } from "react";
+import React, { useRef } from "react";
 
 import "./__slider.css";
 
@@ -49,7 +49,7 @@ function Slider({ negative = false, my = 3, children }) {
   );
 }
 
-export default Slider;
+export default React.memo(Slider);
 
 const styles = {
   sliderParent: {
@@ -59,7 +59,7 @@ const styles = {
     zIndex: 10,
     overflowX: "auto",
     scrollBehavior: "smooth",
-    "&::-webkit-scrollbar": { display: "none" },
+    "&::WebkitScrollbar": { display: "none" },
   },
   sliderButton: { height: "100px" },
   sliderCard: { overflowX: "auto", scrollBehavior: "smooth" },

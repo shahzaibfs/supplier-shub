@@ -1,34 +1,22 @@
-import React, { useCallback, useState } from "react";
+import React, {  useState } from "react";
 import ProccedToCheckout from "./ProccedToCheckout";
 import ShoppingCartTable from "./ShoppingCartTable";
 import { useSelector } from "react-redux";
-import PageHeader from "../../Components/PageHeader/PageHeader"
+import PageHeader from "../../Components/PageHeader/PageHeader";
 
 function Cart() {
-  const [getProductsDetails, setgetProductsDetails] = useState(null);
-  const products = useSelector((store) => store.cartReducer.products);
+  const [quantities, setQuantities] = useState([]);
+  const cartProducts = useSelector((store) => store.cartReducer);
 
-  const getProductsDetailsRef = useCallback(
-    (productsDetails) => {
-      setgetProductsDetails(productsDetails);
-    },
-    [setgetProductsDetails]
-  );
-  console.log(getProductsDetails)
-
+ 
+  console.log("------> Quantities :" , quantities);
   return (
     <>
-     <PageHeader heading="Shopping Cart" classname={"my-3"} /> 
+      <PageHeader heading="Shopping Cart" classname={"my-3"} />
       {/* for two sec  */}
       <main className="row mx-0 ">
-        <ShoppingCartTable
-          products={products}
-          setProductsDetailsRef={getProductsDetailsRef}
-        />
-        <ProccedToCheckout
-          products={products}
-          getProductsDetails={ getProductsDetails }
-        />
+        <ShoppingCartTable products={cartProducts} setQuantities={setQuantities} />
+        <ProccedToCheckout quantities={quantities} products={cartProducts} />
       </main>
     </>
   );

@@ -1,25 +1,19 @@
-const initState = {
-    products:[],
-    sum: 0,
-    message:""
-}
+import { constants } from "../constants";
+const initState = []
 
-export const cartReducer=(state=initState,action)=>{
-    switch (action.type) {
-        case "ADD_TO_CART":
-            const findExistingProduct = state.products.filter(product=>product.productId === action.payload.productId);
-            if(findExistingProduct.length){
-                return {...state,message:"Product Already Exsist in Shopping Cart "};
-            }else{
-                return {...state ,products: [...state.products,action.payload] ,message:"Product Added to Shopping Cart"};
-            }
-            case "REMOVE_FROM_CART":
-                console.log(action.payload)
-                let newArray = state.products.filter(product=>product.productId !== action.payload.productId)
+export const cartReducer = (state = initState, action) => {
+  switch (action.type) {
+    case constants["ADD-product-to-cart"]:
+      return [action.payload, ...state];
 
-                return {...state,products:[...newArray],message:"Deleted Succesfully"};
-            
-        default:
-            return state;
-    }
-}
+      case constants["REMOVE-product-from-cart"]:
+          
+        return [...action.payload];
+
+    default:
+      const localStorageCartProducts = JSON.parse(localStorage.getItem("cart-products"));
+      if(localStorageCartProducts === null) return state;
+
+      return [...localStorageCartProducts];
+  }
+};

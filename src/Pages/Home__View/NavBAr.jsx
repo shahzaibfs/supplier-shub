@@ -9,17 +9,15 @@ import doGetCategoriesFromDatabase from "../../services/category-service";
 const NavBAr = () => {
   const categoriesFromRedux = useGetCategories();
   const dispatch = useDispatch();
-  console.log(categoriesFromRedux)
 
   let categories = [...categoriesFromRedux].slice(0, 9);
   useEffect(() => {
     if (categories.length > 0) return;
-    
+
     dispatch(doGetCategoriesFromDatabase());
   }, [dispatch, categories]);
 
   const navigate = useNavigate();
- 
 
   return (
     <Layout className="bg-primary-light" style={{ height: 45 }}>
@@ -50,7 +48,7 @@ const NavBAr = () => {
   );
 };
 
-export default NavBAr;
+export default React.memo(NavBAr);
 
 const PrintCategChildren = ({ categ }) => {
   const navigate = useNavigate();
@@ -122,4 +120,3 @@ const ChildNode = ({ subCateg }) => {
     </div>
   );
 };
-

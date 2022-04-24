@@ -27,8 +27,9 @@ function Home() {
           subtitle="some lorem ipsum should tdo the trick"
         />
         <Slider key={1}>
-          {productCategoryMockData.map((category) => (
+          {productCategoryMockData.map((category,idx) => (
             <CompanyCard
+            key={idx}
               companyLogo={category.coverPhoto}
               photo={
                 "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"

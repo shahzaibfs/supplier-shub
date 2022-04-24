@@ -104,7 +104,7 @@ function AllProductsTable() {
         <Image
           width={60}
           height={60}
-          src={data.productCoverUrl}
+          src={data.productCoverPictureUrl}
           alt="productPhoto"
           className=" mx-2"
           style={{ objectFit: "contain", borderRadius: 7 }}

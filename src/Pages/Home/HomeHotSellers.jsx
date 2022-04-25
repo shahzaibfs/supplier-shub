@@ -7,6 +7,7 @@ import { doGetAllNewProductsFromDatabase } from "../../services/public-product-s
 import ProductCard from "./productCard";
 import ProductCardWrapper from "./ProductCardWrapper";
 
+
 const { useBreakpoint } = Grid;
 
 const { Text, Title } = Typography;

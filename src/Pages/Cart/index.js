@@ -1,22 +1,19 @@
 import React, {  useState } from "react";
 import ProccedToCheckout from "./ProccedToCheckout";
 import ShoppingCartTable from "./ShoppingCartTable";
-import { useSelector } from "react-redux";
 import PageHeader from "../../Components/PageHeader/PageHeader";
 
 function Cart() {
-  const [quantities, setQuantities] = useState([]);
-  const cartProducts = useSelector((store) => store.cartReducer);
+  const [cartProducts,setCartProducts] =useState(JSON.parse(localStorage.getItem("cart-products")));
 
- 
-  console.log("------> Quantities :" , quantities);
+ console.log(cartProducts)
   return (
     <>
       <PageHeader heading="Shopping Cart" classname={"my-3"} />
       {/* for two sec  */}
       <main className="row mx-0 ">
-        <ShoppingCartTable products={cartProducts} setQuantities={setQuantities} />
-        <ProccedToCheckout quantities={quantities} products={cartProducts} />
+        <ShoppingCartTable  cartProducts={cartProducts} setCartProducts={setCartProducts}/>
+        <ProccedToCheckout  cartProducts={cartProducts} />
       </main>
     </>
   );

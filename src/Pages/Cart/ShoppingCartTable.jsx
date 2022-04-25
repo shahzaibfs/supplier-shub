@@ -5,21 +5,38 @@ import {
   Popconfirm,
   Table,
   Typography,
- 
 } from "antd";
-import React from "react";
-import {
-  AiFillDelete,
-  AiFillEdit,
-  AiOutlineQuestionCircle,
-} from "react-icons/ai";
-import { FaBoxOpen } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
+import { AiFillDelete, AiOutlineQuestionCircle } from "react-icons/ai";
 import Loader from "../../Components/Loader/Loader";
 import { SectionHeader } from "../Home/HomeHotSellers";
 
 const { Text } = Typography;
 
-const ShoppingCartTable = ({ products, setQuantities }) => {
+const ShoppingCartTable = ({ cartProducts = [], setCartProducts }) => {
+  const [quantities, setQuantities] = useState([]);
+  console.log(cartProducts)
+  useEffect(() => {
+    if (quantities.length <= 0) return;
+    console.log("ok")
+    let localStorageProducts = cartProducts.map(
+      (product) => {
+      let founded_product = quantities.findIndex(
+        (quantity) => quantity.productId === product.productId
+      );
+      if (founded_product < 0) return product;
+      let newProduct = {
+        ...product,
+        minimumOrder: quantities[founded_product].data,
+      };
+      return newProduct;
+    });
+
+    localStorage.setItem("cart-products", JSON.stringify(localStorageProducts));
+    setCartProducts((old) => JSON.parse(localStorage.getItem("cart-products")));
+
+    // eslint-disable-next-line
+  }, [quantities, setCartProducts]);
   const handleQuantityChange = ({ data, productId }) => {
     setQuantities((oldQuantities) => {
       const Existing_Object = oldQuantities.findIndex(
@@ -41,6 +58,16 @@ const ShoppingCartTable = ({ products, setQuantities }) => {
         },
       ];
     });
+  };
+
+  const handleDelete = (product) => {
+    let newCartProducts = [...cartProducts];
+    const Existing_Product_on_localstorage = cartProducts.findIndex(
+      (eachProduct) => eachProduct.productId === product.productId
+    );
+    newCartProducts.splice(Existing_Product_on_localstorage, 1);
+    localStorage.setItem("cart-products", JSON.stringify(newCartProducts));
+    setCartProducts(JSON.parse(localStorage.getItem("cart-products")));
   };
 
   const columns = [
@@ -83,8 +110,8 @@ const ShoppingCartTable = ({ products, setQuantities }) => {
 
     {
       title: "Quantity",
-      dataIndex: "minimumOrder",
-      key: "minimumOrder",
+      dataIndex: "productMinOrder",
+      key: "productMinOrder",
       render: (text, data) => {
         return (
           <InputNumber
@@ -101,52 +128,25 @@ const ShoppingCartTable = ({ products, setQuantities }) => {
       },
     },
     {
-      title: "Out-Of-Stock",
-      key: "out-of-stock",
-      render: (text, data) => (
-        <Popconfirm
-          className=""
-          icon={<FaBoxOpen />}
-          title="You Sure its Out of Stock"
-          onConfirm={() => console.log(data)}
-        >
-          <Button
-            className="d-flex align-items-center justify-content-center bg-warning text-white"
-            icon={<FaBoxOpen className="me-2" />}
-          >
-            out-of-stock
-          </Button>
-        </Popconfirm>
-      ),
-    },
-    {
       title: "Actions",
       key: "actions",
-      render: (text, data) => (
-        <>
+      render: (_, data) => (
+        <Popconfirm
+          icon={<AiOutlineQuestionCircle color="red" />}
+          title="Sure to Delete?"
+          onConfirm={() => handleDelete(data)}
+        >
           <Button
-            className="bg-success text-white"
-            icon={<AiFillEdit />}
-            onClick={() => console.log(data)}
+            className="bg-danger text-white"
+            icon={<AiFillDelete />}
           ></Button>
-
-          <Popconfirm
-            icon={<AiOutlineQuestionCircle color="red" />}
-            title="Sure to Delete?"
-            onConfirm={() => console.log(data)}
-          >
-            <Button
-              className="bg-danger text-white"
-              icon={<AiFillDelete />}
-            ></Button>
-          </Popconfirm>
-        </>
+        </Popconfirm>
       ),
     },
   ];
   return (
     <section className="col px-0  me-1 " style={{ overflowX: "auto" }}>
-      {!products.length ? (
+      {!cartProducts.length ? (
         <SectionHeader
           key={23}
           level={4}
@@ -161,7 +161,7 @@ const ShoppingCartTable = ({ products, setQuantities }) => {
           }}
           className=""
           columns={columns}
-          dataSource={products}
+          dataSource={cartProducts}
           rowKey={(product) => product.productId}
         />
       )}

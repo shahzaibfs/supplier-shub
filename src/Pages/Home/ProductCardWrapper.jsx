@@ -1,7 +1,6 @@
 import { Grid, Row } from "antd";
 import React from "react";
 
-// import { useGetAuthenticatedUser } from "../../hooks/useGetAuthenticatedUser";
 
 const { useBreakpoint } = Grid;
 
@@ -20,7 +19,7 @@ function ProductCardWrapper({ children }) {
   );
 }
 
-export default React.memo(ProductCardWrapper);
+export default ProductCardWrapper;
 
 const styles = {
   parent: {

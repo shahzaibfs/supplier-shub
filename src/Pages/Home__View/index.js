@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
 import { Outlet } from "react-router-dom";
 
 import SmallFooter from "./SmallFooter";
@@ -7,17 +6,9 @@ import MainHeader from "./MainHeader";
 import MainFooter from "./MainFooter";
 import NavBAr from "./NavBAr";
 
-import "./home-view.css"
-import { productMiddleWare } from "../../services/productMiddleWare";
+import "./home-view.css";
 
 function Home() {
-  const state = useSelector((store) => store);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(productMiddleWare());
-  }, [dispatch]);
-
   return (
     <section
       className="w-100 h-100  position-relative"
@@ -29,7 +20,7 @@ function Home() {
       }}
     >
       <section className=" mx-auto " style={{ zIndex: 1 }}>
-        <MainHeader authReducer={state.authReducer} />
+        <MainHeader />
         <NavBAr />
         <section
           className="container-xxl position-relative"

@@ -11,12 +11,12 @@ const styles = {
   },
 };
 
-const ProccedToCheckout = ({ cartProducts=[] }) => {
+const ProccedToCheckout = ({ cartProducts = [] }) => {
   const user = useSelector((store) => store.authReducer);
 
   const getTotalPrice = () => {
     const total = cartProducts.reduce((sum, cur) => {
-      return sum + (cur.minimumOrder * cur.productPrice);
+      return sum + cur.quantity * cur.product.productPrice;
     }, 0);
 
     return total;

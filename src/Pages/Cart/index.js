@@ -4,7 +4,7 @@ import ShoppingCartTable from "./ShoppingCartTable";
 import PageHeader from "../../Components/PageHeader/PageHeader";
 
 function Cart() {
-  const [cartProducts,setCartProducts] =useState(JSON.parse(localStorage.getItem("cart-products")));
+  const [cartProducts,setCartProducts] =useState(JSON.parse(localStorage.getItem("cart-products"))|| []);
 
  console.log(cartProducts)
   return (
@@ -20,3 +20,18 @@ function Cart() {
 }
 
 export default Cart;
+
+
+
+
+
+/****
+ * 
+ * {
+ * quantity:0,
+ * product:{...productDetails}
+ * }
+ * 
+ * 
+ * 
+ */

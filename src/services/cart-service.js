@@ -23,13 +23,17 @@ export const doPostProductToCart = (product) =>(dispatch,store)=>{
     const {authReducer,cartReducer} =store();
     const {isLogin} = authReducer;
     if (!isLogin){
-        const ExistingProduct = cartReducer.filter(cartProduct => cartProduct.productId  === product.productId );
+        const ExistingProduct = cartReducer.findIndex(cartProduct => cartProduct.product.productId  === product.productId );
 
-        if(ExistingProduct.length >0) return ;
-
-        let newCartReducerProducts = [...cartReducer,product];
+        if(ExistingProduct >=0) return ;
+        
+        const cartProduct = {
+            quantity:product.productMinOrder,
+            product:product
+          }
+        let newCartReducerProducts = [...cartReducer,cartProduct];
         
         localStorage.setItem("cart-products",JSON.stringify(newCartReducerProducts));
-        dispatch(addtoCartAction(product));
+        dispatch(addtoCartAction(cartProduct));
     }
 }

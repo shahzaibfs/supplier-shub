@@ -15,19 +15,17 @@ const { Text } = Typography;
 
 const ShoppingCartTable = ({ cartProducts = [], setCartProducts }) => {
   const [quantities, setQuantities] = useState([]);
-  console.log(cartProducts)
+
   useEffect(() => {
     if (quantities.length <= 0) return;
-    console.log("ok")
-    let localStorageProducts = cartProducts.map(
-      (product) => {
+    let localStorageProducts = cartProducts.map((cartProduct) => {
       let founded_product = quantities.findIndex(
-        (quantity) => quantity.productId === product.productId
+        (quantity) => quantity.productId === cartProduct.product.productId
       );
-      if (founded_product < 0) return product;
+      if (founded_product < 0) return cartProduct;
       let newProduct = {
-        ...product,
-        minimumOrder: quantities[founded_product].data,
+        ...cartProduct,
+        quantity: quantities[founded_product].data,
       };
       return newProduct;
     });
@@ -61,9 +59,10 @@ const ShoppingCartTable = ({ cartProducts = [], setCartProducts }) => {
   };
 
   const handleDelete = (product) => {
+    console.log(product);
     let newCartProducts = [...cartProducts];
     const Existing_Product_on_localstorage = cartProducts.findIndex(
-      (eachProduct) => eachProduct.productId === product.productId
+      (cProduct) => cProduct.product.productId === product.productId
     );
     newCartProducts.splice(Existing_Product_on_localstorage, 1);
     localStorage.setItem("cart-products", JSON.stringify(newCartProducts));
@@ -78,7 +77,7 @@ const ShoppingCartTable = ({ cartProducts = [], setCartProducts }) => {
         <Image
           width={60}
           height={60}
-          src={data.productCoverPictureUrl}
+          src={data.productCoverUrl}
           alt="productPhoto"
           className=" mx-2"
           style={{ objectFit: "contain", borderRadius: 7 }}
@@ -121,8 +120,8 @@ const ShoppingCartTable = ({ cartProducts = [], setCartProducts }) => {
                 productId: data.productId,
               })
             }
-            min={text}
-            defaultValue={text}
+            min={data.productMinOrder}
+            defaultValue={data.quantity}
           />
         );
       },
@@ -144,6 +143,11 @@ const ShoppingCartTable = ({ cartProducts = [], setCartProducts }) => {
       ),
     },
   ];
+
+  let dataSource = cartProducts.map(({ quantity, product }) => {
+    return { ...product, quantity };
+  });
+
   return (
     <section className="col px-0  me-1 " style={{ overflowX: "auto" }}>
       {!cartProducts.length ? (
@@ -161,7 +165,7 @@ const ShoppingCartTable = ({ cartProducts = [], setCartProducts }) => {
           }}
           className=""
           columns={columns}
-          dataSource={cartProducts}
+          dataSource={dataSource}
           rowKey={(product) => product.productId}
         />
       )}

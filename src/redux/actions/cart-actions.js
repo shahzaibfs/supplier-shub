@@ -8,3 +8,9 @@ export const removeProductFromCart = (payload)=> ({
     type: constants["REMOVE-product-from-cart"],
     payload
 })
+export const updateProductToCartAction =(payload)=>{
+    return {
+        type: constants["UPDATE-product-to-cart-action"],
+        payload
+    }
+}

@@ -11,6 +11,7 @@ function TextAreaField({
   required,
   placeHolder = "",
   classname = "",
+  rules=[]
 }) {
   return (
     <Form.Item
@@ -21,6 +22,7 @@ function TextAreaField({
           required: required,
           message: "Please input your message",
         },
+        ...rules
       ]}
       className={`m-2 ${classname}`}
       style={{ width: width }}

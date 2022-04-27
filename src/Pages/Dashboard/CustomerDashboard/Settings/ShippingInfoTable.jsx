@@ -5,19 +5,19 @@ import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 
 const columns = [
   {
-    title: "Name",
+    title: "Shop Supervisor",
     dataIndex: "name",
-    key: "name"
+    key: "name",
   },
   {
-    title: "Market Name",
-    dataIndex: "marketName",
-    key: "age",
+    title: "Shop Name",
+    dataIndex: "shopName",
+    key: "shopName",
   },
   {
-    title: "Shipping Address Name",
-    dataIndex: "shippingAddressName",
-    key: "shippingAddressName",
+    title: "Postal Code",
+    dataIndex: "postalCode",
+    key: "postalCode",
   },
   {
     title: "Shipping Address",
@@ -53,23 +53,16 @@ const columns = [
   },
 ];
 
-
-
-const data = [
-
-    ...[...Array(5)].map((_,idx)=>(
-        {
-            key: idx,
-            name: "Shahzaib Alam",
-            marketName: "alMaktaba",
-            shippingAddressName: "maktaba",
-            shippingAddress: "New York No. 1 Lake Park",
-            city:"Islamabad",
-            phNo: 3485604453 
-          }
-    ))
-
-];
+const data = [...Array(5)].map((_, idx) => ({
+  key: idx,
+  name: "Shahzaib Alam",
+  shopName: "alMaktaba",
+  shippingAddressName: "maktaba",
+  shippingAddress: "New York No. 1 Lake Park",
+  city: "Islamabad",
+  phNo: "92-3485604453",
+  postalCode: 25000,
+}));
 
 function ShippingInfoTable() {
   return <Table className="mt-3" columns={columns} dataSource={data} />;

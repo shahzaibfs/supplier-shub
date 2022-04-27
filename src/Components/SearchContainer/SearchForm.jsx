@@ -8,6 +8,7 @@ const styles = {
     borderRadius: "7px",
     border: "1px solid #d8dee4",
     background: "#f6f8fa",
+    minWidth : 400
   },
 };
 
@@ -16,6 +17,7 @@ function SearchForm({
   buttonInfo,
   classname,
   handleSubmit = null,
+  
 }) {
   return (
     <Form
@@ -25,17 +27,16 @@ function SearchForm({
       onFinish={handleSubmit}
     >
       {formFields.map(({ inputType: INPUT, ...rest }, idx) => (
-        <INPUT key={idx} {...rest} />
+        <INPUT key={idx}  {...rest} />
       ))}
 
-      <div className="mx-2 my-1">
+      <div className={`mx-2 my-1 ${buttonInfo.classname}`}>
         <ButtonField
           htmlType="submit"
-          classnames={"ms-auto me-0"}
+          classnames={`ms-auto me-0 ${buttonInfo.classname}`}
           type={buttonInfo.type ?? "success"}
           size={buttonInfo.size}
           icon={<AiOutlineSearch className="me-2" />}
-          onClick={buttonInfo.onHandleClick}
           width="25"
           circle={buttonInfo.circle}
         >

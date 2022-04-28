@@ -1,13 +1,20 @@
-import { Divider, Form } from "antd";
-import React from "react";
+import { Alert, Divider, Form } from "antd";
+import React, { useEffect, useState } from "react";
 import { BsFillPatchCheckFill } from "react-icons/bs";
 import { FaEdit } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 
 import ButtonField from "../../../../Components/Inputs/button-field";
 import PhoneField from "../../../../Components/Inputs/phone-field";
 import SelectField from "../../../../Components/Inputs/SelectField";
 import TextAreaField from "../../../../Components/Inputs/TextAreaField";
 import TextField from "../../../../Components/Inputs/TextField";
+
+import { useGetAuthenticatedUser } from "../../../../hooks/useGetAuthenticatedUser";
+import {
+  getUserDetailsService,
+  updateCustomerDetailService,
+} from "../../../../services/customer-services/customer-details-service";
 
 const styles = {
   parent: {
@@ -17,11 +24,69 @@ const styles = {
   },
 };
 
+const useFetchCustomerDetails = ({
+  token = "",
+  hooks = {},
+  dispatch,
+  customerDetails,
+}) => {
+  useEffect(() => {
+    if (Object.keys(customerDetails).length > 0) return;
+    dispatch(getUserDetailsService({ token }));
+  }, [customerDetails, dispatch, token]);
+};
+
+const useFillForm = ({ form, customerDetails }) => {
+  useEffect(() => {
+    if (Object.keys(customerDetails).length <= 0) return;
+    form.setFieldsValue({
+      ...customerDetails,
+      firstName: customerDetails.customerName.split("||")[0],
+      lastName: customerDetails.customerName.split("||")[1],
+      customerContactNo: customerDetails.customerContactNo.split("-")[1],
+      prefixSelectorContactNo: 92,
+    });
+  }, [customerDetails, form]);
+};
+
 function CustomerDetails() {
+  const [formPostHandle, setFormPostHandle] = useState(
+    { status: "ok", message: "" },
+    { status: "loading", message: "Loading Please Wait A While  ...." },
+    { status: "error", message: "Error ...." }
+  );
   const [form] = Form.useForm();
+  const dispatch = useDispatch();
+  const user = useGetAuthenticatedUser();
+  const customerDetails = useSelector(
+    (store) => store.customerProfileDetailsReducer
+  );
+
+  useFetchCustomerDetails({ dispatch, token: user.token, customerDetails });
+  useFillForm({ form, customerDetails });
+
   const handleSubmit = (data) => {
-    console.log(data);
+    setFormPostHandle({
+      status: "loading",
+      message: "Sending Data Please Wait a While .....",
+    });
+    const customerDetailsReqBody = {
+      ...data,
+      customerContactNo:
+        data.prefixSelectorContactNo + "-" + data.customerContactNo,
+      customerName: data.firstName + "||" + data.lastName,
+    };
+    dispatch(
+      updateCustomerDetailService({
+        customerDetails: customerDetailsReqBody,
+        token: user.token,
+        hooks: {
+          setFormPostHandle,
+        },
+      })
+    );
   };
+
   return (
     <section
       className="  p-4 d-flex flex-wrap justify-content-evenly "
@@ -61,7 +126,6 @@ function CustomerDetails() {
         className=" form section d-flex flex-wrap  w-75 justify-content-evenly"
         onFinish={handleSubmit}
         form={form}
-        initialValues={{ prefixSelectorContactNo: 92 }}
       >
         <div
           className="border-right-primary-light me-1 d-flex justify-content-between align-content-start flex-wrap pe-4"
@@ -79,10 +143,21 @@ function CustomerDetails() {
               classnames={""}
               width="100"
               circle
+              loading={formPostHandle.status === "loading" && true}
             >
               Update Profile
             </ButtonField>
           </div>
+          {
+            (formPostHandle.status === "error" && (
+              <Alert
+                className="mx-2 my-2 w-100"
+                message="Update Error Happend"
+                description={formPostHandle.message}
+                type="error"
+              />
+            ))
+          }
         </div>
         <div style={{ width: "49%" }} className="ps-4   pe-3">
           {rightFormFields.map(({ inputType: INPUT, ...rest }, idx) => (

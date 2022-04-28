@@ -30,7 +30,7 @@ function TextAreaField({
     >
       <Input.TextArea
         placeholder={placeHolder}
-        defaultValue={null}
+        
         size={size}
         showCount
         maxLength={100}

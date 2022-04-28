@@ -21,13 +21,13 @@ function InputNumberField({
       rules={rules}
       className={`m-2 ${classname} `}
       style={{ width: width }}
+      initialValue={defaultValue ?? ""}
     >
       <InputNumber
       controls={controls}
         status={status ?? ""}
         placeholder={placeHolder}
         size={size}
-        defaultValue={defaultValue ?? ""}
         addonBefore={addOnBefore}
         style={{width:width}}
       />

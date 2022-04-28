@@ -36,7 +36,7 @@ function SelectField({
       <Select
         disabled={disabled}
         size={size ?? "small"}
-        defaultValue={defaultValue}
+        
         placeholder={placeHolder}
       >
         {options.map((option, idx) => (

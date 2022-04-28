@@ -9,10 +9,11 @@ function PhoneField({
     width,
     size,
     placeHolder
+    ,classname
 }) {
   return (
     <Form.Item
-    className="m-2"
+    className={`m-2 ${classname}`}
     name={name}
     label={label}
     rules={rules}

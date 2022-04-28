@@ -19,6 +19,8 @@ export const constants = {
   "UPDATE-all-new-products-from-database" : "UPDATE_ALL_NEW_PRODUCTS_FROM_DATABASE",
   "ADD-product-to-cart" :"ADD_PRODUCT_TO_CART",
   "REMOVE-product-from-cart" : "REMOVE_PRODUCT_FROM_CART",
-  "UPDATE-product-to-cart-action" : "UPDATE_PRODUCT_TO_CART_ACTION"
+  "UPDATE-product-to-cart-action" : "UPDATE_PRODUCT_TO_CART_ACTION",
 
+  "UPDATE-customer-details" : "UPDATE_CUSTOMR_DETAILS " ,
+"UPDATE-customer-shipping-address" : "UPDATE_CUSTOMER_SHIPPING_ADDRESS"
   };

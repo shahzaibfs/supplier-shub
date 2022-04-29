@@ -1,9 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Table, Button, Modal, Row, Form, Col, Alert } from "antd";
+import { Table, Button, Modal, Row, Form, Col, Alert, Popconfirm } from "antd";
 
-import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+import {
+  AiFillDelete,
+  AiFillEdit,
+  AiOutlineQuestionCircle,
+} from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  deleteCustomerShippingAddressService,
   editOrSaveCustomerShippingAddressService,
   getCustomerShippingAddressService,
 } from "../../../../services/customer-services/customer-shipping-address-service";
@@ -101,22 +106,27 @@ function ShippingInfoTable() {
     {
       title: "Actions",
       key: "actions",
-      render: (text, data) => (
+      render: (_, data) => (
         <>
           <Button
             className="bg-success text-white"
             icon={<AiFillEdit />}
             onClick={() => handleModalOpen(data)}
           ></Button>
-          <Button
-            className="bg-danger text-white"
-            icon={<AiFillDelete />}
-          ></Button>
+          <Popconfirm
+            icon={<AiOutlineQuestionCircle color="red" />}
+            title="Sure ,You Want to Delete?"
+            onConfirm={() => handleDeleteShippingAddress(data)}
+          >
+            <Button
+              className="bg-danger text-white"
+              icon={<AiFillDelete />}
+            ></Button>
+          </Popconfirm>
         </>
       ),
     },
   ];
-
   const data = shippingAddresses.map((shippingAddress, idx) => ({
     "S#": idx,
     key: shippingAddress.id,
@@ -128,6 +138,16 @@ function ShippingInfoTable() {
     postalCode: shippingAddress.postalCode,
   }));
 
+  const handleDeleteShippingAddress = (data) => {
+    console.log(data);
+    dispatch(
+      deleteCustomerShippingAddressService({
+        arrayIndex: data["S#"],
+        shippingAddressId: data.key,
+        token:user.token
+      })
+    );
+  };
   const handleModalOpen = (data) => {
     setisModalVisible(true);
     form.setFieldsValue({
@@ -221,7 +241,7 @@ const prefixSelector = (
   />
 );
 
-const formFields = [
+export const formFields = [
   {
     inputType: TextField,
     name: "shopSupervisor",

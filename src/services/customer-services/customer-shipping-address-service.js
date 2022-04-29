@@ -1,5 +1,9 @@
+import { message } from "antd";
 import axios from "axios";
-import { updateCustomerShippingAddressAction } from "../../redux/actions/customer-actions";
+import {
+  addNewCustomerShippingAddressAction,
+  updateCustomerShippingAddressAction,
+} from "../../redux/actions/customer-actions";
 
 const options = (token) => ({
   headers: {
@@ -55,7 +59,7 @@ export const editOrSaveCustomerShippingAddressService =
           );
         } else {
           // add new Shipping address to the state
-          dispatch();
+          dispatch(addNewCustomerShippingAddressAction(response.data));
         }
         setIsSaving({
           status: "ok",
@@ -78,5 +82,29 @@ export const editOrSaveCustomerShippingAddressService =
           status: "error",
           message: "" + error,
         });
+      });
+  };
+
+export const deleteCustomerShippingAddressService =
+  ({ token = "", shippingAddressId, arrayIndex, hooks = {} }) =>
+  (dispatch, state) => {
+    // const {} = hooks;
+    const { customerShippingAddressReducer } = state();
+    axios
+      .delete(
+        "http://localhost:8081/api/v1.0/customer-shipping-address/" +
+          shippingAddressId,
+        options(token)
+      )
+      .then((response) => {
+        const newShippingAddressState = [...customerShippingAddressReducer];
+        newShippingAddressState.splice(arrayIndex, 1);
+        dispatch(updateCustomerShippingAddressAction(newShippingAddressState));
+
+        message.success(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        message.error("Error :" + error, 5000);
       });
   };

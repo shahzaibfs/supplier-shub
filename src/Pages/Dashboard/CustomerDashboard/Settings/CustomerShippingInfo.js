@@ -1,17 +1,27 @@
-import { Button } from "antd";
-import React from "react";
+import { Alert, Button, Col, Form, Modal, Row } from "antd";
+import React, { useState } from "react";
 import { AiFillFileAdd } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 
 import PageHeader from "../../../../Components/PageHeader/PageHeader";
 import SearchForm from "../../../../Components/SearchContainer/SearchForm";
-import ShippingInfoTable from "./ShippingInfoTable";
+import ShippingInfoTable, { formFields } from "./ShippingInfoTable";
 import TextField from "../../../../Components/Inputs/TextField";
 import TextAreaField from "../../../../Components/Inputs/TextAreaField";
 
+import { useGetAuthenticatedUser } from "../../../../hooks/useGetAuthenticatedUser";
+import { editOrSaveCustomerShippingAddressService } from "../../../../services/customer-services/customer-shipping-address-service";
+
 function CustomerShippingInfo() {
-  const handleSearchSubmit = (Data) => {
-    console.log(Data);
-  };
+  const [isSaving, setIsSaving] = useState(
+    { status: "ok", message: "" },
+    { status: "loading", message: "Loading Please Wait A While  ...." },
+    { status: "error", message: "Error ...." }
+  );
+  const [isModalVisible, setisModalVisible] = useState(false);
+  const dispatch = useDispatch();
+  const [form] = Form.useForm();
+  const user = useGetAuthenticatedUser();
 
   const searchFormFields = [
     {
@@ -36,6 +46,40 @@ function CustomerShippingInfo() {
     classname: "pt-2",
   };
 
+  const handleSearchSubmit = (Data) => {
+    console.log(Data);
+  };
+  const handleModalOpen = () => {
+    setisModalVisible(true);
+  };
+  const handleOk = () => {
+    setIsSaving({
+      status: "loading",
+      message: "Saving Data Please Wait",
+    });
+    const formDetails = form.getFieldsValue();
+    const customerShippingAddressReqBody = {
+      ...formDetails,
+      shopSupervisorPhNo:
+        formDetails.prefixSelectorContactNo + "-" + formDetails.contactNo,
+      id: 0,
+    };
+
+    dispatch(
+      editOrSaveCustomerShippingAddressService({
+        customerShippingAddressReqBody,
+        hooks: {
+          setIsSaving,
+          setisModalVisible,
+        },
+        token: user.token,
+      })
+    );
+  };
+  const handleCancel = () => {
+    setisModalVisible(false);
+  };
+
   return (
     <section className=" p-3">
       <PageHeader
@@ -55,11 +99,39 @@ function CustomerShippingInfo() {
           type="primary"
           className="d-flex align-items-center"
           icon={<AiFillFileAdd className="me-1" />}
+          onClick={handleModalOpen}
         >
           Add New Address
         </Button>
       </div>
       <ShippingInfoTable />
+      <Modal
+        title="Add New Shipping Address "
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        centered
+      >
+        <Form form={form} layout="vertical" initialValues={{
+          prefixSelectorContactNo : 92
+        }}>
+          <Row gutter={8}>
+            {formFields.map(({ inputType: INPUT, xs, ...rest }, idx) => (
+              <Col xs={xs}>
+                <INPUT classname="mx-0" width={"100%"} {...rest} />
+              </Col>
+            ))}
+          </Row>
+        </Form>
+        {isSaving.status === "error" && (
+          <Alert
+            className=" my-2 w-100"
+            message="Update Error Happend"
+            description={isSaving.message}
+            type="error"
+          />
+        )}
+      </Modal>
     </section>
   );
 }

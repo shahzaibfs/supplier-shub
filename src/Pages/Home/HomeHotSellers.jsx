@@ -1,12 +1,11 @@
 import { Col, Grid, Typography } from "antd";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { doPostProductToCart } from "../../services/cart-service";
 import { doGetAllNewProductsFromDatabase } from "../../services/public-product-service";
 import ProductCard from "./productCard";
 import ProductCardWrapper from "./ProductCardWrapper";
-
 
 const { useBreakpoint } = Grid;
 
@@ -15,22 +14,25 @@ const HomeHotSellers = () => {
   const products = useSelector((store) => store.productReducer);
   const dispatch = useDispatch();
   const { lg } = useBreakpoint();
-  console.log(products)
 
-  useEffect(()=>{
-    if(products.length>0) return ;
+  console.log(products);
+
+  useEffect(() => {
+    if (products.length > 0) return;
     dispatch(doGetAllNewProductsFromDatabase());
     // eslint-disable-next-line
-  },[dispatch,products])
+  }, [dispatch, products]);
 
+  const handleAddToCart = useCallback(
+    (product) => {
+      dispatch(doPostProductToCart(product));
+      console.log(product);
+    },
+    [dispatch]
+  );
 
-  const handleAddToCart = (product) => {
-    dispatch(doPostProductToCart(product))
-   console.log(product)
-  };
-
-  if(products.length <= 0 ){
-    return <Text type="danger">Network Err : Please Try Again Later</Text>
+  if (products.length <= 0) {
+    return <Text type="danger">Network Err : Please Try Again Later</Text>;
   }
 
   return (

@@ -14,11 +14,11 @@ const root = document.getElementById("root");
 
 reactDom.render(
   <React.StrictMode>
-    <Provider store={globalStore}>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Provider store={globalStore}>
         <App />
-      </BrowserRouter>
-    </Provider>
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>,
   root
 );

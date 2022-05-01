@@ -3,7 +3,7 @@ import React from "react";
 
 const { Title, Text } = Typography;
 
- function CompanyCard({ photo, title, subtitle, companyLogo }) {
+function CompanyCard({ photo, title, subtitle, companyLogo }) {
   return (
     <div>
       <Card
@@ -23,7 +23,6 @@ const { Title, Text } = Typography;
             src={photo}
             height={188}
             style={{ objectFit: "cover", objectPosition: "center" }}
-            loading="lazy"
           />
         }
       >
@@ -40,7 +39,7 @@ const { Title, Text } = Typography;
           }}
         >
           <img
-          loading="lazy"
+            loading="lazy"
             width={52}
             height={52}
             src={companyLogo}
@@ -68,4 +67,4 @@ const { Title, Text } = Typography;
   );
 }
 
-export default CompanyCard
+export default CompanyCard;

@@ -1,0 +1,13 @@
+.supplierProfileDrawer__banner {
+  position: relative !important;
+  margin-bottom: 50px;
+}
+.supplierProfileDrawerBanner__banner__profile {
+  position: absolute !important;
+  top: 0;
+  left: 40px;
+}
+
+.supplierProfileDrawer__banner .ant-image:last-child > img {
+  border: 2px solid white;
+}

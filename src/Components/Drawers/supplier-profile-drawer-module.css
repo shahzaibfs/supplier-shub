@@ -11,3 +11,30 @@
 .supplierProfileDrawer__banner .ant-image:last-child > img {
   border: 2px solid white;
 }
+
+.slider__arrow {
+  position: absolute;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  height: 100px;
+  top: 33.5%;
+  background: rgb(246, 248, 250);
+  background: linear-gradient(
+    107deg,
+    rgba(246, 248, 250, 1) 6%,
+    rgba(246, 248, 250, 0.1110819327731093) 77%
+  );
+  cursor:pointer;
+}
+.arrow-right {
+  right: 16px;
+}
+
+.arrow-left {
+  left: 16px;
+}
+
+.smooth-scroll {
+  scroll-behavior: smooth;
+}

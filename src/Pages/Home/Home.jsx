@@ -23,6 +23,14 @@ function Home() {
       <>
         <SectionHeader
           level={3}
+          title={"New Products"}
+          subtitle="some lorem ipsum should tdo the trick"
+        />
+        <HomeHotSellers />
+      </>
+      <>
+        <SectionHeader
+          level={3}
           title={"Top Rated Companies"}
           subtitle="some lorem ipsum should tdo the trick"
         />

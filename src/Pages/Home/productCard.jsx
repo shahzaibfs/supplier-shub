@@ -1,13 +1,25 @@
-import { Avatar, Button, Card, Grid, Image, Rate, Typography } from "antd";
-import React from "react";
+import {
+  Avatar,
+  Button,
+  Card,
+  Col,
+  Grid,
+  Image,
+  Rate,
+  Row,
+  Typography,
+} from "antd";
+import Title from "antd/lib/typography/Title";
+import React, { useState } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import SupplierProfileDrawer from "../../Components/Drawers/SupplierProfileDrawer";
 
 const { useBreakpoint } = Grid;
-const { Meta } = Card;
 const { Text } = Typography;
 
 function ProductCard({ product, handleAddToCart }) {
+  const [isVisible, setIsVisible] = useState();
   const navigate = useNavigate();
 
   const { xs, lg, md } = useBreakpoint();
@@ -21,6 +33,8 @@ function ProductCard({ product, handleAddToCart }) {
     console.log(typeof `/product/${productId}`.toString());
     navigate("/product/" + productId, { replace: true });
   };
+
+  const openSupplierDrawer = () => setIsVisible(true);
 
   return (
     <Card
@@ -53,11 +67,20 @@ function ProductCard({ product, handleAddToCart }) {
         />
       }
     >
-      <Meta
-        avatar={<Avatar src={product.supplier.supplierProfileUrl}></Avatar>}
-        title={product.supplier.brandName.slice(0, 7) + "..."}
-        className="mb-2"
-      />
+      <Row className="mb-2" align="middle" onClick={openSupplierDrawer}>
+        <Col>
+          <Avatar
+            size={"default"}
+            className="me-2"
+            src={product.supplier.supplierProfileUrl}
+          />
+        </Col>
+        <Col>
+          <Title level={5}>
+            {product.supplier.brandName.slice(0, 7) + "..."}
+          </Title>
+        </Col>
+      </Row>
       <Text className="my-1" strong>
         {product.productName}
       </Text>
@@ -88,6 +111,11 @@ function ProductCard({ product, handleAddToCart }) {
       >
         Add to Cart
       </Button>
+      <SupplierProfileDrawer
+        setIsVisible={setIsVisible}
+        visible={isVisible}
+        supplierId={product.supplier.supplierId}
+      />
     </Card>
   );
 }

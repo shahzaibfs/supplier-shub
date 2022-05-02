@@ -1,7 +1,11 @@
 import { Col, Drawer, Grid, Image, Row, Space, Typography } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import { SiBrandfolder } from "react-icons/si";
-import { BsPersonSquare } from "react-icons/bs";
+import {
+  BsArrowLeftSquareFill,
+  BsArrowRightSquareFill,
+  BsPersonSquare,
+} from "react-icons/bs";
 import { RiFacebookBoxFill, RiInstagramFill } from "react-icons/ri";
 import "./supplier-profile-drawer-module.css";
 
@@ -40,7 +44,7 @@ const SupplierProfileBanner = () => {
 
 const SupplierProfileDetails = () => {
   return (
-    <Row gutter={8} style={{ height: "max-content" }}>
+    <Row gutter={16} style={{ height: "max-content" }}>
       <Col span={12}>
         <div className="w-100 p-3" style={{ height: "100%", ...styles.parent }}>
           <Title level={4} className="d-flex align-items-center ">
@@ -105,7 +109,7 @@ const SupplierProfileAboutMe = () => {
     setIsMoreDetails((old) => !old);
   };
   return (
-    <div className="my-2 p-3" style={{ ...styles.parent }}>
+    <div className="my-3 p-3" style={{ ...styles.parent }}>
       <Title level={4} className="d-flex align-items-center ">
         <BsPersonSquare className="me-2" />
         About Me
@@ -132,43 +136,51 @@ const SupplierProfileProducts = () => {
 
   useEffect(() => {
     const sliderRefCopy = sliderRef.current;
-    console.log(sliderRefCopy === null | undefined)
+
     const handleScroll = (evt) => {
+      sliderRefCopy.classList.remove("smooth-scroll")
       evt.preventDefault();
       console.log(evt.deltaY);
       sliderRefCopy.scrollLeft += evt.deltaY;
     };
+
     sliderRefCopy.addEventListener("wheel", handleScroll);
 
     return () => {
-      if (sliderRefCopy === null | undefined) return;
+      if ((sliderRefCopy === null) | undefined) return;
       sliderRefCopy.removeEventListener("wheel", handleScroll);
     };
+
     // eslint-disable-next-line
   }, [sliderRef.current]);
 
-  // const slideLeft = () => {
-  //   sliderRef.current.scrollLeft -= 300;
-  // };
+  const slideLeft = (e) => {
+    sliderRef.current.classList.add("smooth-scroll")
 
-  // const slideRight = () => {
-  //   sliderRef.current.scrollLeft += 300;
-  // };
+    sliderRef.current.scrollLeft -= 300;
+  };
+
+  const slideRight = (e) => {
+    sliderRef.current.classList.add("smooth-scroll")
+
+    sliderRef.current.scrollLeft += 300;
+  };
 
   return (
-    <div className="my-2 p-3" style={styles.parent}>
+    <div className="my-3 p-3 position-relative" style={styles.parent}>
       <Title level={4} className="d-flex align-items-center ">
         <BsPersonSquare className="me-2" />
         Hot Selling Products
       </Title>
-
+      <div className="slider__arrow arrow-left  py-3 px-2" onClick={slideLeft}>
+        <BsArrowLeftSquareFill size={20} />
+      </div>
       <Row
         gutter={8}
         ref={sliderRef}
-        className="mx-0 p-1 "
+        className="mx-0 py-2 position-relative overflow-hidden smooth-scroll"
         id="Slider__Ref"
         wrap={false}
-        style={{ overflow: "hidden", ...styles.parent }}
       >
         {[...Array(9)].map((_, idx) => (
           <Col key={idx}>
@@ -184,6 +196,9 @@ const SupplierProfileProducts = () => {
           </Col>
         ))}
       </Row>
+      <div className="slider__arrow arrow-right py-3 px-2" onClick={slideRight}>
+        <BsArrowRightSquareFill size={20} />
+      </div>
     </div>
   );
 };
@@ -200,6 +215,7 @@ function SupplierProfileDrawer({
 
   return (
     <Drawer
+      bodyStyle={{ paddingBottom: "30px" }}
       width={lg ? 640 : "100%"}
       placement="right"
       onClose={() => setIsVisible(false)}

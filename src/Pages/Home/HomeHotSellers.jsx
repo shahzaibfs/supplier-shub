@@ -15,7 +15,6 @@ const HomeHotSellers = () => {
   const dispatch = useDispatch();
   const { lg } = useBreakpoint();
 
-  console.log(products);
 
   useEffect(() => {
     if (products.length > 0) return;

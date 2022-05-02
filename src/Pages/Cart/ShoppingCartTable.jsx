@@ -125,6 +125,15 @@ const ShoppingCartTable = ({ cartProducts = [], setCartProducts }) => {
           />
         );
       },
+    
+    },
+    {
+      title: "Brand",
+      dataIndex: "brandName",
+      key: "brand",
+      render:(text,data)=>(
+        <Text strong mark>{text}</Text>
+      )
     },
     {
       title: "Actions",
@@ -145,7 +154,7 @@ const ShoppingCartTable = ({ cartProducts = [], setCartProducts }) => {
   ];
 
   let dataSource = cartProducts.map(({ quantity, product }) => {
-    return { ...product, quantity };
+    return { ...product, quantity ,brandName:product.supplier.brandName  };
   });
 
   return (

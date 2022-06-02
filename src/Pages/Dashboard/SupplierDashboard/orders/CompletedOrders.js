@@ -1,32 +1,24 @@
-import React from 'react'
-import TextField from '../../../../Components/Inputs/TextField'
-import PageHeader from "../../../../Components/PageHeader/PageHeader"
-import SearchForm from "../../../../Components/SearchContainer/SearchForm"
-import CompletedProductsTable from './CompletedOrderTable'
+import { Empty } from "antd";
+
+const styles = {
+  parent: {
+    borderRadius: "7px",
+    border: "1px solid #d8dee4",
+    background: "#f6f8fa",
+    minHeight: "100%",
+    width: "100%",
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center"
+  },
+};
 
 function CompletedOrders() {
   return (
-    <>
-      <PageHeader heading="Completed Orders" subtitle={"Here All the Completed Product Lies"} />
-      <SearchForm buttonInfo={buttonInfo} formFields={formFields} />
-      <CompletedProductsTable />
-    </>
+    <section style={styles.parent} >
+    <Empty description="Coming Soon"/>
+    </section>
   )
 }
 
 export default CompletedOrders
-
-const buttonInfo = {
-  type: "primary",
-  text: "Search"
-}
-
-
-const formFields = [
-  {
-    inputField: TextField,
-    label: "Id or category",
-    name: "productName",
-    placeholder: "search any Order"
-  }
-]

@@ -8,14 +8,16 @@ import {
 } from "antd";
 import React, { useEffect, useState } from "react";
 import { AiFillDelete, AiOutlineQuestionCircle } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 import Loader from "../../Components/Loader/Loader";
+import { removeProductFromCart } from "../../redux/actions/cart-actions";
 import { SectionHeader } from "../Home/HomeHotSellers";
 
 const { Text } = Typography;
 
 const ShoppingCartTable = ({ cartProducts = [], setCartProducts }) => {
   const [quantities, setQuantities] = useState([]);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     if (quantities.length <= 0) return;
     let localStorageProducts = cartProducts.map((cartProduct) => {
@@ -67,6 +69,7 @@ const ShoppingCartTable = ({ cartProducts = [], setCartProducts }) => {
     newCartProducts.splice(Existing_Product_on_localstorage, 1);
     localStorage.setItem("cart-products", JSON.stringify(newCartProducts));
     setCartProducts(JSON.parse(localStorage.getItem("cart-products")));
+    dispatch(removeProductFromCart(newCartProducts))
   };
 
   const columns = [

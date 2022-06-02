@@ -1,12 +1,19 @@
 import { Card, Typography } from "antd";
-import React from "react";
+import React, { useState } from "react";
+import SupplierProfileDrawer from "../../Components/Drawers/SupplierProfileDrawer";
 
 const { Title, Text } = Typography;
 
 function CompanyCard({ photo, title, subtitle, companyLogo }) {
+  const [isVisible,setisVisible] = useState(false);
+
+  const openSupplierDrawer = (evt)=>{
+    setisVisible(true)
+  }
   return (
     <div>
       <Card
+      onClick={openSupplierDrawer}
         hoverable
         style={{
           width: 188,
@@ -20,7 +27,7 @@ function CompanyCard({ photo, title, subtitle, companyLogo }) {
             alt="example"
             width={"100%"}
             className="mb-1"
-            src={photo}
+            src={"https://idsb.tmgrup.com.tr/ly/uploads/images/2020/03/12/24934.jpg"}
             height={188}
             style={{ objectFit: "cover", objectPosition: "center" }}
           />
@@ -63,6 +70,12 @@ function CompanyCard({ photo, title, subtitle, companyLogo }) {
           <Text type="secondary">{subtitle}</Text>
         </div>
       </Card>
+      <SupplierProfileDrawer
+        setIsVisible={setisVisible}
+        visible={isVisible}
+        supplierId={1}
+      />
+    
     </div>
   );
 }

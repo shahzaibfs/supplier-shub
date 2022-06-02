@@ -1,6 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import ButtonField from "../../Components/Inputs/button-field";
 
 const styles = {
@@ -13,6 +13,8 @@ const styles = {
 
 const ProccedToCheckout = ({ cartProducts = [] }) => {
   const user = useSelector((store) => store.authReducer);
+  const navigate = useNavigate();
+  const dispatch= useDispatch();
 
   const getTotalPrice = () => {
     const total = cartProducts.reduce((sum, cur) => {
@@ -22,7 +24,13 @@ const ProccedToCheckout = ({ cartProducts = [] }) => {
     return total;
   };
 
-  const handleProccedToCheckout = () => {};
+  const handleProccedToCheckout = () => {
+    dispatch({
+      type:"PROCCED_TO_CHECKOUT",
+      payload:cartProducts
+    })
+    navigate("/checkout")
+  };
 
   return (
     <section
@@ -103,9 +111,9 @@ const ProccedToCheckout = ({ cartProducts = [] }) => {
       </div>
       <ButtonField size="large" type="success" classnames={"my-3"} width="100">
         {user.isLogin && cartProducts.length ? (
-          <Link to={"/checkout"} onClick={handleProccedToCheckout}>
+          <div onClick={handleProccedToCheckout}>
             Procced to Checkout
-          </Link>
+          </div>
         ) : (!user.isLogin || user.isLogin) && !cartProducts.length ? (
           <Link to={"/"}>Add Products to Cart </Link>
         ) : (

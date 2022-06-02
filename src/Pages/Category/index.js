@@ -3,19 +3,10 @@ import { useParams } from "react-router-dom";
 import { AiOutlineRight } from "react-icons/ai";
 import CategorySideBar from "./CategorySideBar";
 import CategoryMain from "./CategoryMain";
-import { useSelector } from "react-redux";
 import PageHeader from "../../Components/PageHeader/PageHeader";
 
 function Catalog() {
   const { productCategory } = useParams();
-  const products = useSelector((store) => store.productReducer);
-
-  const getCategoryProducts = () => {
-    return products.filter(
-      (product) =>
-        product.category.categoryName === productCategory.split("-").join(" ")
-    );
-  };
 
   return (
     <>
@@ -33,10 +24,7 @@ function Catalog() {
         {/* side bar   */}
         <CategorySideBar />
         {/* content */}
-        <CategoryMain
-          CategoryProducts={getCategoryProducts()}
-          productCategory={productCategory}
-        />
+        <CategoryMain CategoryProducts={{}} productCategory={productCategory} />
       </main>
     </>
   );

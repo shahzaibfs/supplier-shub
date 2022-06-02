@@ -10,7 +10,6 @@ import { addtoCartAction } from "../redux/actions/cart-actions";
 //   },
 // });
 
-
 // const postCartDetailApi = (cartDetails, token) =>
 //   axios.post(
 //     "http://localhost:8081/api/v1.0/user/edit",
@@ -18,22 +17,22 @@ import { addtoCartAction } from "../redux/actions/cart-actions";
 //     options(token)
 //   );
 
+export const doPostProductToCart = (product) => (dispatch, store) => {
+  const {  cartReducer } = store();
 
-export const doPostProductToCart = (product) =>(dispatch,store)=>{
-    const {authReducer,cartReducer} =store();
-    const {isLogin} = authReducer;
-    if (!isLogin){
-        const ExistingProduct = cartReducer.findIndex(cartProduct => cartProduct.product.productId  === product.productId );
+  const ExistingProduct = cartReducer.findIndex(
+    (cartProduct) => cartProduct.product.productId === product.productId
+  );
 
-        if(ExistingProduct >=0) return ;
-        
-        const cartProduct = {
-            quantity:product.productMinOrder,
-            product:product
-          }
-        let newCartReducerProducts = [...cartReducer,cartProduct];
-        
-        localStorage.setItem("cart-products",JSON.stringify(newCartReducerProducts));
-        dispatch(addtoCartAction(cartProduct));
-    }
-}
+  if (ExistingProduct >= 0) return;
+
+  const cartProduct = {
+    quantity: product.productMinOrder,
+    product: product,
+  };
+
+  let newCartReducerProducts = [...cartReducer, cartProduct];
+
+  localStorage.setItem("cart-products", JSON.stringify(newCartReducerProducts));
+  dispatch(addtoCartAction(cartProduct));
+};

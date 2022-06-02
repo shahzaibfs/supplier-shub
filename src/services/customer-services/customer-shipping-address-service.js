@@ -23,7 +23,6 @@ export const getCustomerShippingAddressService =
         options(token)
       )
       .then((response) => {
-        console.log(response);
         if (response.data.length > 0) {
           dispatch(updateCustomerShippingAddressAction(response.data));
         }

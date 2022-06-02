@@ -1,33 +1,24 @@
-import React from 'react'
-import TextField from '../../../../Components/Inputs/TextField'
-import PageHeader from '../../../../Components/PageHeader/PageHeader'
-import SearchForm from '../../../../Components/SearchContainer/SearchForm'
-import TrackOrdersTable from './TrackOrdersTable'
+import { Empty } from "antd";
 
-function TrackOrders() {
+const styles = {
+  parent: {
+    borderRadius: "7px",
+    border: "1px solid #d8dee4",
+    background: "#f6f8fa",
+    minHeight: "100%",
+    width: "100%",
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center"
+  },
+};
+
+function CompletedOrders() {
   return (
-    <>
-    <PageHeader heading="Track Orders" subtitle={"Track And Update Orders As soon as Delivery is Completed"} />
-    <SearchForm buttonInfo={buttonInfo} formFields={formFields} />
-    <TrackOrdersTable />
-  </>
+    <section style={styles.parent} >
+    <Empty description="Coming Soon"/>
+    </section>
   )
 }
 
-export default TrackOrders
-
-
-const buttonInfo = {
-  type: "primary",
-  text: "Search"
-}
-
-
-const formFields = [
-  {
-    inputType: TextField,
-    label: "Id or category",
-    name: "productName",
-    placeholder: "search any Order"
-  }
-]
+export default CompletedOrders 

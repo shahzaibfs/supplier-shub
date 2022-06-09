@@ -169,7 +169,6 @@ const getDashboardLinkFromUserDetails = {
 };
 
 const menu = (user, dispatch) => {
-  console.log("i am here");
   return (
     <Menu>
       <Menu.Item key={1}>

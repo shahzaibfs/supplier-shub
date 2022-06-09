@@ -1,7 +1,9 @@
-import React from "react";
+import { Alert } from "antd";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import ButtonField from "../../Components/Inputs/button-field";
+import { addPrdouctsTocart } from "../../services/customer-services/customer-cart-service";
 
 const styles = {
   parent: {
@@ -12,9 +14,13 @@ const styles = {
 };
 
 const ProccedToCheckout = ({ cartProducts = [] }) => {
+  const [isLoading, setisLoading] = useState({
+    state: "ok",
+    message: "",
+  });
   const user = useSelector((store) => store.authReducer);
   const navigate = useNavigate();
-  const dispatch= useDispatch();
+  const dispatch = useDispatch();
 
   const getTotalPrice = () => {
     const total = cartProducts.reduce((sum, cur) => {
@@ -25,11 +31,26 @@ const ProccedToCheckout = ({ cartProducts = [] }) => {
   };
 
   const handleProccedToCheckout = () => {
-    dispatch({
-      type:"PROCCED_TO_CHECKOUT",
-      payload:cartProducts
+    console.log("Procceed to checkout  : ", cartProducts);
+    setisLoading({
+      state:"loading"
     })
-    navigate("/checkout")
+    let cartProductReq = cartProducts.map(
+      ({ quantity, product: { productId } }) => {
+        return { quantity, productId };
+      }
+    );
+    dispatch({
+      type: "PROCCED_TO_CHECKOUT",
+      payload: cartProducts,
+    });
+    dispatch(
+      addPrdouctsTocart({
+        token: user.token,
+        cartProductsReq: cartProductReq,
+        hooks: {setisLoading,navigate},
+      })
+    );
   };
 
   return (
@@ -109,17 +130,24 @@ const ProccedToCheckout = ({ cartProducts = [] }) => {
           Rs {getTotalPrice()}
         </p>
       </div>
-      <ButtonField size="large" type="success" classnames={"my-3"} width="100">
+      <ButtonField
+        loading={isLoading.state === "loading"}
+        size="large"
+        type="success"
+        classnames={"my-3"}
+        width="100"
+      >
         {user.isLogin && cartProducts.length ? (
-          <div onClick={handleProccedToCheckout}>
-            Procced to Checkout
-          </div>
+          <div onClick={handleProccedToCheckout}>Procced to Checkout</div>
         ) : (!user.isLogin || user.isLogin) && !cartProducts.length ? (
           <Link to={"/"}>Add Products to Cart </Link>
         ) : (
           <Link to={"/login"}>Login</Link>
         )}
       </ButtonField>
+      {isLoading.state === "error" && (
+        <Alert message={isLoading.message} type="error" className="mb-3" />
+      )}
     </section>
   );
 };

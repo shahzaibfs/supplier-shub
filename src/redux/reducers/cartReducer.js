@@ -10,7 +10,6 @@ export const cartReducer = (state = initState, action) => {
       return [...action.payload];
 
     case constants["UPDATE-product-to-cart-action"]:
-      console.log("----update cart on reducer  --- > ", action);
       return [...action.payload];
 
     default:

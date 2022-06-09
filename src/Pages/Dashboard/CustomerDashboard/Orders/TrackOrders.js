@@ -1,25 +1,19 @@
-import React from 'react'
-import {Empty} from "antd"
+import React from "react";
+import PageHeader from "../../../../Components/PageHeader/PageHeader";
+import TrackOrderTable from "./TrackOrderTable";
 
-const styles = {
-  parent: {
-    borderRadius: "7px",
-    border: "1px solid #d8dee4",
-    background: "#f6f8fa",
-    minHeight: "100%",
-    width: "100%",
-    display:"flex",
-    justifyContent:"center",
-    alignItems:"center"
-  },
-};
+
 
 function TrackOrders() {
   return (
-    <section style={styles.parent} >
-    <Empty description="Coming Soon"/>
+    <section  className="p-3">
+      <PageHeader
+        heading={"Track Orders "}
+        subtitle="Keep Track Of your Orders "
+      />
+      <TrackOrderTable />
     </section>
-  )
+  );
 }
 
-export default TrackOrders
+export default TrackOrders;

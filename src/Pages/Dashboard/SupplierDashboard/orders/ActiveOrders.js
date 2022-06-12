@@ -1,5 +1,5 @@
-import CompletedOrdersTable from "./CompletedOrderTable";
 import PageHeader from "../../../../Components/PageHeader/PageHeader";
+import ActiveOrdersTable from "./ActiveOrdersTable";
 
 function CompletedOrders() {
   return (
@@ -9,7 +9,7 @@ function CompletedOrders() {
         subtitle="Manage And Track orders "
         classname={"my-2 mb-3"}
       />{" "}
-      <CompletedOrdersTable />{" "}
+      <ActiveOrdersTable />{" "}
     </section>
   );
 }

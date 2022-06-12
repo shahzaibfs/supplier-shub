@@ -13,6 +13,7 @@ function SearchField({
       placeholder={placeholder}
       onSearch={onSearch}
       style={{ width: width }}
+      
     />
   );
 }

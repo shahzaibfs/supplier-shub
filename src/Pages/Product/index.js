@@ -24,7 +24,7 @@ const Product = () => {
 
   useEffect(() => {
     if (isFetching.state === "error") navigate("/");
-  }, [isFetching.state,navigate]);
+  }, [isFetching.state,navigate,id]);
 
   useEffect(() => {
     dispatch(
@@ -37,7 +37,7 @@ const Product = () => {
       })
     );
     // eslint-disable-next-line 
-  }, [dispatch,setIsFetching,setProduct]);
+  }, [dispatch,setIsFetching,setProduct,id]);
 
   return (
     <>

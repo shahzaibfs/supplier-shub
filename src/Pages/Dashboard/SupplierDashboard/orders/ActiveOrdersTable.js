@@ -1,12 +1,12 @@
-import { Button, Image, Table, Typography } from "antd";
+import { Button, Image, Popconfirm, Table, Typography } from "antd";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Loader from "../../../../Components/Loader/Loader";
-import { getPendingOrdersService } from "../../../../services/supplier-services/supplier-pending-orders";
 import { useGetAuthenticatedUser } from "../../../../hooks/useGetAuthenticatedUser";
 import { TiTick } from "react-icons/ti";
-import { IoMdClose } from "react-icons/io";
+import { getActiveOrdersService } from "../../../../services/supplier-services/supplier-active-orders";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 const { Paragraph } = Typography;
 
 const columns = [
@@ -53,24 +53,24 @@ const columns = [
     },
   },
   {
-    title: "Accept Order",
+    title: "Action",
     dataIndex: "",
     key: "x",
     render: () => {
       return (
-        <>
+        <Popconfirm
+        icon={<AiOutlineQuestionCircle color="green" />}
+        title="You sure it's Delivered Correctly ?."
+        onConfirm={() => alert("ok")}
+      >
           <Button className="bg-success text-white" icon={<TiTick />}></Button>{" "}
-          <Button
-            className="bg-danger text-white"
-            icon={<IoMdClose />}
-          ></Button>{" "}
-        </>
+        </Popconfirm>
       );
     },
   },
 ];
 
-const TrackOrdersTable = () => {
+const ActiveOrdersTable = () => {
   const [data, setData] = useState([]);
   const [isLoading, setisLoading] = useState({
     state: "ok",
@@ -81,11 +81,11 @@ const TrackOrdersTable = () => {
 
   useEffect(() => {
     setisLoading((old) => ({
-      state: "loading",
-      message: "",
-    }));
+        state: "loading",
+        message: "",
+      }));
     dispatch(
-      getPendingOrdersService({
+      getActiveOrdersService({
         token: user.token,
         hooks: {
           setisLoading,
@@ -129,7 +129,7 @@ const TrackOrdersTable = () => {
   );
 };
 
-export default TrackOrdersTable;
+export default ActiveOrdersTable;
 
 const ShippingAddressInfo = ({ shippingAddress }) => {
   return (

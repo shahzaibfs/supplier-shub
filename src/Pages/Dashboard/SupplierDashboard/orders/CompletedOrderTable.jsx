@@ -1,137 +1,141 @@
+import {  Image, Table, Typography } from "antd";
 import React, { useState } from "react";
-import { Table, Button, Popconfirm, Modal } from "antd";
-
-import {
-  AiFillDelete,
-  AiFillEdit,
-  AiOutlineQuestionCircle,
-} from "react-icons/ai";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import Loader from "../../../../Components/Loader/Loader";
+import { useGetAuthenticatedUser } from "../../../../hooks/useGetAuthenticatedUser";
+import { getCompletedOrders } from "../../../../services/supplier-services/supplier-completed-orders";
+const { Paragraph } = Typography;
 
-const data = [
-  ...[...Array(5)].map((_, idx) => ({
-    key: idx,
-    name: "Sunsilk",
-    price: "Rs " + 4500,
-    weight: "cotton",
-    size: 12,
-    minOrder: <p className="ms-3 mt-3">10</p>,
-    coverPhotoUrl:
-      "https://m.media-amazon.com/images/I/51ks3MTOnfL._SX679_.jpg",
-      category :"Shampoo"
-  })),
+const columns = [
+  {
+    title: "Product",
+    dataIndex: "productCoverUrl",
+    key: "product",
+    render: (indexData, data) => {
+      return <Image src={indexData} width={70} height={70} />;
+    },
+  },
+  {
+    title: "Order Id ",
+    dataIndex: "ordersId",
+    key: "ordersId",
+  },
+  {
+    title: "Status",
+    dataIndex: "status",
+    render: (indexData, data) => {
+      return <Paragraph mark>{indexData}</Paragraph>;
+    },
+  },
+  {
+    title: "Quantity",
+    dataIndex: "quantity",
+    key: "quantity",
+  },
+  {
+    title: "Date Of Creation",
+    dataIndex: "dateOfCreation",
+    key: "dateOfCreation",
+  },
+  {
+    title: "Customer Name",
+    dataIndex: "customerName",
+    key: "customerName",
+  },
+  {
+    title: "Total Price",
+    key: "totalPrice",
+    render:(_,data)=>{
+      return <Paragraph>Rs {data.quantity * 45000} </Paragraph>
+    }
+  },
+ 
 ];
 
-function CompletedProductsTable() {
-  const [isModalVisible, setIsModalVisible] = useState(false);
+const CompletedOrdersTable = () => {
+  const [data, setData] = useState([]);
+  const [isLoading, setisLoading] = useState({
+    state: "ok",
+    message: "",
+  });
+  const user = useGetAuthenticatedUser();
+  const dispatch = useDispatch();
 
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
+  useEffect(() => {
+    setisLoading((old) => ({
+      state: "loading",
+      message: "",
+    }));
+    dispatch(
+      getCompletedOrders({
+        token: user.token,
+        hooks: {
+          setisLoading,
+          setData,
+        },
+      })
+    );
+  }, [setData, setisLoading, dispatch,user.token]);
 
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-
-  const cancel = () => {
-    console.log("hurrah i am deleted ");
-  };
-
-  // Todo : table columns
-  const columns = [
-    {
-      title: "Product Photo",
-      key: "coverPhotoUrl",
-      render: (text, data) => (
-        <img
-        className="border-primary-light mx-2"
-          src={data.coverPhotoUrl}
-          alt="productPhoto"
-          width={"60px"}
-          height="60px"
-          style={{ objectFit: "contain" ,borderRadius:"6px" }}
-        />
-      ),
-    },
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Price",
-      dataIndex: "price",
-      key: "price",
-    },
-    {
-      title: "Weight",
-      dataIndex: "weight",
-      key: "weight",
-    },
-    {
-      title: "Size",
-      dataIndex: "size",
-      key: "size",
-    },
-    {
-      title: "Minimum Order",
-      dataIndex: "minOrder",
-      key: "minOrder",
-    },
-    {
-      title: "Category",
-      dataIndex: "category",
-      key: "category",
-    },
-    {
-      title: "Actions",
-      key: "actions",
-      render: (text, data) => (
-        <>
-          <Button
-            className="bg-success text-white"
-            icon={<AiFillEdit />}
-            onClick={showModal}
-          ></Button>
-
-          <Popconfirm
-            icon={<AiOutlineQuestionCircle color="red" />}
-            title="Sure to Delete?"
-            onConfirm={cancel}
-          >
-            <Button
-              className="bg-danger text-white"
-              icon={<AiFillDelete />}
-            ></Button>
-          </Popconfirm>
-          <Modal
-            title={<b>Edit Product Details</b>}
-            visible={isModalVisible}
-            onOk={handleOk}
-            onCancel={handleCancel}
-          >
-            i am edit product model
-          </Modal>
-        </>
-      ),
-    },
-  ];
+  const pendingOrders = data.map((eData)=>{
+    return {
+      orderId:eData.orderId,
+      productCoverUrl:eData.product.productCoverUrl,
+      status:eData.status,
+      quantity:eData.quantity,
+      dateOfCreation : eData.orders.dateOfCreation,
+      customerName:eData.orders.customer.customerName,
+      shippingAddress:eData.orders.shippingAddress,
+      ordersId:eData.orders.ordersId
+    }
+  })
 
   return (
-    <>
-      <Table
-
-        loading={{ spinning: false, indicator: <Loader /> }}
-        className="mt-3 mx-auto"
-        columns={columns}
-        dataSource={data}
-      />
-    </>
+    <Table
+      className=""
+      columns={columns}
+      loading={{
+        spinning: isLoading.state === "loading",
+        indicator: <Loader />,
+      }}
+      expandable={{
+        expandedRowRender: (record) => (
+      <ShippingAddressInfo shippingAddress={record.shippingAddress} />
+        ),
+        rowExpandable: (record) => "shippingAddress" in record,
+        expandRowByClick:true
+      }}
+      dataSource={pendingOrders}
+      rowKey={(eachData)=>eachData.orderId}
+    />
   );
-}
+};
 
-export default CompletedProductsTable;
+export default CompletedOrdersTable;
+
+
+const ShippingAddressInfo = ({shippingAddress})=>{
+  return <section className="d-flex">
+    <div className="mx-3 me-5">
+      <Paragraph strong >ShopName</Paragraph>
+      <Paragraph className="mb-0">{shippingAddress.shopName}</Paragraph>
+    </div>
+    <div className="mx-3 me-5">
+      <Paragraph strong >Postal code </Paragraph>
+      <Paragraph className="mb-0">{shippingAddress.postalCode}</Paragraph>
+    </div>
+    <div className="mx-3 me-5">
+      <Paragraph strong >Shipping Address</Paragraph>
+      <Paragraph className="mb-0">{shippingAddress.shippingAddress}</Paragraph>
+    </div>
+    <div className="mx-3 me-5">
+      <Paragraph strong >Supervisor Ph#</Paragraph>
+      <Paragraph className="mb-0">{shippingAddress.shopSupervisorPhNo}</Paragraph>
+    </div>
+    <div className="mx-3 me-5">
+      <Paragraph strong >City</Paragraph>
+      <Paragraph className="mb-0">{shippingAddress.city}</Paragraph>
+    </div>
+  </section>
+}

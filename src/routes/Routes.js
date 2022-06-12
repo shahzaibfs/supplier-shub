@@ -51,6 +51,9 @@ const SupplierTrackOrders = React.lazy(() =>
 const SupplierCompletedOrders = React.lazy(() =>
   import("../Pages/Dashboard/SupplierDashboard/orders/CompletedOrders")
 );
+const SupplierActiveOrders = React.lazy(() =>
+  import("../Pages/Dashboard/SupplierDashboard/orders/ActiveOrders")
+);
 const SupplierAllPRoducts = React.lazy(() =>
   import("../Pages/Dashboard/SupplierDashboard/products/AllProducts")
 );
@@ -148,6 +151,10 @@ const Routes = () => {
               <Route
                 path="orders/completed-orders"
                 element={<SupplierCompletedOrders />}
+              />
+               <Route
+                path="orders/active-orders"
+                element={<SupplierActiveOrders />}
               />
               <Route
                 path="reports/view-reports"

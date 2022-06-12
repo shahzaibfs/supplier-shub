@@ -56,6 +56,9 @@ const SupplierDashboard = () => {
                 <Link to="orders/track-orders">Track Orders</Link>
               </Menu.Item>
               <Menu.Item key="4">
+                <Link to={"orders/active-orders"}>Active Orders</Link>
+              </Menu.Item>
+              <Menu.Item key="100">
                 <Link to={"orders/completed-orders"}>Completed Orders</Link>
               </Menu.Item>
             </SubMenu>

@@ -9,12 +9,14 @@ import {
   Typography,
   Dropdown,
   Empty,
+  Drawer,
+  Image,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { HiLocationMarker } from "react-icons/hi";
 import { Header } from "antd/lib/layout/layout";
 
-import fypogo from "./JIMMY LOGO.png"
+import fypogo from "./JIMMY LOGO.png";
 
 import { FaUserCircle } from "react-icons/fa";
 import { HiOutlineShoppingCart, HiOutlineMenuAlt1 } from "react-icons/hi";
@@ -30,16 +32,41 @@ import { logoutAction } from "../../redux/actions/logoutAction";
 
 import StyledButton from "../../Components/Inputs/StyledButton";
 import SearchField from "../../Components/Inputs/search-filed";
+import { useState } from "react";
+import { getSearchResultService } from "../../services/public-search-service";
+import Loader from "../../Components/Loader/Loader";
 
-const { Text } = Typography;
+const { Text, Paragraph } = Typography;
 
 const { useBreakpoint } = Grid;
 const MainHeader = () => {
+  const [isLoading, setisLoading] = useState({ state: "ok", message: "" });
+  const [data, setData] = useState([]);
   const cart = useSelector((store) => store.cartReducer);
   const user = useGetAuthenticatedUser();
   const { md } = useBreakpoint();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [visible, setVisible] = useState(false);
+
+  const showDrawer = () => {
+    setVisible(true);
+  };
+
+  const onClose = () => {
+    setVisible(false);
+  };
+
+  const handleSearch = (query) => {
+    console.log(query);
+    if (query === "") return;
+    setisLoading({state:"loading",message:""})
+    showDrawer();
+    const searchQuery = { query: query };
+    dispatch(
+      getSearchResultService({ searchQuery, hooks: { setisLoading, setData } })
+    );
+  };
 
   return (
     <Header style={{ height: "max-content", padding: 0 }}>
@@ -54,7 +81,7 @@ const MainHeader = () => {
             maxWidth: "max-content",
             height: "70px",
             display: "flex",
-          alignItems:"center"
+            alignItems: "center",
           }}
         >
           <img
@@ -85,7 +112,24 @@ const MainHeader = () => {
           xl={9}
           xxl={11}
         >
-          <SearchField placeholder="Search thorugh out the website" />
+          <SearchField
+            onSearch={handleSearch}
+            placeholder="Search thorugh out the website"
+          />
+          <Drawer
+            title={"Search Result (" + data.length + ")"}
+            placement={"left"}
+            closable={false}
+            onClose={onClose}
+            visible={visible}
+            key={"left"}
+          >
+            {isLoading.state === "loading" ? (
+              <Loader />
+            ) : (
+              <SearchContent data={data} />
+            )}
+          </Drawer>
         </Col>
         <Col
           style={{
@@ -202,20 +246,55 @@ const menu = (user, dispatch) => {
 };
 
 const NotificationMenu = () => {
-  return <section style={{ width: "300px" ,minHeight:"300px",...styles.parent}}>
-  <Empty />
-  </section>;
+  return (
+    <section style={{ width: "300px", minHeight: "300px", ...styles.parent }}>
+      <Empty />
+    </section>
+  );
 };
-
 
 const styles = {
   parent: {
     borderRadius: "7px",
     border: "1px solid #d8dee4",
     background: "#f6f8fa",
-    display:"flex",
-    justifyContent:"center",
-    alignItems:"center",
-    
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
+};
+
+const SearchContent = ({ data }) => {
+  if (data.length < 1) {
+    return <Paragraph>No Search result Found with this Keyword</Paragraph>;
+  }
+  return data.map((eachResult) => {
+    return <EachResult key={eachResult.productId} result={eachResult} />;
+  });
+};
+
+const EachResult = ({ result }) => {
+  const navigate = useNavigate();
+  return (
+    <section
+      className="d-flex my-3"
+      onClick={() => {
+        navigate("product/" + result.productId);
+      }}
+    >
+      <Image
+        src={result.productCoverUrl}
+        alt=""
+        width={50}
+        height={50}
+        preview={false}
+      />
+      <div className="ms-3">
+        <Paragraph className="m-0">{result.productName}</Paragraph>
+        <Paragraph className="m-0">
+          Category : <b>{result.category.categoryName}</b>
+        </Paragraph>
+      </div>
+    </section>
+  );
 };

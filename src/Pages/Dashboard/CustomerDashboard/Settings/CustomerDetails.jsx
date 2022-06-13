@@ -41,9 +41,10 @@ const useFillForm = ({ form, customerDetails }) => {
     if (Object.keys(customerDetails).length <= 0) return;
     form.setFieldsValue({
       ...customerDetails,
-      firstName: customerDetails.customerName.split("||")[0],
-      lastName: customerDetails.customerName.split("||")[1],
-      customerContactNo: customerDetails.customerContactNo.split("-")[1],
+      firstName:  customerDetails.customerName !==null ? customerDetails.customerName.split("||")[0] :"",
+      lastName:customerDetails.customerName !==null ? customerDetails.customerName.split("||")[1] :"",
+      customerContactNo: customerDetails.customerContactNo !== null ?
+       customerDetails.customerContactNo.split("-")[1] : 0,
       prefixSelectorContactNo: 92,
     });
   }, [customerDetails, form]);

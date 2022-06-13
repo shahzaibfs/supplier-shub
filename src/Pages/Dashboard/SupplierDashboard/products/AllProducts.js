@@ -7,15 +7,35 @@ import TextField from "../../../../Components/Inputs/TextField";
 import PageHeader from "../../../../Components/PageHeader/PageHeader";
 import SearchForm from "../../../../Components/SearchContainer/SearchForm";
 import AllProductsTable from "./AllProductsTable";
+import { useDispatch } from "react-redux";
+import { getSearchSupplierProductsService } from "../../../../services/supplier-services/supplier-product-service";
+import { useGetAuthenticatedUser } from "../../../../hooks/useGetAuthenticatedUser";
 
 function AllProducts() {
+  const dispatch = useDispatch();
+  const user = useGetAuthenticatedUser();
+
+  const onHandleSearchChange = (e) => {
+    console.log(e);
+    dispatch(
+      getSearchSupplierProductsService({
+        token: user.token,
+        searchQuery: { query: e.query },
+      })
+    );
+  };
   return (
     <>
       <PageHeader
         heading={"Products"}
         subtitle="Here you can see all of your products"
       />
-      <SearchForm formFields={formFields} buttonInfo={buttonInfo} />
+      <SearchForm
+        handleSubmit={onHandleSearchChange}
+        formFields={formFields}
+        buttonInfo={buttonInfo}
+        on
+      />
       <div className="d-flex  justify-content-end">
         <Link to={"/dashboard/supplier/products/add-product"}>
           <Button
@@ -44,6 +64,6 @@ const formFields = [
   {
     inputType: TextField,
     label: "Name or Category",
-    name: "productName",
+    name: "query",
   },
 ];

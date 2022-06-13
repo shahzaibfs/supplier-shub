@@ -9,7 +9,10 @@ import { Modal } from "antd";
 import TextField from "../../../../Components/Inputs/TextField";
 import TextAreaField from "../../../../Components/Inputs/TextAreaField";
 import { useDispatch } from "react-redux";
-import { doEditOrSaveSupplierAddresses } from "../../../../services/supplier-services/supplier-setting-address-service";
+import {
+  doEditOrSaveSupplierAddresses,
+  getSearchSupplierAddressService,
+} from "../../../../services/supplier-services/supplier-setting-address-service";
 import { useGetAuthenticatedUser } from "../../../../hooks/useGetAuthenticatedUser";
 import InputNumberField from "../../../../Components/Inputs/number-field";
 
@@ -80,6 +83,12 @@ function SupplierAddresses() {
 
   const onHandleSearchChange = (e) => {
     console.log(e);
+    dispatch(
+      getSearchSupplierAddressService({
+        token: user.token,
+        city: e.city,
+      })
+    );
   };
 
   const searchFormFields = [
@@ -88,7 +97,7 @@ function SupplierAddresses() {
       type: "text",
       label: "City",
       placeHolder: "City",
-      name: "cityName",
+      name: "city",
       size: "large",
     },
   ];
@@ -124,7 +133,11 @@ function SupplierAddresses() {
         >
           Add Address
         </Button>
-        <SupplierAddressTable setisLoader={setisLoader} isLoader={isLoader} showModal={showModal} />{" "}
+        <SupplierAddressTable
+          setisLoader={setisLoader}
+          isLoader={isLoader}
+          showModal={showModal}
+        />{" "}
       </div>
 
       <Modal

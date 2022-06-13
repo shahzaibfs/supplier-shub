@@ -39,3 +39,22 @@ export const confirmOrderService =
         });
       });
   };
+
+export const getSearchOrderResultService =
+  ({ token = "", orderId, hooks = {} }) =>
+  (dispatch, store) => {
+    const {setOrders} =hooks;
+    axios
+      .get(
+        "http://localhost:8081/api/v1.0/order/" + orderId,
+
+        options(token)
+      )
+      .then((response) => {
+        console.log(response);
+        setOrders(response.data)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };

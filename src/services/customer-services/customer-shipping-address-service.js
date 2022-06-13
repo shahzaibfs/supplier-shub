@@ -107,3 +107,23 @@ export const deleteCustomerShippingAddressService =
         message.error("Error :" + error, 5000);
       });
   };
+
+export const getSearchShippingAddressResult =
+  ({ token = "", shippingAddressQuery, hooks = {} }) =>
+  (dispatch) => {
+    // const {} = hooks;
+    axios
+      .post(
+        "http://localhost:8081/api/v1.0/customer-shipping-address/search-shipping-address",
+        shippingAddressQuery,
+        options(token)
+      )
+      .then((response) => {
+        console.log(response);
+        dispatch(updateCustomerShippingAddressAction(response.data));
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };

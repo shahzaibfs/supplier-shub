@@ -22,6 +22,7 @@ function InputNumberField({
       className={`m-2 ${classname} `}
       style={{ width: width }}
       initialValue={defaultValue ?? ""}
+      
     >
       <InputNumber
       controls={controls}
@@ -29,7 +30,8 @@ function InputNumberField({
         placeholder={placeHolder}
         size={size}
         addonBefore={addOnBefore}
-        style={{width:width}}
+        style={{width:"100%"}}
+        
       />
     </Form.Item>
   );

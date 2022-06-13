@@ -84,11 +84,11 @@ export const doDeleteSupplierAddressFromDatabase =
     deleteSupplierAddressApi(supplierAddress.No, token)
       .then((response) => {
         console.log(response);
-        const {supplierAddressesReducer} = getState()
-        let newState= [...supplierAddressesReducer]
-        newState.splice(supplierAddress.key,1) 
-    
-        dispatch(updateSupplierAddress(newState))
+        const { supplierAddressesReducer } = getState();
+        let newState = [...supplierAddressesReducer];
+        newState.splice(supplierAddress.key, 1);
+
+        dispatch(updateSupplierAddress(newState));
         message.success("deleted successfully");
         setisLoader(false);
       })
@@ -96,5 +96,24 @@ export const doDeleteSupplierAddressFromDatabase =
         console.log(error);
         message.error("error happend please wait a while and try again ");
         setisLoader(false);
+      });
+  };
+
+export const getSearchSupplierAddressService =
+  ({ hooks = {}, token = "", city }) =>
+  (dispatch) => {
+    axios
+      .get(
+        "http://localhost:8081/api/v1.0/supplier/" + city,
+
+        options(token)
+      )
+      .then((response) => {
+        console.log("res", response);
+        dispatch(setSupplierAddresses(response.data));
+
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };

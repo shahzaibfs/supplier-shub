@@ -30,9 +30,8 @@ const columns = [
   },
 ];
 
-const TrackOrderTable = () => {
+const TrackOrderTable = ({orders,setOrders}) => {
   const [isLoading, setisLoading] = useState({ state: "ok", message: "" });
-  const [orders, setOrders] = useState([]);
   const dispatch = useDispatch();
   const user = useGetAuthenticatedUser();
 

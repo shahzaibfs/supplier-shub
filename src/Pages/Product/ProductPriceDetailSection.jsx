@@ -6,8 +6,9 @@ import {
   AiOutlineShoppingCart,
   AiOutlineStar,
 } from "react-icons/ai";
-import {  useSelector } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
 import SupplierProfileDrawer from "../../Components/Drawers/SupplierProfileDrawer";
+import { doPostProductToCart } from "../../services/cart-service";
 
 const { Paragraph, Title } = Typography;
 
@@ -22,9 +23,13 @@ const styles = {
 const ProductPriceDetailSection = ({ product }) => {
   const [visible, setIsVisible] = useState(false);
   const authReducer = useSelector((store) => store.authReducer);
+const dispatch = useDispatch();
 
+  const handleAddToCart = () => {
 
-  const handleAddToCart = () => {};
+    dispatch(doPostProductToCart(product));
+
+  };
   const handleSupplierProfile = () => {
     setIsVisible(true);
   };

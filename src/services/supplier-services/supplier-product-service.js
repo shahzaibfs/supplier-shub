@@ -198,3 +198,21 @@ export const doRemoveProductFromOutOfStockTableInDatabase =
         });
       });
   };
+
+export const getSearchSupplierProductsService =
+  ({ token = "", searchQuery = {}, hooks = {} }) =>
+  (dispatch) => {
+    axios
+      .post(
+        "http://localhost:8081/api/v1.0/product-supplier/searchProduct",
+        searchQuery,
+        options(token)
+      )
+      .then((response) => {
+        console.log(response);
+        dispatch(updateSupplierProducts(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };

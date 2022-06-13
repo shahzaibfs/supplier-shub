@@ -53,9 +53,7 @@ const CustomerDashboard = () => {
               <Menu.Item key="5">
                 <Link to="orders/track-orders">Track Orders</Link>
               </Menu.Item>
-              <Menu.Item key="6">
-                <Link to={"orders/previous-orders"}>Previous Orders</Link>
-              </Menu.Item>
+             
             </SubMenu>
             <SubMenu key="sub3" icon={<NotificationOutlined />} title="Reports">
               <Menu.Item key="9">

@@ -10,7 +10,7 @@ import TextField from "../../../../Components/Inputs/TextField";
 import TextAreaField from "../../../../Components/Inputs/TextAreaField";
 
 import { useGetAuthenticatedUser } from "../../../../hooks/useGetAuthenticatedUser";
-import { editOrSaveCustomerShippingAddressService } from "../../../../services/customer-services/customer-shipping-address-service";
+import { editOrSaveCustomerShippingAddressService, getSearchShippingAddressResult } from "../../../../services/customer-services/customer-shipping-address-service";
 
 function CustomerShippingInfo() {
   const [isSaving, setIsSaving] = useState(
@@ -26,10 +26,10 @@ function CustomerShippingInfo() {
   const searchFormFields = [
     {
       inputType: TextField,
-      label: "Shipping Address Name",
-      placeHolder: "Name for shipping address",
+      label: "Shop Name",
+      placeHolder: "Enter Your Shop Name",
 
-      name: "shippingAddressName",
+      name: "shopName",
     },
     {
       inputType: TextAreaField,
@@ -46,8 +46,17 @@ function CustomerShippingInfo() {
     classname: "pt-2",
   };
 
-  const handleSearchSubmit = (Data) => {
-    console.log(Data);
+  const handleSearchSubmit = (data) => {
+    console.log(data);
+    dispatch(
+      getSearchShippingAddressResult({
+        token:user.token,
+        shippingAddressQuery:{
+          "shopName": data.shopName,
+          "shippingAddress": data.shippingAddress
+        }
+      })
+    )
   };
   const handleModalOpen = () => {
     setisModalVisible(true);

@@ -7,68 +7,8 @@ import { getPendingOrdersService } from "../../../../services/supplier-services/
 import { useGetAuthenticatedUser } from "../../../../hooks/useGetAuthenticatedUser";
 import { TiTick } from "react-icons/ti";
 import { IoMdClose } from "react-icons/io";
+import { setActveOrderService, setRejectOrder } from "../../../../services/supplier-services/supplier-active-orders";
 const { Paragraph } = Typography;
-
-const columns = [
-  {
-    title: "Product",
-    dataIndex: "productCoverUrl",
-    key: "product",
-    render: (indexData, data) => {
-      return <Image src={indexData} width={70} height={70} />;
-    },
-  },
-  {
-    title: "Order Id ",
-    dataIndex: "ordersId",
-    key: "ordersId",
-  },
-  {
-    title: "Status",
-    dataIndex: "status",
-    render: (indexData, data) => {
-      return <Paragraph mark>{indexData}</Paragraph>;
-    },
-  },
-  {
-    title: "Quantity",
-    dataIndex: "quantity",
-    key: "quantity",
-  },
-  {
-    title: "Date Of Creation",
-    dataIndex: "dateOfCreation",
-    key: "dateOfCreation",
-  },
-  {
-    title: "Customer Name",
-    dataIndex: "customerName",
-    key: "customerName",
-  },
-  {
-    title: "Total Price",
-    key: "totalPrice",
-    render: (_, data) => {
-      return <Paragraph>Rs {data.quantity * 45000} </Paragraph>;
-    },
-  },
-  {
-    title: "Accept Order",
-    dataIndex: "",
-    key: "x",
-    render: () => {
-      return (
-        <>
-          <Button className="bg-success text-white" icon={<TiTick />}></Button>{" "}
-          <Button
-            className="bg-danger text-white"
-            icon={<IoMdClose />}
-          ></Button>{" "}
-        </>
-      );
-    },
-  },
-];
 
 const TrackOrdersTable = () => {
   const [data, setData] = useState([]);
@@ -93,7 +33,7 @@ const TrackOrdersTable = () => {
         },
       })
     );
-  }, [setData, setisLoading, dispatch,user.token]);
+  }, [setData, setisLoading, dispatch, user.token]);
 
   const pendingOrders = data.map((eData) => {
     return {
@@ -104,9 +44,99 @@ const TrackOrdersTable = () => {
       dateOfCreation: eData.orders.dateOfCreation,
       customerName: eData.orders.customer.customerName,
       shippingAddress: eData.orders.shippingAddress,
-      ordersId: eData.orders.ordersId,
+      ordersId: eData.orderId,
     };
   });
+
+  const columns = [
+    {
+      title: "Product",
+      dataIndex: "productCoverUrl",
+      key: "product",
+      render: (indexData, data) => {
+        return <Image src={indexData} width={70} height={70} />;
+      },
+    },
+    {
+      title: "Order Id ",
+      dataIndex: "ordersId",
+      key: "ordersId",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      render: (indexData, data) => {
+        return <Paragraph mark>{indexData}</Paragraph>;
+      },
+    },
+    {
+      title: "Quantity",
+      dataIndex: "quantity",
+      key: "quantity",
+    },
+    {
+      title: "Date Of Creation",
+      dataIndex: "dateOfCreation",
+      key: "dateOfCreation",
+    },
+    {
+      title: "Customer Name",
+      dataIndex: "customerName",
+      key: "customerName",
+    },
+    {
+      title: "Total Price",
+      key: "totalPrice",
+      render: (_, data) => {
+        return <Paragraph>Rs {data.quantity * 45000} </Paragraph>;
+      },
+    },
+    {
+      title: "Accept Order",
+      dataIndex: "",
+      key: "x",
+      render: (_, data) => {
+        return (
+          <>
+            <Button
+              className="bg-success text-white"
+              onClick={() => handleAcceptOrder(data.orderId)}
+              icon={<TiTick />}
+            ></Button>{" "}
+            <Button
+              onClick={() => handleRejectOrder(data.orderId)}
+              className="bg-danger text-white"
+              icon={<IoMdClose />}
+            ></Button>{" "}
+          </>
+        );
+      },
+    },
+  ];
+
+  const handleRejectOrder = (orderId) => {
+    setisLoading({ state: "loading", message: "" });
+    dispatch(
+      setRejectOrder({
+        orderId: orderId,
+        data,
+        hooks: { setisLoading, setData },
+        token: user.token,
+      })
+    );
+  };
+
+  const handleAcceptOrder = (orderId) => {
+    setisLoading({ state: "loading", message: "" });
+    dispatch(
+      setActveOrderService({
+        orderId: orderId,
+        data,
+        hooks: { setisLoading, setData },
+        token: user.token,
+      })
+    );
+  };
 
   return (
     <Table

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Avatar,
   Badge,
@@ -11,6 +11,7 @@ import {
   Empty,
   Drawer,
   Image,
+  Button,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { HiLocationMarker } from "react-icons/hi";
@@ -35,6 +36,10 @@ import SearchField from "../../Components/Inputs/search-filed";
 import { useState } from "react";
 import { getSearchResultService } from "../../services/public-search-service";
 import Loader from "../../Components/Loader/Loader";
+import {
+  getSupplierNotificationService,
+  setNotficationOrderToViewedService,
+} from "../../services/supplier-services/supplier-notification-service";
 
 const { Text, Paragraph } = Typography;
 
@@ -42,6 +47,7 @@ const { useBreakpoint } = Grid;
 const MainHeader = () => {
   const [isLoading, setisLoading] = useState({ state: "ok", message: "" });
   const [data, setData] = useState([]);
+  const [notificationData, setNotificationData] = useState([]);
   const cart = useSelector((store) => store.cartReducer);
   const user = useGetAuthenticatedUser();
   const { md } = useBreakpoint();
@@ -57,15 +63,37 @@ const MainHeader = () => {
     setVisible(false);
   };
 
+  useEffect(() => {
+    if (user.role === "SUPPLIER") {
+      dispatch(
+        getSupplierNotificationService({
+          token: user.token,
+          hooks: { setData: setNotificationData },
+        })
+      );
+    }
+  }, [user.token, dispatch, user.role]);
+
   const handleSearch = (query) => {
     console.log(query);
     if (query === "") return;
-    setisLoading({state:"loading",message:""})
+    setisLoading({ state: "loading", message: "" });
     showDrawer();
     const searchQuery = { query: query };
     dispatch(
       getSearchResultService({ searchQuery, hooks: { setisLoading, setData } })
     );
+  };
+
+  const handleNotficationClick = () => {
+    dispatch(
+      setNotficationOrderToViewedService({
+        token: user.token,
+      })
+    );
+    setTimeout(() => {
+      setData([])
+    }, 5000);
   };
 
   return (
@@ -142,24 +170,33 @@ const MainHeader = () => {
         >
           {user.isLogin && (
             <Dropdown
-              overlay={NotificationMenu}
+              overlay={<NotificationMenu notificationData={notificationData} />}
               placement="bottomRight"
               trigger={"click"}
               className="cursor-pointer"
+              
             >
               <Badge
-                count={0}
+                count={notificationData.length}
                 status={"success"}
                 className="me-2"
                 color={"gold"}
                 offset={[-7, 0]}
+                
               >
-                <Avatar
-                  className="d-flex justify-content-center align-items-center bg-primary-light border-primary"
-                  shape="square"
-                  size="large"
-                  icon={<RiNotification4Fill />}
-                />
+                <Button
+                  className="d-flex align-items-center  "
+                  style={{ background: "transparent", border: "none" }}
+                  onClick={handleNotficationClick}
+                >
+                  <Avatar
+                    className="d-flex justify-content-center align-items-center bg-primary-light border-primary"
+                    shape="square"
+                    size="large"
+                    icon={<RiNotification4Fill />}
+                    
+                  />
+                </Button>
               </Badge>
             </Dropdown>
           )}
@@ -245,11 +282,59 @@ const menu = (user, dispatch) => {
   );
 };
 
-const NotificationMenu = () => {
+const NotificationMenu = ({ notificationData }) => {
+  console.log(notificationData);
+  if (notificationData.length < 1)
+    return (
+      <section
+        style={{ width: "350px", minHeight: "300px", ...styles.parent }}
+        className="d-flex justify-content-center align-items-center"
+      >
+        <Empty />
+      </section>
+    );
   return (
-    <section style={{ width: "300px", minHeight: "300px", ...styles.parent }}>
-      <Empty />
+    <section
+      style={{
+        width: "350px",
+        maxHeight: "300px",
+        minHeight: "300px",
+        ...styles.parent,
+        overflow: "auto",
+      }}
+      className=""
+    >
+      {notificationData.map((notfication) => {
+        return <EachNotfication notfication={notfication} />;
+      })}
     </section>
+  );
+};
+
+const EachNotfication = ({ notfication }) => {
+  const navigate = useNavigate();
+  return (
+    <div className="my-2 mx-2 d-flex justify-content-between">
+      <Image
+        src={notfication.product.productCoverUrl}
+        width={50}
+        height={50}
+        alt=""
+      />
+      <div className="w-50">
+        <Paragraph className="my-0" strong>
+          {notfication.product.productName}
+        </Paragraph>
+        <Paragraph className="my-0">
+          Total Rs : {notfication.product.productPrice * notfication.quantity}
+        </Paragraph>
+      </div>
+      <Button
+        onClick={() => navigate("/dashboard/supplier/orders/track-orders")}
+      >
+        View ~
+      </Button>
+    </div>
   );
 };
 
@@ -258,9 +343,6 @@ const styles = {
     borderRadius: "7px",
     border: "1px solid #d8dee4",
     background: "#f6f8fa",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
   },
 };
 

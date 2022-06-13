@@ -87,7 +87,7 @@ const CompletedOrdersTable = () => {
       dateOfCreation : eData.orders.dateOfCreation,
       customerName:eData.orders.customer.customerName,
       shippingAddress:eData.orders.shippingAddress,
-      ordersId:eData.orders.ordersId
+      ordersId: eData.orderId,
     }
   })
 

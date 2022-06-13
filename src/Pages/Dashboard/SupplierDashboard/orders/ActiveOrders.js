@@ -5,7 +5,7 @@ function CompletedOrders() {
   return (
     <section>
       <PageHeader
-        heading={"Completed Orders"}
+        heading={"Active Orders"}
         subtitle="Manage And Track orders "
         classname={"my-2 mb-3"}
       />{" "}

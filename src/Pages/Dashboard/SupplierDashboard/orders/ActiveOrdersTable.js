@@ -7,68 +7,10 @@ import { useGetAuthenticatedUser } from "../../../../hooks/useGetAuthenticatedUs
 import { TiTick } from "react-icons/ti";
 import { getActiveOrdersService } from "../../../../services/supplier-services/supplier-active-orders";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { setCompletedOrdersService } from "../../../../services/supplier-services/supplier-completed-orders";
 const { Paragraph } = Typography;
 
-const columns = [
-  {
-    title: "Product",
-    dataIndex: "productCoverUrl",
-    key: "product",
-    render: (indexData, data) => {
-      return <Image src={indexData} width={70} height={70} />;
-    },
-  },
-  {
-    title: "Order Id ",
-    dataIndex: "ordersId",
-    key: "ordersId",
-  },
-  {
-    title: "Status",
-    dataIndex: "status",
-    render: (indexData, data) => {
-      return <Paragraph mark>{indexData}</Paragraph>;
-    },
-  },
-  {
-    title: "Quantity",
-    dataIndex: "quantity",
-    key: "quantity",
-  },
-  {
-    title: "Date Of Creation",
-    dataIndex: "dateOfCreation",
-    key: "dateOfCreation",
-  },
-  {
-    title: "Customer Name",
-    dataIndex: "customerName",
-    key: "customerName",
-  },
-  {
-    title: "Total Price",
-    key: "totalPrice",
-    render: (_, data) => {
-      return <Paragraph>Rs {data.quantity * 45000} </Paragraph>;
-    },
-  },
-  {
-    title: "Action",
-    dataIndex: "",
-    key: "x",
-    render: () => {
-      return (
-        <Popconfirm
-        icon={<AiOutlineQuestionCircle color="green" />}
-        title="You sure it's Delivered Correctly ?."
-        onConfirm={() => alert("ok")}
-      >
-          <Button className="bg-success text-white" icon={<TiTick />}></Button>{" "}
-        </Popconfirm>
-      );
-    },
-  },
-];
+
 
 const ActiveOrdersTable = () => {
   const [data, setData] = useState([]);
@@ -104,9 +46,84 @@ const ActiveOrdersTable = () => {
       dateOfCreation: eData.orders.dateOfCreation,
       customerName: eData.orders.customer.customerName,
       shippingAddress: eData.orders.shippingAddress,
-      ordersId: eData.orders.ordersId,
+      ordersId: eData.orderId,
     };
   });
+
+
+  const columns = [
+    {
+      title: "Product",
+      dataIndex: "productCoverUrl",
+      key: "product",
+      render: (indexData, data) => {
+        return <Image src={indexData} width={70} height={70} />;
+      },
+    },
+    {
+      title: "Order Id ",
+      dataIndex: "ordersId",
+      key: "ordersId",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      render: (indexData, data) => {
+        return <Paragraph mark>{indexData}</Paragraph>;
+      },
+    },
+    {
+      title: "Quantity",
+      dataIndex: "quantity",
+      key: "quantity",
+    },
+    {
+      title: "Date Of Creation",
+      dataIndex: "dateOfCreation",
+      key: "dateOfCreation",
+    },
+    {
+      title: "Customer Name",
+      dataIndex: "customerName",
+      key: "customerName",
+    },
+    {
+      title: "Total Price",
+      key: "totalPrice",
+      render: (_, data) => {
+        return <Paragraph>Rs {data.quantity * 45000} </Paragraph>;
+      },
+    },
+    {
+      title: "Action",
+      dataIndex: "",
+      key: "x",
+      render: (_,data) => {
+        return (
+          <Popconfirm
+          icon={<AiOutlineQuestionCircle color="green" />}
+          title="You sure it's Delivered Correctly ?."
+          onConfirm={() => handleCOmleteOrders(data.orderId)}
+        >
+            <Button className="bg-success text-white" icon={<TiTick />}></Button>{" "}
+          </Popconfirm>
+        );
+      },
+    },
+  ];
+
+
+  const handleCOmleteOrders = (orderId) => {
+    setisLoading({ state: "loading", message: "" });
+    dispatch(
+      setCompletedOrdersService({
+        orderId: orderId,
+        data,
+        hooks: { setisLoading, setData },
+        token: user.token,
+      })
+    );
+  };
 
   return (
     <Table

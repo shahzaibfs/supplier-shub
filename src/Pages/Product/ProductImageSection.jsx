@@ -33,7 +33,7 @@ const ProductImageSection = ({ product }) => {
           return (
             <img
               key={idx}
-              src={""}
+              src={"https://www.mariposakids.co.nz/wp-content/uploads/2014/08/image-placeholder2.jpg"}
               alt={""}
               className=" my-2 flex-item mx-1 p-1 bg-white"
               style={{

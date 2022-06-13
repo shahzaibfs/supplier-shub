@@ -32,7 +32,7 @@ const NavBAr = () => {
                 className="list-unstyled "
                 onClick={() =>
                   eachcateg.categories.length <= 0 &&
-                  navigate("/products/" + eachcateg.categoryName)
+                  navigate("/products/" + eachcateg.categoryName+"/"+eachcateg.categoryId)
                 }
               >
                 {eachcateg.categoryName}{" "}
@@ -70,7 +70,7 @@ const PrintCategChildren = ({ categ }) => {
           className="list-unstyled p-2 px-3 navbar__Link__child_parent_links"
           onClick={() =>
             eachCategory.categories.length <= 0 &&
-            navigate("/products/" + eachCategory.categoryName)
+            navigate("/products/" + eachCategory.categoryName+"/"+eachCategory.categoryId)
           }
         >
           {eachCategory.categoryName}
@@ -105,7 +105,7 @@ const ChildNode = ({ subCateg }) => {
           className="navbar__Link__child_children_links m-0 p-2 px-3"
           onClick={() =>
             eachSubCateg.categories.length <= 0 &&
-            navigate("/products/" + eachSubCateg.categoryName)
+            navigate("/products/" + eachSubCateg.categoryName+"/"+eachSubCateg.categoryId)
           }
         >
           {eachSubCateg.categoryName}{" "}

@@ -112,7 +112,7 @@ const ProccedToCheckout = ({ cartProducts = [] }) => {
             Subtotal
           </p>
           <p className="text-primary-light-700 text-weight-regular body-2 mb-0">
-            Rs 90.00
+          Rs {getTotalPrice()}
           </p>
         </div>
         <div className="d-flex justify-content-between align-items-center">

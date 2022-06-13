@@ -24,3 +24,30 @@ const doGetCategoriesFromDatabase = () => (dispatch) => {
 };
 
 export default doGetCategoriesFromDatabase;
+
+export const getCategoryByIdService =
+  ({ hooks = {}, categoryId }) =>
+  (dispatch) => {
+    const { setisLoading, setData } = hooks;
+    axios
+      .get(
+        "http://localhost:8081/api/v1.0/product/searchProductsByCategory/" + categoryId,
+        {},
+        options
+      )
+      .then((response) => {
+        console.log("res",response)
+        setData(response.data);
+        setisLoading({
+          state: "ok",
+          message: "",
+        });
+      })
+      .catch((error) => {
+        setisLoading({
+          state: "error",
+          message: "Invalid Category Id  Error ",
+        });
+        console.log(error.response);
+      });
+  };

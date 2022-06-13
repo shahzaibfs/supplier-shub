@@ -1,10 +1,11 @@
 import { Card, Typography } from "antd";
 import React, { useState } from "react";
 import SupplierProfileDrawer from "../../Components/Drawers/SupplierProfileDrawer";
+import SupplierImage from "./supplier-image.png"
 
 const { Title, Text } = Typography;
 
-function CompanyCard({ photo, title, subtitle, companyLogo }) {
+function CompanyCard({ photo, title, subtitle, companyLogo ,supplier}) {
   const [isVisible,setisVisible] = useState(false);
 
   const openSupplierDrawer = (evt)=>{
@@ -27,7 +28,7 @@ function CompanyCard({ photo, title, subtitle, companyLogo }) {
             alt="example"
             width={"100%"}
             className="mb-1"
-            src={"https://idsb.tmgrup.com.tr/ly/uploads/images/2020/03/12/24934.jpg"}
+            src={SupplierImage}
             height={188}
             style={{ objectFit: "cover", objectPosition: "center" }}
           />
@@ -73,7 +74,7 @@ function CompanyCard({ photo, title, subtitle, companyLogo }) {
       <SupplierProfileDrawer
         setIsVisible={setisVisible}
         visible={isVisible}
-        supplierId={1}
+        supplierId={supplier.supplierId}
       />
     
     </div>

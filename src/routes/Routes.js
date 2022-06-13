@@ -100,7 +100,7 @@ const Routes = () => {
             <Route path="search-term" element={<SearchTerm />} />
           </Route>
 
-          <Route path="products/:productCategory" element={<Category />} />
+          <Route path="products/:productCategory/:categId" element={<Category />} />
           <Route path="product/:id" element={<Product />} />
 
           <Route path="checkout" element={<Checkout />} />

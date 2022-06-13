@@ -1,17 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 
 import HomeBanner from "./HomeBanner";
 import HomeHotSellers, { SectionHeader } from "./HomeHotSellers";
 import { useGetAuthenticatedUser } from "../../hooks/useGetAuthenticatedUser";
 import "./__home.css";
 import Slider from "../../Components/slider/Slider";
-import productCategoryMockData from "../../services/productCategoryMockData.json";
 import CategoryCards from "./CategoryCards";
 import CompanyCard from "./CompanyCard";
 import PageHeader from "../../Components/PageHeader/PageHeader";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getTopRatedSuppliersService } from "../../services/top-rated-supplier-service";
 
 function Home() {
+  const [data, setData] = useState([]);
+  const [isLoading, setisLoading] = useState({ state: "loading", message: "" });
   const user = useGetAuthenticatedUser();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      getTopRatedSuppliersService({
+        hooks: { setData, setisLoading },
+      })
+    );
+  }, [setData, dispatch, setisLoading]);
+console.log(isLoading)
 
   return (
     <>
@@ -35,15 +49,14 @@ function Home() {
           subtitle="some lorem ipsum should tdo the trick"
         />
         <Slider key={1}>
-          {productCategoryMockData.map((category,idx) => (
+          {[...data,...data].map((supplier, idx) => (
             <CompanyCard
-            key={idx}
-              companyLogo={category.coverPhoto}
-              photo={
-                "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-              }
-              title={category.categoryName}
+              key={idx}
+              companyLogo={supplier.supplierProfileUrl}
+              photo={"https://placeimg.com/640/480/tech"}
+              title={supplier.brandName}
               subtitle="something good"
+              supplier={supplier}
             />
           ))}
         </Slider>

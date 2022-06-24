@@ -189,6 +189,7 @@ function Checkout() {
                 classnames={"ms-2 mt-3 mb-2"}
                 width="25"
                 type="primary"
+                onClick={()=>navigate("/dashboard/customer/settings/shipping-info")}
               >
                 Create New Shipping Address
               </ButtonField>

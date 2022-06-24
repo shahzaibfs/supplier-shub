@@ -38,7 +38,7 @@ console.log(isLoading)
         <SectionHeader
           level={3}
           title={"New Products"}
-          subtitle="some lorem ipsum should tdo the trick"
+          subtitle="Here are some new products"
         />
         <HomeHotSellers />
       </>
@@ -46,7 +46,7 @@ console.log(isLoading)
         <SectionHeader
           level={3}
           title={"Top Rated Companies"}
-          subtitle="some lorem ipsum should tdo the trick"
+          subtitle="Here are top rated companies "
         />
         <Slider key={1}>
           {[...data,...data].map((supplier, idx) => (

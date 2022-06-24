@@ -33,20 +33,21 @@ function SupplierDetails() {
 
   useEffect(() => {
     if (Object.keys(supplierProfileData).length !== 0) {
+      console.log(supplierProfileData)
       form.setFieldsValue({
         firstName: supplierProfileData.supplierFirstname,
         lastName: supplierProfileData.supplierLastname,
         brandName: supplierProfileData.brandName,
         brandOwnerName: supplierProfileData.brandOwnerName,
         bio: supplierProfileData.supplierBio,
-        contactNo: supplierProfileData.supplierContactNo.split("-")[1],
+        contactNo: supplierProfileData.supplierContactNo !== null ? supplierProfileData.supplierContactNo.split("-")[1] :0,
         prefixSelectorContactNo:
-          supplierProfileData.supplierContactNo.split("-")[0],
-        city: supplierProfileData.supplierBrandAddresses[0].city,
-        address: supplierProfileData.supplierBrandAddresses[0].address,
-        postalCode: supplierProfileData.supplierBrandAddresses[0].postalCode,
-        instagramUrl: supplierProfileData.instagram.instagram_url,
-        facebookUrl: supplierProfileData.facebook.facebookUrl,
+        supplierProfileData.supplierContactNo !== null ? supplierProfileData.supplierContactNo.split("-")[0]:0,
+        city: supplierProfileData.supplierBrandAddresses[0] !== null  ? supplierProfileData.supplierBrandAddresses[0].city: "",
+        address:supplierProfileData.supplierBrandAddresses[0] !== null ? supplierProfileData.supplierBrandAddresses[0].address:"",
+        postalCode: supplierProfileData.supplierBrandAddresses[0] !== null ?supplierProfileData.supplierBrandAddresses[0].postalCode:0,
+        instagramUrl: supplierProfileData.instagram !== null ? supplierProfileData.instagram.instagram_url :"",
+        facebookUrl: supplierProfileData.facebook !== null ? supplierProfileData.facebook.facebookUrl :"",
       });
     } else {
       dispatch(doGetSupplierProfileData(user.token));

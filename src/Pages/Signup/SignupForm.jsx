@@ -37,6 +37,8 @@ const SignupForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const refRole =roles.filter(curr=>curr.roleName !=="ADMIN")
+  console.log(refRole)
   const formFields = [
     {
       inputType: TextField,
@@ -75,7 +77,7 @@ const SignupForm = () => {
     {
       inputType: Select,
       label: "Account-Type",
-      options: roles,
+      options: refRole,
       name: "role",
       dataIndex: "roleName",
       valueIndex: "roleId",

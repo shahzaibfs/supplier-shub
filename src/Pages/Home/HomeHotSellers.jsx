@@ -15,7 +15,6 @@ const HomeHotSellers = () => {
   const dispatch = useDispatch();
   const { lg } = useBreakpoint();
 
-
   useEffect(() => {
     if (products.length > 0) return;
     dispatch(doGetAllNewProductsFromDatabase());
@@ -36,7 +35,7 @@ const HomeHotSellers = () => {
 
   return (
     <ProductCardWrapper>
-      {products.map((product, idx) => (
+      {products.slice(0, 6).map((product, idx) => (
         <Col className="my-2" xs={!lg && 12} key={idx}>
           <Link to="">
             <ProductCard handleAddToCart={handleAddToCart} product={product} />
